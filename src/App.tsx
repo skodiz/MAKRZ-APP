@@ -850,30 +850,28 @@ function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
         </div>
 
         <div className="comment-card">
+  <div className="comment-head">
+    <div className="c-av">TR</div>
+    <div className="comment-content">
+      <div className="comment-meta"><span className="comment-name">Thomas R.</span><span className="comment-dot">·</span><span className="comment-time">il y a 30 min</span></div>
+      <div className="comment-text">Tu as utilisé quel émail ?</div>
+      <div className="comment-actions"><span>Répondre</span><button className="toggle-btn" onClick={() => setOpen2(!open2)}>{open2 ? <><span>Masquer</span><ChevronUp size={13} /></> : <><span>Voir 1 réponse</span><ChevronDown size={13} /></>}</button></div>
+
+      {open2 && (
+        <div className="nested">
           <div className="comment-head">
-            <div className="c-av">TR</div>
-            <div className="comment-meta"><span className="comment-name">Thomas R.</span><span className="comment-dot">·</span><span className="comment-time">il y a 30 min</span></div>
-            </div>
-          <div className="comment-text">Tu as utilisé quel émail ?</div>
-          <div className="comment-actions">
-            <span>Répondre</span>
-            <button className="toggle-btn" onClick={() => setOpen2(!open2)}>
-              {open2 ? <><span>Masquer</span><ChevronUp size={13} /></> : <><span>Voir 1 réponse</span><ChevronDown size={13} /></>}
-            </button>
-          </div>
-          {open2 && (
-            <div className="nested">
-              <div className="comment-head"><div className="c-av">MD</div>
-                <div>
-                  <div className="comment-meta"><span className="comment-name">Marie D.</span><span className="comment-dot">·</span><span className="comment-time">il y a 20 min</span></div>          
-                </div>
-              </div>
+            <div className="c-av">MD</div>
+            <div className="comment-content">
+              <div className="comment-meta"><span className="comment-name">Marie D.</span><span className="comment-dot">·</span><span className="comment-time">il y a 20 min</span></div>
               <div className="comment-text">Émail blanc mat Solargil.</div>
               <div className="comment-actions"><span>Répondre</span></div>
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
+    </div>
+  </div>
+</div>
       <div className="reply-bar">
         <div className="reply-input">Répondre à la publication...</div>
         <button className="send-btn"><Send size={17} strokeWidth={2} /></button>
