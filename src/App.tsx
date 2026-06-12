@@ -856,7 +856,6 @@ function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
       <div className="comment-meta"><span className="comment-name">Thomas R.</span><span className="comment-dot">·</span><span className="comment-time">il y a 30 min</span></div>
       <div className="comment-text">Tu as utilisé quel émail ?</div>
       <div className="comment-actions"><span>Répondre</span><button className="toggle-btn" onClick={() => setOpen2(!open2)}>{open2 ? <><span>Masquer</span><ChevronUp size={13} /></> : <><span>Voir 1 réponse</span><ChevronDown size={13} /></>}</button></div>
-
       {open2 && (
         <div className="nested">
           <div className="comment-head">
@@ -871,6 +870,7 @@ function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
       )}
     </div>
   </div>
+</div>
 </div>
       <div className="reply-bar">
         <div className="reply-input">Répondre à la publication...</div>
