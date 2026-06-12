@@ -386,9 +386,9 @@ const css = `
 .comment-time { font-size:11px; color:#8B837B; }
 .comment-content { flex:1; text-align:left; }
 .comment-text { font-size:13px; line-height:18px; color:#4E4842; margin:4px 0 0 0; text-align:left; }
-.comment-actions { margin-top:7px; display:flex; align-items:center; gap:12px; font-size:12px; font-weight:600; color:#78917F; }
+.comment-actions { margin-top:4px; display:flex; align-items:center; gap:12px; font-size:12px; font-weight:600; color:#78917F; }
   .toggle-btn { border: none; background: transparent; padding: 0; color: #9A938C; font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; gap: 3px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
-  .nested { margin-left: 14px; margin-top: 10px; padding-left: 12px; border-left: 1px solid #D8CBBE; }
+  .nested { margin-left: 14px; margin-top: 14px; padding-left: 12px; border-left: 1px solid #D8CBBE; }
   .nested .comment-text, .nested .comment-actions { margin-left:0; }
   .reply-bar { height: 64px; background: #FAF8F4; border-top: 1px solid #E6DDD2; display: flex; align-items: center; gap: 10px; padding: 0 14px; flex-shrink: 0; }
   .reply-input { flex: 1; height: 40px; border-radius: 999px; border: 1px solid #E6DDD2; background: #FDFBF8; padding: 0 14px; color: #8B837B; font-size: 13px; display: flex; align-items: center; }
