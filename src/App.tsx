@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Home,
   Palette,
@@ -395,6 +395,7 @@ const css = `
   .send-btn { width: 38px; height: 38px; border-radius: 50%; border: none; background: #3F5248; color: #FFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; }
 .comment-meta { display:flex; align-items:center; gap:5px; line-height:15px; margin-bottom:2px; }
 .comment-dot { font-size:11px; color:#8B837B; }
+.reply-action { border:none; background:transparent; padding:0; margin:0; color:#78917F; font-size:12px; font-weight:600; font-family:'Inter', system-ui, sans-serif; cursor:pointer; }
 
   /* GALLERY */
   .masonry { column-count: 2; column-gap: 8px; }
@@ -787,6 +788,7 @@ function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
   const [replyText, setReplyText] = useState("");
 const [replyTarget, setReplyTarget] = useState<"post" | "lucie" | "thomas">("post");
 const [newComments, setNewComments] = useState<string[]>([]);
+  const replyInputRef = useRef<HTMLInputElement>(null);
   return (
     <div className="screen">
             <div className="topbar" style={{ borderBottom: "1px solid #E6DDD2" }}>
@@ -821,7 +823,7 @@ const [newComments, setNewComments] = useState<string[]>([]);
                 <span className="comment-time">il y a 1 h</span></div>
               <div className="comment-text">Magnifique résultat !</div>
               <div className="comment-actions">
-                <button className="reply-action" onClick={() => setReplyTarget("lucie")}>Répondre</button>
+                <button className="reply-action" onClick={() => { setReplyTarget("lucie"); replyInputRef.current?.focus(); }}>Répondre</button>
                 <button className="toggle-btn" onClick={() => setOpen1(!open1)}>{open1 ? <><span>Masquer</span><ChevronUp size={13} /></> : <><span>Voir 1 réponse</span><ChevronDown size={13} /></>}</button>
               </div>
             </div>
@@ -859,7 +861,7 @@ const [newComments, setNewComments] = useState<string[]>([]);
       <div className="comment-meta"><span className="comment-name">Thomas R.</span><span className="comment-dot">·</span><span className="comment-time">il y a 30 min</span></div>
       <div className="comment-text">Tu as utilisé quel émail ?</div>
       <div className="comment-actions">
-        <button className="reply-action" onClick={() => setReplyTarget("thomas")}>Répondre</button>
+        <button className="reply-action" onClick={() => { setReplyTarget("thomas"); replyInputRef.current?.focus(); }}>Répondre</button>
         <button className="toggle-btn" onClick={() => setOpen2(!open2)}>{open2 ? <><span>Masquer</span><ChevronUp size={13} /></> : <><span>Voir 1 réponse</span><ChevronDown size={13} /></>}</button></div>
       {open2 && (
         <div className="nested">
@@ -877,9 +879,10 @@ const [newComments, setNewComments] = useState<string[]>([]);
   </div>
 </div>
 </div>
+      {newComments.map((text, index) => (<div className="comment-card" key={index}><div className="comment-head"><div className="c-av">ML</div><div className="comment-content"><div className="comment-meta"><span className="comment-name">Moi</span><span className="comment-dot">·</span><span className="comment-time">à l’instant</span></div><div className="comment-text">{text}</div><div className="comment-actions"><span>Répondre</span></div></div></div></div>))}
       <div className="reply-bar">
-        <div className="reply-input">Répondre à la publication...</div>
-        <button className="send-btn"><Send size={17} strokeWidth={2} /></button>
+        <input className="reply-input" value={replyText} onChange={(e) => setReplyText(e.target.value)} placeholder={replyTarget === "post" ? "Répondre à la publication..." : "Répondre au commentaire..."} />
+<button className="send-btn" onClick={() => { if (!replyText.trim()) return; setNewComments((items) => [...items, replyText]); setReplyText(""); setReplyTarget("post"); }}><Send size={17} strokeWidth={2} /></button>
       </div>
     </div>
   );
