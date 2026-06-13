@@ -850,10 +850,7 @@ const [newReplies, setNewReplies] = useState({
             La texture est superbe.
           </div>
 
-          <div className="comment-actions">
-            <span>Répondre</span>
-          </div>
-        </div>
+                  </div>
       </div>
     </>
   )}
@@ -871,10 +868,7 @@ const [newReplies, setNewReplies] = useState({
 
         <div className="comment-text">{text}</div>
 
-        <div className="comment-actions">
-          <span>Répondre</span>
-        </div>
-      </div>
+             </div>
     </div>
   ))}
 </div>
@@ -896,8 +890,7 @@ const [newReplies, setNewReplies] = useState({
             <div className="comment-content">
               <div className="comment-meta"><span className="comment-name">Marie D.</span><span className="comment-dot">·</span><span className="comment-time">il y a 20 min</span></div>
               <div className="comment-text">Émail blanc mat Solargil.</div>
-              <div className="comment-actions"><span>Répondre</span></div>
-            </div>
+              
           </div>
         </div>
       )}
@@ -920,10 +913,7 @@ const [newReplies, setNewReplies] = useState({
 
         <div className="comment-text">{text}</div>
 
-        <div className="comment-actions">
-          <span>Répondre</span>
-        </div>
-      </div>
+              </div>
     </div>
   </div>
 ))}
