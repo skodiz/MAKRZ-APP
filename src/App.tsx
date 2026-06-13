@@ -784,6 +784,9 @@ function AtelierDetail({
 function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
+  const [replyText, setReplyText] = useState("");
+const [replyTarget, setReplyTarget] = useState<"post" | "lucie" | "thomas">("post");
+const [newComments, setNewComments] = useState<string[]>([]);
   return (
     <div className="screen">
             <div className="topbar" style={{ borderBottom: "1px solid #E6DDD2" }}>
@@ -817,7 +820,8 @@ function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
                 <span className="comment-dot">·</span>
                 <span className="comment-time">il y a 1 h</span></div>
               <div className="comment-text">Magnifique résultat !</div>
-              <div className="comment-actions"><span>Répondre</span>
+              <div className="comment-actions">
+                <button className="reply-action" onClick={() => setReplyTarget("lucie")}>Répondre</button>
                 <button className="toggle-btn" onClick={() => setOpen1(!open1)}>{open1 ? <><span>Masquer</span><ChevronUp size={13} /></> : <><span>Voir 1 réponse</span><ChevronDown size={13} /></>}</button>
               </div>
             </div>
@@ -854,7 +858,9 @@ function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
     <div className="comment-content">
       <div className="comment-meta"><span className="comment-name">Thomas R.</span><span className="comment-dot">·</span><span className="comment-time">il y a 30 min</span></div>
       <div className="comment-text">Tu as utilisé quel émail ?</div>
-      <div className="comment-actions"><span>Répondre</span><button className="toggle-btn" onClick={() => setOpen2(!open2)}>{open2 ? <><span>Masquer</span><ChevronUp size={13} /></> : <><span>Voir 1 réponse</span><ChevronDown size={13} /></>}</button></div>
+      <div className="comment-actions">
+        <button className="reply-action" onClick={() => setReplyTarget("thomas")}>Répondre</button>
+        <button className="toggle-btn" onClick={() => setOpen2(!open2)}>{open2 ? <><span>Masquer</span><ChevronUp size={13} /></> : <><span>Voir 1 réponse</span><ChevronDown size={13} /></>}</button></div>
       {open2 && (
         <div className="nested">
           <div className="comment-head">
