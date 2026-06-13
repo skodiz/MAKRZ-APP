@@ -786,8 +786,12 @@ function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [replyText, setReplyText] = useState("");
-const [replyTarget, setReplyTarget] = useState<"post" | "lucie" | "thomas">("post");
-const [newComments, setNewComments] = useState<string[]>([]);
+const [activeReplyBox, setActiveReplyBox] = useState<"lucie" | "thomas" | null>(null);
+const [newMainComments, setNewMainComments] = useState<string[]>([]);
+const [newReplies, setNewReplies] = useState({
+  lucie: [] as string[],
+  thomas: [] as string[],
+});
   const replyInputRef = useRef<HTMLInputElement>(null);
   return (
     <div className="screen">
@@ -879,7 +883,27 @@ const [newComments, setNewComments] = useState<string[]>([]);
   </div>
 </div>
 </div>
-      {newComments.map((text, index) => (<div className="comment-card" key={index}><div className="comment-head"><div className="c-av">ML</div><div className="comment-content"><div className="comment-meta"><span className="comment-name">Moi</span><span className="comment-dot">·</span><span className="comment-time">à l’instant</span></div><div className="comment-text">{text}</div><div className="comment-actions"><span>Répondre</span></div></div></div></div>))}
+      {newMainComments.map((text, index) => (
+  <div className="comment-card" key={index}>
+    <div className="comment-head">
+      <div className="c-av">ML</div>
+
+      <div className="comment-content">
+        <div className="comment-meta">
+          <span className="comment-name">Moi</span>
+          <span className="comment-dot">·</span>
+          <span className="comment-time">à l'instant</span>
+        </div>
+
+        <div className="comment-text">{text}</div>
+
+        <div className="comment-actions">
+          <span>Répondre</span>
+        </div>
+      </div>
+    </div>
+  </div>
+))}
       <div className="reply-bar">
         <input className="reply-input" value={replyText} onChange={(e) => setReplyText(e.target.value)} placeholder={replyTarget === "post" ? "Répondre à la publication..." : "Répondre au commentaire..."} />
 <button className="send-btn" onClick={() => { if (!replyText.trim()) return; setNewComments((items) => [...items, replyText]); setReplyText(""); setReplyTarget("post"); }}><Send size={17} strokeWidth={2} /></button>
