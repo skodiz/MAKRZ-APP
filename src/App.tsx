@@ -789,8 +789,7 @@ function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
             <div className="topbar" style={{ borderBottom: "1px solid #E6DDD2" }}>
         <div className="topbar-left">
           <button className="icon-btn" onClick={onBack}><ArrowLeft size={22} strokeWidth={1.8} /></button>
-          <span className="topbar-title">Fil</span>
-        </div>
+                 </div>
       </div>
       <div className="content">
         <div className="post" style={{ cursor: "default" }}>
