@@ -827,7 +827,7 @@ const [newReplies, setNewReplies] = useState({
                 <span className="comment-time">il y a 1 h</span></div>
               <div className="comment-text">Magnifique résultat !</div>
               <div className="comment-actions">
-                <button className="reply-action" onClick={() => { setReplyTarget("lucie"); replyInputRef.current?.focus(); }}>Répondre</button>
+                <button className="reply-action" onClick={() => { setActiveReplyBox("lucie"); replyInputRef.current?.focus(); }}>Répondre</button>
                 <button className="toggle-btn" onClick={() => setOpen1(!open1)}>{open1 ? <><span>Masquer</span><ChevronUp size={13} /></> : <><span>Voir 1 réponse</span><ChevronDown size={13} /></>}</button>
               </div>
             </div>
@@ -865,7 +865,7 @@ const [newReplies, setNewReplies] = useState({
       <div className="comment-meta"><span className="comment-name">Thomas R.</span><span className="comment-dot">·</span><span className="comment-time">il y a 30 min</span></div>
       <div className="comment-text">Tu as utilisé quel émail ?</div>
       <div className="comment-actions">
-        <button className="reply-action" onClick={() => { setReplyTarget("thomas"); replyInputRef.current?.focus(); }}>Répondre</button>
+        <button className="reply-action" onClick={() => { setActiveReplyBox("thomas"); replyInputRef.current?.focus(); }}>Répondre</button>
         <button className="toggle-btn" onClick={() => setOpen2(!open2)}>{open2 ? <><span>Masquer</span><ChevronUp size={13} /></> : <><span>Voir 1 réponse</span><ChevronDown size={13} /></>}</button></div>
       {open2 && (
         <div className="nested">
@@ -905,8 +905,8 @@ const [newReplies, setNewReplies] = useState({
   </div>
 ))}
       <div className="reply-bar">
-        <input className="reply-input" value={replyText} onChange={(e) => setReplyText(e.target.value)} placeholder={replyTarget === "post" ? "Répondre à la publication..." : "Répondre au commentaire..."} />
-<button className="send-btn" onClick={() => { if (!replyText.trim()) return; setNewComments((items) => [...items, replyText]); setReplyText(""); setReplyTarget("post"); }}><Send size={17} strokeWidth={2} /></button>
+        <input ref={replyInputRef} className="reply-input" value={replyText} onChange={(e) => setReplyText(e.target.value)} placeholder={activeReplyBox === null ? "Répondre à la publication..." : "Répondre au commentaire..."} />
+<button className="send-btn" onClick={() => { if (!replyText.trim()) return; setNewMainComments((items) => [...items, replyText]); setReplyText(""); setActiveReplyBox(null); }}><Send size={17} strokeWidth={2} /></button>
       </div>
     </div>
   );
