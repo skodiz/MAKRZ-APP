@@ -388,7 +388,8 @@ const css = `
 .comment-text { font-size:13px; line-height:18px; color:#4E4842; margin:4px 0 0 0; text-align:left; }
 .comment-actions { margin-top:4px; display:flex; align-items:center; gap:12px; font-size:12px; font-weight:600; color:#78917F; }
   .toggle-btn { border: none; background: transparent; padding: 0; color: #9A938C; font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; gap: 3px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
-  .nested { margin-left: 14px; margin-top: 14px; padding-left: 12px; border-left: 1px solid #D8CBBE; }
+ .nested { margin-left:14px; margin-top:14px; padding-left:12px; border-left:1px solid #D8CDBE; display:flex; flex-direction:column; gap:12px; }
+ .nested-reply { margin:0; }
   .nested .comment-text, .nested .comment-actions { margin-left:0; }
   .reply-bar { height: 64px; background: #FAF8F4; border-top: 1px solid #E6DDD2; display: flex; align-items: center; gap: 10px; padding: 0 14px; flex-shrink: 0; }
   .reply-input { flex: 1; height: 40px; border-radius: 999px; border: 1px solid #E6DDD2; background: #FDFBF8; padding: 0 14px; color: #8B837B; font-size: 13px; display: flex; align-items: center; }
@@ -832,30 +833,51 @@ const [newReplies, setNewReplies] = useState({
               </div>
             </div>
           </div>
-         {open1 && (
-  <div className="nested">
-    <div className="comment-head">
-      <div className="c-av">TR</div>
+         <div className="nested">
+  {open1 && (
+    <>
+      <div className="comment-head">
+        <div className="c-av">TR</div>
+
+        <div className="comment-content">
+          <div className="comment-meta">
+            <span className="comment-name">Théo R.</span>
+            <span className="comment-dot">·</span>
+            <span className="comment-time">il y a 45 min</span>
+          </div>
+
+          <div className="comment-text">
+            La texture est superbe.
+          </div>
+
+          <div className="comment-actions">
+            <span>Répondre</span>
+          </div>
+        </div>
+      </div>
+    </>
+  )}
+
+  {newReplies.lucie?.map((text, index) => (
+    <div className="comment-head" key={index}>
+      <div className="c-av">ML</div>
 
       <div className="comment-content">
         <div className="comment-meta">
-          <span className="comment-name">Théo R.</span>
+          <span className="comment-name">Moi</span>
           <span className="comment-dot">·</span>
-          <span className="comment-time">il y a 45 min</span>
+          <span className="comment-time">à l'instant</span>
         </div>
 
-        <div className="comment-text">
-          La texture est superbe.
-        </div>
+        <div className="comment-text">{text}</div>
 
         <div className="comment-actions">
           <span>Répondre</span>
         </div>
       </div>
-
     </div>
-  </div>
-)}
+  ))}
+</div>
           {newReplies.lucie.map((text, index) => (<div className="nested" key={`lucie-${index}`}><div className="comment-head"><div className="c-av">ML</div><div className="comment-content"><div className="comment-meta"><span className="comment-name">Moi</span><span className="comment-dot">·</span><span className="comment-time">à l'instant</span></div><div className="comment-text">{text}</div><div className="comment-actions"><span>Répondre</span></div></div></div></div>))}
         </div>
 
