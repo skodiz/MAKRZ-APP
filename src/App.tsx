@@ -878,8 +878,7 @@ const [newReplies, setNewReplies] = useState({
     </div>
   ))}
 </div>
-          {newReplies.lucie.map((text, index) => (<div className="nested" key={`lucie-${index}`}><div className="comment-head"><div className="c-av">ML</div><div className="comment-content"><div className="comment-meta"><span className="comment-name">Moi</span><span className="comment-dot">·</span><span className="comment-time">à l'instant</span></div><div className="comment-text">{text}</div><div className="comment-actions"><span>Répondre</span></div></div></div></div>))}
-        </div>
+              </div>
 
         <div className="comment-card">
   <div className="comment-head">
@@ -930,7 +929,12 @@ const [newReplies, setNewReplies] = useState({
 ))}
       <div className="reply-bar">
         <input ref={replyInputRef} className="reply-input" value={replyText} onChange={(e) => setReplyText(e.target.value)} placeholder={activeReplyBox === null ? "Répondre à la publication..." : "Répondre au commentaire..."} />
-<button className="send-btn" onClick={() => { if (!replyText.trim()) return; if (activeReplyBox === "lucie") { setNewReplies((r) => ({ ...r, lucie: [...r.lucie, replyText] })); setOpen1(true); } else if (activeReplyBox === "thomas") { setNewReplies((r) => ({ ...r, thomas: [...r.thomas, replyText] })); setOpen2(true); } else { setNewMainComments((items) => [...items, replyText]); } setReplyText(""); setActiveReplyBox(null); }}><Send size={17} strokeWidth={2} /></button>
+<button type="button" className="send-btn" onClick={() => { const text = replyText.trim();
+                                                           if (!text) return; if (activeReplyBox === "lucie") { setNewReplies((r) => ({ ...r, lucie: [...r.lucie, text] })); setOpen1(true);
+                                                                                                              } else if (activeReplyBox === "thomas") { setNewReplies((r) => ({ ...r, thomas: [...r.thomas, text] })); setOpen2(true);
+                                                                                                                                                      } else { setNewMainComments((items) => [...items, text]);
+                                                                                                                                                             } setReplyText(""); setActiveReplyBox(null);
+                                                          }}><Send size={17} strokeWidth={2} /></button>
       </div>
     </div>
   );
