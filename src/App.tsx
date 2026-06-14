@@ -787,12 +787,12 @@ function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [replyText, setReplyText] = useState("");
-  const [activeReplyBox, setActiveReplyBox] = useState<"lucie" | "thomas" | null>(null);
+  const [activeReplyBox, setActiveReplyBox] = useState<string | null>(null);
   const [newMainComments, setNewMainComments] = useState<string[]>([]);
-  const [newReplies, setNewReplies] = useState({
-    lucie: [] as string[],
-    thomas: [] as string[],
-  });
+  const [newReplies, setNewReplies] = useState<Record<string, string[]>>({
+  lucie: [],
+  thomas: [],
+});
   const replyInputRef = useRef<HTMLInputElement>(null);
   const lucieReplyCount = 1 + newReplies.lucie.length;
 const thomasReplyCount = 1 + newReplies.thomas.length;
@@ -802,15 +802,13 @@ const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments
     const text = replyText.trim();
     if (!text) return;
 
-    if (activeReplyBox === "lucie") {
-      setNewReplies((r) => ({ ...r, lucie: [...r.lucie, text] }));
-      setOpen1(true);
-    } else if (activeReplyBox === "thomas") {
-      setNewReplies((r) => ({ ...r, thomas: [...r.thomas, text] }));
-      setOpen2(true);
-    } else {
-      setNewMainComments((items) => [...items, text]);
-    }
+   if (activeReplyBox) {
+  setNewReplies((r) => ({ ...r, [activeReplyBox]: [...(r[activeReplyBox] || []), text] }));
+  if (activeReplyBox === "lucie") setOpen1(true);
+  if (activeReplyBox === "thomas") setOpen2(true);
+} else {
+  setNewMainComments((items) => [...items, text]);
+}
 
     setReplyText("");
     setActiveReplyBox(null);
@@ -1016,13 +1014,27 @@ const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments
                 <div className="comment-text">{text}</div>
 
                 <div className="comment-actions">
-                  <button className="reply-action">Répondre</button>
+                  <button className="reply-action" onClick={() => { setActiveReplyBox(`main-${index}`); replyInputRef.current?.focus(); }}>Répondre</button>
                 </div>
               </div>
             </div>
           </div>
         ))}
-
+        
+{newReplies[`main-${index}`]?.length > 0 && (
+  <div className="nested">
+    {newReplies[`main-${index}`].map((reply, replyIndex) => (
+      <div className="comment-head" key={replyIndex}>
+        <div className="c-av">ML</div>
+        <div className="comment-content">
+          <div className="comment-meta"><span className="comment-name">Moi</span><span className="comment-dot">·</span><span className="comment-time">à l'instant</span></div>
+          <div className="comment-text">{reply}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
+        
         <div className="reply-bar">
           <input
             ref={replyInputRef}
