@@ -354,10 +354,17 @@ const css = `
   .post-img { width: 100%; height: 160px; border-radius: 14px; object-fit: cover; display: block; margin-bottom: 8px; }
  .post-actions {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   margin-top: 12px;
   padding-top: 10px;
   border-top: 1px solid #E6DDD2;
+}
+
+.post-actions-right {
+  display: flex;
+  gap: 16px;
+  align-items: center;
 }
 
 .post-action {
@@ -868,29 +875,28 @@ const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments
           <div className="post-body">{post.body}</div>
           {post.img && <img className="post-img" style={{ height: 200 }} src={post.img} alt="" />}
          <div className="post-actions">
-  <div className="post-action">
-    <MessageCircle size={14} strokeWidth={1.8} />
+  <div className="post-actions">
+  <div className="reply-count">
     {totalReplyCount} réponses
   </div>
 
-  <button className="post-action">
-    <Share2 size={14} strokeWidth={1.8} />
-    Partager
-  </button>
+  <div className="post-actions-right">
+    <button
+      className="post-action save-action"
+      onClick={() => setSaved(!saved)}
+    >
+      <Bookmark
+        size={14}
+        strokeWidth={1.8}
+        fill={saved ? "currentColor" : "none"}
+      />
+    </button>
 
-  <button
-    className="post-action save-action"
-    onClick={() => setSaved(!saved)}
-  >
-    <Bookmark
-      size={14}
-      strokeWidth={1.8}
-      fill={saved ? "currentColor" : "none"}
-    />
-    {saved ? "Enregistré" : "Enregistrer"}
-  </button>
+    <button className="post-action">
+      <Share2 size={14} strokeWidth={1.8} />
+    </button>
+  </div>
 </div>
-        </div>
         
 
         <div className="sect">{totalReplyCount} Réponses</div>
