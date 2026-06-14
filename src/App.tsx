@@ -1018,10 +1018,7 @@ const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-        
-{newReplies[`main-${index}`]?.length > 0 && (
+            {newReplies[`main-${index}`]?.length > 0 && (
   <div className="nested">
     {newReplies[`main-${index}`].map((reply, replyIndex) => (
       <div className="comment-head" key={replyIndex}>
@@ -1034,6 +1031,10 @@ const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments
     ))}
   </div>
 )}
+          </div>
+        ))}
+        
+
         
         <div className="reply-bar">
           <input
