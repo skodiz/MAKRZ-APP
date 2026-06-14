@@ -877,48 +877,85 @@ const [newReplies, setNewReplies] = useState({
         <div className="comment-card">
   <div className="comment-head">
     <div className="c-av">TR</div>
+
     <div className="comment-content">
-      <div className="comment-meta"><span className="comment-name">Thomas R.</span><span className="comment-dot">·</span><span className="comment-time">il y a 30 min</span></div>
+      <div className="comment-meta">
+        <span className="comment-name">Thomas R.</span>
+        <span className="comment-dot">·</span>
+        <span className="comment-time">il y a 30 min</span>
+      </div>
+
       <div className="comment-text">Tu as utilisé quel émail ?</div>
+
       <div className="comment-actions">
-        <button className="reply-action" onClick={() => { setActiveReplyBox("thomas"); replyInputRef.current?.focus(); }}>Répondre</button>
-        <button className="toggle-btn" onClick={() => setOpen2(!open2)}>{open2 ? <><span>Masquer</span><ChevronUp size={13} /></> : <><span>Voir 1 réponse</span><ChevronDown size={13} /></>}</button></div>
-      {open2 && (
-        <div className="nested">
-          <div className="comment-head">
-            <div className="c-av">MD</div>
-            <div className="comment-content">
-              <div className="comment-meta"><span className="comment-name">Marie D.</span><span className="comment-dot">·</span><span className="comment-time">il y a 20 min</span></div>
-              <div className="comment-text">Émail blanc mat Solargil.</div>
-              
-          </div>
-        </div>
-      )}
-     {newReplies.thomas.map((text, index) => (
-  <div className="nested" key={`thomas-${index}`}>
-       <div className="comment-content"><div className="comment-meta"><span className="comment-name">Moi</span><span className="comment-dot">·</span><span className="comment-time">à l'instant</span></div>
-         <div className="comment-text">{text}</div></div></div>))}
-   </div>
-</div>
-</div>
-      {newMainComments.map((text, index) => (
-  <div className="comment-card" key={index}>
-    <div className="comment-head">
-      <div className="c-av">ML</div>
+        <button
+          className="reply-action"
+          onClick={() => {
+            setActiveReplyBox("thomas");
+            replyInputRef.current?.focus();
+          }}
+        >
+          Répondre
+        </button>
 
-      <div className="comment-content">
-        <div className="comment-meta">
-          <span className="comment-name">Moi</span>
-          <span className="comment-dot">·</span>
-          <span className="comment-time">à l'instant</span>
-        </div>
+        <button
+          className="toggle-btn"
+          onClick={() => setOpen2(!open2)}
+        >
+          {open2 ? (
+            <>
+              <span>Masquer</span>
+              <ChevronUp size={13} />
+            </>
+          ) : (
+            <>
+              <span>Voir 1 réponse</span>
+              <ChevronDown size={13} />
+            </>
+          )}
+        </button>
+      </div>
 
-        <div className="comment-text">{text}</div>
+      <div className="nested">
+        {open2 && (
+          <>
+            <div className="comment-head">
+              <div className="c-av">MD</div>
 
+              <div className="comment-content">
+                <div className="comment-meta">
+                  <span className="comment-name">Marie D.</span>
+                  <span className="comment-dot">·</span>
+                  <span className="comment-time">il y a 20 min</span>
+                </div>
+
+                <div className="comment-text">
+                  Émail blanc mat Solargil.
+                </div>
               </div>
+            </div>
+          </>
+        )}
+
+        {newReplies.thomas.map((text, index) => (
+          <div className="comment-head" key={index}>
+            <div className="c-av">ML</div>
+
+            <div className="comment-content">
+              <div className="comment-meta">
+                <span className="comment-name">Moi</span>
+                <span className="comment-dot">·</span>
+                <span className="comment-time">à l'instant</span>
+              </div>
+
+              <div className="comment-text">{text}</div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </div>
-))}
+</div>
       <div className="reply-bar">
         <input ref={replyInputRef} className="reply-input" value={replyText} onChange={(e) => setReplyText(e.target.value)} placeholder={activeReplyBox === null ? "Répondre à la publication..." : "Répondre au commentaire..."} />
 <button type="button" className="send-btn" onClick={() => { const text = replyText.trim();
