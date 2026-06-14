@@ -787,30 +787,58 @@ function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [replyText, setReplyText] = useState("");
-const [activeReplyBox, setActiveReplyBox] = useState<"lucie" | "thomas" | null>(null);
-const [newMainComments, setNewMainComments] = useState<string[]>([]);
-const [newReplies, setNewReplies] = useState({
-  lucie: [] as string[],
-  thomas: [] as string[],
-});
+  const [activeReplyBox, setActiveReplyBox] = useState<"lucie" | "thomas" | null>(null);
+  const [newMainComments, setNewMainComments] = useState<string[]>([]);
+  const [newReplies, setNewReplies] = useState({
+    lucie: [] as string[],
+    thomas: [] as string[],
+  });
   const replyInputRef = useRef<HTMLInputElement>(null);
+
+  const sendReply = () => {
+    const text = replyText.trim();
+    if (!text) return;
+
+    if (activeReplyBox === "lucie") {
+      setNewReplies((r) => ({ ...r, lucie: [...r.lucie, text] }));
+      setOpen1(true);
+    } else if (activeReplyBox === "thomas") {
+      setNewReplies((r) => ({ ...r, thomas: [...r.thomas, text] }));
+      setOpen2(true);
+    } else {
+      setNewMainComments((items) => [...items, text]);
+    }
+
+    setReplyText("");
+    setActiveReplyBox(null);
+  };
+
   return (
     <div className="screen">
-            <div className="topbar" style={{ borderBottom: "1px solid #E6DDD2" }}>
+      <div className="topbar" style={{ borderBottom: "1px solid #E6DDD2" }}>
         <div className="topbar-left">
-          <button className="icon-btn" onClick={onBack}><ArrowLeft size={22} strokeWidth={1.8} /></button>
-                 </div>
+          <button className="icon-btn" onClick={onBack}>
+            <ArrowLeft size={22} strokeWidth={1.8} />
+          </button>
+        </div>
       </div>
+
       <div className="content">
         <div className="post" style={{ cursor: "default" }}>
           <div className="post-head">
             <div className="av" style={{ background: post.avColor }}>{post.av}</div>
-            <div>
-              <div className="post-author">{post.author}{post.role && <span className="role">{post.role}</span>}</div>
+
+            <div className="post-meta">
+              <div className="post-author">
+                {post.author}
+                {post.role && <span className="role">{post.role}</span>}
+              </div>
               <div className="post-time">{post.time}</div>
             </div>
+
             <div className={`post-type-badge ${post.typeKey}`}>{post.type}</div>
           </div>
+
           {post.title && <div className="post-title">{post.title}</div>}
           <div className="post-body">{post.body}</div>
           {post.img && <img className="post-img" style={{ height: 200 }} src={post.img} alt="" />}
@@ -821,48 +849,190 @@ const [newReplies, setNewReplies] = useState({
         <div className="comment-card">
           <div className="comment-head">
             <div className="c-av">LM</div>
+
             <div className="comment-content">
               <div className="comment-meta">
                 <span className="comment-name">Lucie M.</span>
                 <span className="comment-dot">·</span>
-                <span className="comment-time">il y a 1 h</span></div>
+                <span className="comment-time">il y a 1 h</span>
+              </div>
+
               <div className="comment-text">Magnifique résultat !</div>
+
               <div className="comment-actions">
-                <button className="reply-action" onClick={() => { setActiveReplyBox("lucie"); replyInputRef.current?.focus(); }}>Répondre</button>
-                <button className="toggle-btn" onClick={() => setOpen1(!open1)}>{open1 ? <><span>Masquer</span><ChevronUp size={13} /></> : <><span>Voir 1 réponse</span><ChevronDown size={13} /></>}</button>
+                <button
+                  className="reply-action"
+                  onClick={() => {
+                    setActiveReplyBox("lucie");
+                    replyInputRef.current?.focus();
+                  }}
+                >
+                  Répondre
+                </button>
+
+                <button className="toggle-btn" onClick={() => setOpen1(!open1)}>
+                  {open1 ? (
+                    <>
+                      <span>Masquer</span>
+                      <ChevronUp size={13} />
+                    </>
+                  ) : (
+                    <>
+                      <span>Voir 1 réponse</span>
+                      <ChevronDown size={13} />
+                    </>
+                  )}
+                </button>
+              </div>
+
+              <div className="nested">
+                {open1 && (
+                  <div className="comment-head">
+                    <div className="c-av">TR</div>
+
+                    <div className="comment-content">
+                      <div className="comment-meta">
+                        <span className="comment-name">Théo R.</span>
+                        <span className="comment-dot">·</span>
+                        <span className="comment-time">il y a 45 min</span>
+                      </div>
+
+                      <div className="comment-text">La texture est superbe.</div>
+                    </div>
+                  </div>
+                )}
+
+                {newReplies.lucie.map((text, index) => (
+                  <div className="comment-head" key={index}>
+                    <div className="c-av">ML</div>
+
+                    <div className="comment-content">
+                      <div className="comment-meta">
+                        <span className="comment-name">Moi</span>
+                        <span className="comment-dot">·</span>
+                        <span className="comment-time">à l'instant</span>
+                      </div>
+
+                      <div className="comment-text">{text}</div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        <div className="nested">
-<div className="nested">
-  {open2 && (
-    <div className="comment-head">
-      <div className="c-av">MD</div>
-      <div className="comment-content">
-        <div className="comment-meta"><span className="comment-name">Marie D.</span><span className="comment-dot">·</span><span className="comment-time">il y a 20 min</span></div>
-        <div className="comment-text">Émail blanc mat Solargil.</div>
-      </div>
-    </div>
-  )}
+        </div>
 
-  {newReplies.thomas.map((text, index) => (
-    <div className="comment-head" key={index}>
-      <div className="c-av">ML</div>
-      <div className="comment-content">
-        <div className="comment-meta"><span className="comment-name">Moi</span><span className="comment-dot">·</span><span className="comment-time">à l'instant</span></div>
-        <div className="comment-text">{text}</div>
-      </div>
-    </div>
-  ))}
-</div>
-      <div className="reply-bar">
-        <input ref={replyInputRef} className="reply-input" value={replyText} onChange={(e) => setReplyText(e.target.value)} placeholder={activeReplyBox === null ? "Répondre à la publication..." : "Répondre au commentaire..."} />
-<button type="button" className="send-btn" onClick={() => { const text = replyText.trim();
-                                                           if (!text) return; if (activeReplyBox === "lucie") { setNewReplies((r) => ({ ...r, lucie: [...r.lucie, text] })); setOpen1(true);
-                                                                                                              } else if (activeReplyBox === "thomas") { setNewReplies((r) => ({ ...r, thomas: [...r.thomas, text] })); setOpen2(true);
-                                                                                                                                                      } else { setNewMainComments((items) => [...items, text]);
-                                                                                                                                                             } setReplyText(""); setActiveReplyBox(null);
-                                                          }}><Send size={17} strokeWidth={2} /></button>
+        <div className="comment-card">
+          <div className="comment-head">
+            <div className="c-av">TR</div>
+
+            <div className="comment-content">
+              <div className="comment-meta">
+                <span className="comment-name">Thomas R.</span>
+                <span className="comment-dot">·</span>
+                <span className="comment-time">il y a 30 min</span>
+              </div>
+
+              <div className="comment-text">Tu as utilisé quel émail ?</div>
+
+              <div className="comment-actions">
+                <button
+                  className="reply-action"
+                  onClick={() => {
+                    setActiveReplyBox("thomas");
+                    replyInputRef.current?.focus();
+                  }}
+                >
+                  Répondre
+                </button>
+
+                <button className="toggle-btn" onClick={() => setOpen2(!open2)}>
+                  {open2 ? (
+                    <>
+                      <span>Masquer</span>
+                      <ChevronUp size={13} />
+                    </>
+                  ) : (
+                    <>
+                      <span>Voir 1 réponse</span>
+                      <ChevronDown size={13} />
+                    </>
+                  )}
+                </button>
+              </div>
+
+              <div className="nested">
+                {open2 && (
+                  <div className="comment-head">
+                    <div className="c-av">MD</div>
+
+                    <div className="comment-content">
+                      <div className="comment-meta">
+                        <span className="comment-name">Marie D.</span>
+                        <span className="comment-dot">·</span>
+                        <span className="comment-time">il y a 20 min</span>
+                      </div>
+
+                      <div className="comment-text">Émail blanc mat Solargil.</div>
+                    </div>
+                  </div>
+                )}
+
+                {newReplies.thomas.map((text, index) => (
+                  <div className="comment-head" key={index}>
+                    <div className="c-av">ML</div>
+
+                    <div className="comment-content">
+                      <div className="comment-meta">
+                        <span className="comment-name">Moi</span>
+                        <span className="comment-dot">·</span>
+                        <span className="comment-time">à l'instant</span>
+                      </div>
+
+                      <div className="comment-text">{text}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {newMainComments.map((text, index) => (
+          <div className="comment-card" key={index}>
+            <div className="comment-head">
+              <div className="c-av">ML</div>
+
+              <div className="comment-content">
+                <div className="comment-meta">
+                  <span className="comment-name">Moi</span>
+                  <span className="comment-dot">·</span>
+                  <span className="comment-time">à l'instant</span>
+                </div>
+
+                <div className="comment-text">{text}</div>
+
+                <div className="comment-actions">
+                  <button className="reply-action">Répondre</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+
+        <div className="reply-bar">
+          <input
+            ref={replyInputRef}
+            className="reply-input"
+            value={replyText}
+            onChange={(e) => setReplyText(e.target.value)}
+            placeholder={activeReplyBox === null ? "Répondre à la publication..." : "Répondre au commentaire..."}
+          />
+
+          <button type="button" className="send-btn" onClick={sendReply}>
+            <Send size={17} strokeWidth={2} />
+          </button>
+        </div>
       </div>
     </div>
   );
