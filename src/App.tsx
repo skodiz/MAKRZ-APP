@@ -352,8 +352,30 @@ const css = `
  .post-title { font-family:'Fraunces', serif; font-size:16px; line-height:21px; font-weight:500; color:#2C2623; margin-bottom:6px; text-align:left; }
 .post-body { font-size:13px; line-height:19px; color:#4F4842; margin-bottom:10px; text-align:left; }
   .post-img { width: 100%; height: 160px; border-radius: 14px; object-fit: cover; display: block; margin-bottom: 8px; }
-  .post-actions { display: flex; align-items: center; gap: 14px; color: #7F7770; font-size: 12px; }
-  .post-action { display: flex; align-items: center; gap: 5px; }
+ .post-actions {
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #E6DDD2;
+}
+
+.post-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5C6F63;
+  cursor: pointer;
+}
+
+.save-action {
+  margin-left: auto;
+}
   .share-ml { margin-left: auto; color: #8B837B; }
 
   /* SECTION */
@@ -845,7 +867,29 @@ const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments
           {post.title && <div className="post-title">{post.title}</div>}
           <div className="post-body">{post.body}</div>
           {post.img && <img className="post-img" style={{ height: 200 }} src={post.img} alt="" />}
-          <div className="post-actions"><button className="post-action"><MessageCircle size={14} strokeWidth={1.8} /> Répondre</button><button className="post-action"><Share2 size={14} strokeWidth={1.8} /> Partager</button><button className="post-action" onClick={() => setSaved(!saved)}><Bookmark size={14} strokeWidth={1.8} fill={saved ? "currentColor" : "none"} /> {saved ? "Enregistré" : "Enregistrer"}</button></div>
+         <div className="post-actions">
+  <div className="post-action">
+    <MessageCircle size={14} strokeWidth={1.8} />
+    {totalReplyCount} réponses
+  </div>
+
+  <button className="post-action">
+    <Share2 size={14} strokeWidth={1.8} />
+    Partager
+  </button>
+
+  <button
+    className="post-action save-action"
+    onClick={() => setSaved(!saved)}
+  >
+    <Bookmark
+      size={14}
+      strokeWidth={1.8}
+      fill={saved ? "currentColor" : "none"}
+    />
+    {saved ? "Enregistré" : "Enregistrer"}
+  </button>
+</div>
         </div>
         
 
