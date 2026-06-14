@@ -857,7 +857,6 @@ const [newReplies, setNewReplies] = useState({
       </div>
     </div>
   </div>
-</div>
       <div className="reply-bar">
         <input ref={replyInputRef} className="reply-input" value={replyText} onChange={(e) => setReplyText(e.target.value)} placeholder={activeReplyBox === null ? "Répondre à la publication..." : "Répondre au commentaire..."} />
 <button type="button" className="send-btn" onClick={() => { const text = replyText.trim();
