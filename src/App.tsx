@@ -894,9 +894,11 @@ const [newReplies, setNewReplies] = useState({
           </div>
         </div>
       )}
-      {newReplies.thomas.map((text, index) => (<div className="nested" key={`thomas-${index}`}><div className="comment-head"><div className="c-av">ML</div><div className="comment-content"><div className="comment-meta"><span className="comment-name">Moi</span><span className="comment-dot">·</span><span className="comment-time">à l'instant</span></div><div className="comment-text">{text}</div><div className="comment-actions"><span>Répondre</span></div></div></div></div>))}
-    </div>
-  </div>
+     {newReplies.thomas.map((text, index) => (
+  <div className="nested" key={`thomas-${index}`}>
+       <div className="comment-content"><div className="comment-meta"><span className="comment-name">Moi</span><span className="comment-dot">·</span><span className="comment-time">à l'instant</span></div>
+         <div className="comment-text">{text}</div></div></div>))}
+   </div>
 </div>
 </div>
       {newMainComments.map((text, index) => (
