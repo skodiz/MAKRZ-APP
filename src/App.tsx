@@ -16,6 +16,7 @@ import {
   ExternalLink,
   Check,
   X,
+  Bookmark,
 } from "lucide-react";
 
 // ─── TYPES ───────────────────────────────────────────────────────────────────
@@ -787,6 +788,7 @@ function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [replyText, setReplyText] = useState("");
+  const [saved, setSaved] = useState(false);
   const [activeReplyBox, setActiveReplyBox] = useState<string | null>(null);
   const [newMainComments, setNewMainComments] = useState<string[]>([]);
   const [newReplies, setNewReplies] = useState<Record<string, string[]>>({
@@ -843,7 +845,9 @@ const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments
           {post.title && <div className="post-title">{post.title}</div>}
           <div className="post-body">{post.body}</div>
           {post.img && <img className="post-img" style={{ height: 200 }} src={post.img} alt="" />}
+          <div className="post-actions"><button className="post-action"><MessageCircle size={14} strokeWidth={1.8} /> Répondre</button><button className="post-action"><Share2 size={14} strokeWidth={1.8} /> Partager</button><button className="post-action" onClick={() => setSaved(!saved)}><Bookmark size={14} strokeWidth={1.8} fill={saved ? "currentColor" : "none"} /> {saved ? "Enregistré" : "Enregistrer"}</button></div>
         </div>
+        
 
         <div className="sect">{totalReplyCount} Réponses</div>
         
