@@ -443,8 +443,8 @@ const css = `
   .detail-meta { font-size: 12px; color: #7F7770; margin-bottom: 10px; }
   .detail-text { font-size: 13px; line-height: 19px; color: #4E4842; margin-bottom: 12px; }
   .detail-actions { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #E6DDD2; }
-  .reply-count { display: flex; align-items: center; gap: 5px; color: #78917F; font-size: 13px; font-weight: 700; }
-  .share-btn-sm { border: none; border-radius: 999px; background: #EFEAE3; color: #5E5750; padding: 6px 12px; font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
+  .reply-count { display: flex; align-items: center; gap: 5px; color: #78917F; font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+  .share-btn-sm { border: none; border-radius: 999px; background: #EFEAE3; color: #8E867D; padding: 6px 12px; font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
 
   /* ADD RESOURCE */
   .add-res-content { flex: 1; background: linear-gradient(180deg, #DCCCB8 0%, #D3C1AB 100%); padding: 16px 14px 20px; overflow-y: auto; scrollbar-width: none; }
@@ -872,7 +872,9 @@ function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
           {post.img && <img className="post-img" style={{ height: 200 }} src={post.img} alt="" />}
 
           <div className="post-actions">
-            <div className="reply-count">{totalReplyCount} réponses</div>
+            <div className="reply-count">
+  {totalReplyCount} RÉPONSES
+</div>
 
             <div className="post-actions-right">
               <button className="post-action save-action" onClick={() => setSaved(!saved)}>
@@ -886,8 +888,7 @@ function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
           </div>
         </div>
 
-        <div className="sect">{totalReplyCount} Réponses</div>
-
+     
         <div className="comment-card">
           <div className="comment-head">
             <div className="c-av">LM</div>
