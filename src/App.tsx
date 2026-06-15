@@ -1023,6 +1023,7 @@ const replyPlaceholder = activeReplyBox === "lucie" ? "Répondre à Lucie..." : 
           <input ref={replyInputRef} 
             className="reply-input" value={replyText} onChange={(e) => setReplyText(e.target.value)} 
             placeholder={replyPlaceholder}
+            />
 
           <button type="button" className="send-btn" onClick={sendReply}>
             <Send size={17} strokeWidth={2} />
