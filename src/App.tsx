@@ -1054,39 +1054,54 @@ const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments
         </div>
 
         {newMainComments.map((text, index) => (
-          <div className="comment-card" key={index}>
-            <div className="comment-head">
-              <div className="c-av">ML</div>
+  <div className="comment-card" key={index}>
+    <div className="comment-head">
+      <div className="c-av">ML</div>
 
-              <div className="comment-content">
-                <div className="comment-meta">
-                  <span className="comment-name">Moi</span>
-                  <span className="comment-dot">·</span>
-                  <span className="comment-time">à l'instant</span>
-                </div>
+      <div className="comment-content">
+        <div className="comment-meta">
+          <span className="comment-name">Moi</span>
+          <span className="comment-dot">·</span>
+          <span className="comment-time">à l'instant</span>
+        </div>
 
-                <div className="comment-text">{text}</div>
+        <div className="comment-text">{text}</div>
 
-                <div className="comment-actions">
-                  <button className="reply-action" onClick={() => { setActiveReplyBox(`main-${index}`); replyInputRef.current?.focus(); }}>Répondre</button>
+        <div className="comment-actions">
+          <button
+            className="reply-action"
+            onClick={() => {
+              setActiveReplyBox(`main-${index}`);
+              replyInputRef.current?.focus();
+            }}
+          >
+            Répondre
+          </button>
+        </div>
+
+        {newReplies[`main-${index}`]?.length > 0 && (
+          <div className="nested">
+            {newReplies[`main-${index}`].map((reply, replyIndex) => (
+              <div className="comment-head" key={replyIndex}>
+                <div className="c-av">ML</div>
+
+                <div className="comment-content">
+                  <div className="comment-meta">
+                    <span className="comment-name">Moi</span>
+                    <span className="comment-dot">·</span>
+                    <span className="comment-time">à l'instant</span>
+                  </div>
+
+                  <div className="comment-text">{reply}</div>
                 </div>
               </div>
-            </div>
-            {newReplies[`main-${index}`]?.length > 0 && (
-  <div className="nested">
-    {newReplies[`main-${index}`].map((reply, replyIndex) => (
-      <div className="comment-head" key={replyIndex}>
-        <div className="c-av">ML</div>
-        <div className="comment-content">
-          <div className="comment-meta"><span className="comment-name">Moi</span><span className="comment-dot">·</span><span className="comment-time">à l'instant</span></div>
-          <div className="comment-text">{reply}</div>
-        </div>
-      </div>
-    ))}
-  </div>
-)}
+            ))}
           </div>
-        ))}
+        )}
+      </div>
+    </div>
+  </div>
+))}
         
 
         
