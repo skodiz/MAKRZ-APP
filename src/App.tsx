@@ -820,26 +820,25 @@ function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
   const [saved, setSaved] = useState(false);
   const [activeReplyBox, setActiveReplyBox] = useState<string | null>(null);
   const [newMainComments, setNewMainComments] = useState<string[]>([]);
-  const [newReplies, setNewReplies] = useState<Record<string, string[]>>({
-  lucie: [],
-  thomas: [],
-});
+  const [newReplies, setNewReplies] = useState<Record<string, string[]>>({ lucie: [], thomas: [] });
   const replyInputRef = useRef<HTMLInputElement>(null);
-  const lucieReplyCount = 1 + newReplies.lucie.length;
-const thomasReplyCount = 1 + newReplies.thomas.length;
-const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments.length;
+
+  const lucieReplyCount = 1 + (newReplies.lucie?.length || 0);
+  const thomasReplyCount = 1 + (newReplies.thomas?.length || 0);
+  const dynamicMainRepliesCount = newMainComments.reduce((total, _, i) => total + (newReplies[`main-${i}`]?.length || 0), 0);
+  const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments.length + dynamicMainRepliesCount;
 
   const sendReply = () => {
     const text = replyText.trim();
     if (!text) return;
 
-   if (activeReplyBox) {
-  setNewReplies((r) => ({ ...r, [activeReplyBox]: [...(r[activeReplyBox] || []), text] }));
-  if (activeReplyBox === "lucie") setOpen1(true);
-  if (activeReplyBox === "thomas") setOpen2(true);
-} else {
-  setNewMainComments((items) => [...items, text]);
-}
+    if (activeReplyBox) {
+      setNewReplies((r) => ({ ...r, [activeReplyBox]: [...(r[activeReplyBox] || []), text] }));
+      if (activeReplyBox === "lucie") setOpen1(true);
+      if (activeReplyBox === "thomas") setOpen2(true);
+    } else {
+      setNewMainComments((items) => [...items, text]);
+    }
 
     setReplyText("");
     setActiveReplyBox(null);
@@ -861,10 +860,7 @@ const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments
             <div className="av" style={{ background: post.avColor }}>{post.av}</div>
 
             <div className="post-meta">
-              <div className="post-author">
-                {post.author}
-                {post.role && <span className="role">{post.role}</span>}
-              </div>
+              <div className="post-author">{post.author}{post.role && <span className="role">{post.role}</span>}</div>
               <div className="post-time">{post.time}</div>
             </div>
 
@@ -874,33 +870,24 @@ const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments
           {post.title && <div className="post-title">{post.title}</div>}
           <div className="post-body">{post.body}</div>
           {post.img && <img className="post-img" style={{ height: 200 }} src={post.img} alt="" />}
-         <div className="post-actions">
-  <div className="post-actions">
-  <div className="reply-count">
-    {totalReplyCount} réponses
-  </div>
 
-  <div className="post-actions-right">
-    <button
-      className="post-action save-action"
-      onClick={() => setSaved(!saved)}
-    >
-      <Bookmark
-        size={14}
-        strokeWidth={1.8}
-        fill={saved ? "currentColor" : "none"}
-      />
-    </button>
+          <div className="post-actions">
+            <div className="reply-count">{totalReplyCount} réponses</div>
 
-    <button className="post-action">
-      <Share2 size={14} strokeWidth={1.8} />
-    </button>
-  </div>
-</div>
-        
+            <div className="post-actions-right">
+              <button className="post-action save-action" onClick={() => setSaved(!saved)}>
+                <Bookmark size={14} strokeWidth={1.8} fill={saved ? "currentColor" : "none"} />
+              </button>
+
+              <button className="post-action">
+                <Share2 size={14} strokeWidth={1.8} />
+              </button>
+            </div>
+          </div>
+        </div>
 
         <div className="sect">{totalReplyCount} Réponses</div>
-        
+
         <div className="comment-card">
           <div className="comment-head">
             <div className="c-av">LM</div>
@@ -915,64 +902,35 @@ const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments
               <div className="comment-text">Magnifique résultat !</div>
 
               <div className="comment-actions">
-                <button
-                  className="reply-action"
-                  onClick={() => {
-                    setActiveReplyBox("lucie");
-                    replyInputRef.current?.focus();
-                  }}
-                >
-                  Répondre
-                </button>
-
+                <button className="reply-action" onClick={() => { setActiveReplyBox("lucie"); replyInputRef.current?.focus(); }}>Répondre</button>
                 <button className="toggle-btn" onClick={() => setOpen1(!open1)}>
-                  {open1 ? (
-                    <>
-                      <span>Masquer</span>
-                      <ChevronUp size={13} />
-                    </>
-                  ) : (
-                    <>
-                      <span>Voir {lucieReplyCount} réponse{lucieReplyCount > 1 ? "s" : ""}</span>
-                      <ChevronDown size={13} />
-                    </>
-                  )}
+                  {open1 ? <><span>Masquer</span><ChevronUp size={13} /></> : <><span>Voir {lucieReplyCount} réponse{lucieReplyCount > 1 ? "s" : ""}</span><ChevronDown size={13} /></>}
                 </button>
               </div>
 
-              <div className="nested">
-                {open1 && (
-                  <div className="comment-head">
-                    <div className="c-av">TR</div>
-
-                    <div className="comment-content">
-                      <div className="comment-meta">
-                        <span className="comment-name">Théo R.</span>
-                        <span className="comment-dot">·</span>
-                        <span className="comment-time">il y a 45 min</span>
+              {(open1 || newReplies.lucie.length > 0) && (
+                <div className="nested">
+                  {open1 && (
+                    <div className="comment-head">
+                      <div className="c-av">TR</div>
+                      <div className="comment-content">
+                        <div className="comment-meta"><span className="comment-name">Théo R.</span><span className="comment-dot">·</span><span className="comment-time">il y a 45 min</span></div>
+                        <div className="comment-text">La texture est superbe.</div>
                       </div>
-
-                      <div className="comment-text">La texture est superbe.</div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {newReplies.lucie.map((text, index) => (
-                  <div className="comment-head" key={index}>
-                    <div className="c-av">ML</div>
-
-                    <div className="comment-content">
-                      <div className="comment-meta">
-                        <span className="comment-name">Moi</span>
-                        <span className="comment-dot">·</span>
-                        <span className="comment-time">à l'instant</span>
+                  {newReplies.lucie.map((text, index) => (
+                    <div className="comment-head" key={index}>
+                      <div className="c-av">ML</div>
+                      <div className="comment-content">
+                        <div className="comment-meta"><span className="comment-name">Moi</span><span className="comment-dot">·</span><span className="comment-time">à l'instant</span></div>
+                        <div className="comment-text">{text}</div>
                       </div>
-
-                      <div className="comment-text">{text}</div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -991,128 +949,77 @@ const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments
               <div className="comment-text">Tu as utilisé quel émail ?</div>
 
               <div className="comment-actions">
-                <button
-                  className="reply-action"
-                  onClick={() => {
-                    setActiveReplyBox("thomas");
-                    replyInputRef.current?.focus();
-                  }}
-                >
-                  Répondre
-                </button>
-
+                <button className="reply-action" onClick={() => { setActiveReplyBox("thomas"); replyInputRef.current?.focus(); }}>Répondre</button>
                 <button className="toggle-btn" onClick={() => setOpen2(!open2)}>
-                  {open2 ? (
-                    <>
-                      <span>Masquer</span>
-                      <ChevronUp size={13} />
-                    </>
-                  ) : (
-                    <>
-                      <span>Voir {thomasReplyCount} réponse{thomasReplyCount > 1 ? "s" : ""}</span>
-                      <ChevronDown size={13} />
-                    </>
-                  )}
+                  {open2 ? <><span>Masquer</span><ChevronUp size={13} /></> : <><span>Voir {thomasReplyCount} réponse{thomasReplyCount > 1 ? "s" : ""}</span><ChevronDown size={13} /></>}
                 </button>
               </div>
 
-              <div className="nested">
-                {open2 && (
-                  <div className="comment-head">
-                    <div className="c-av">MD</div>
-
-                    <div className="comment-content">
-                      <div className="comment-meta">
-                        <span className="comment-name">Marie D.</span>
-                        <span className="comment-dot">·</span>
-                        <span className="comment-time">il y a 20 min</span>
+              {(open2 || newReplies.thomas.length > 0) && (
+                <div className="nested">
+                  {open2 && (
+                    <div className="comment-head">
+                      <div className="c-av">MD</div>
+                      <div className="comment-content">
+                        <div className="comment-meta"><span className="comment-name">Marie D.</span><span className="comment-dot">·</span><span className="comment-time">il y a 20 min</span></div>
+                        <div className="comment-text">Émail blanc mat Solargil.</div>
                       </div>
-
-                      <div className="comment-text">Émail blanc mat Solargil.</div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {newReplies.thomas.map((text, index) => (
-                  <div className="comment-head" key={index}>
-                    <div className="c-av">ML</div>
-
-                    <div className="comment-content">
-                      <div className="comment-meta">
-                        <span className="comment-name">Moi</span>
-                        <span className="comment-dot">·</span>
-                        <span className="comment-time">à l'instant</span>
+                  {newReplies.thomas.map((text, index) => (
+                    <div className="comment-head" key={index}>
+                      <div className="c-av">ML</div>
+                      <div className="comment-content">
+                        <div className="comment-meta"><span className="comment-name">Moi</span><span className="comment-dot">·</span><span className="comment-time">à l'instant</span></div>
+                        <div className="comment-text">{text}</div>
                       </div>
-
-                      <div className="comment-text">{text}</div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
 
         {newMainComments.map((text, index) => (
-  <div className="comment-card" key={index}>
-    <div className="comment-head">
-      <div className="c-av">ML</div>
+          <div className="comment-card" key={index}>
+            <div className="comment-head">
+              <div className="c-av">ML</div>
 
-      <div className="comment-content">
-        <div className="comment-meta">
-          <span className="comment-name">Moi</span>
-          <span className="comment-dot">·</span>
-          <span className="comment-time">à l'instant</span>
-        </div>
-
-        <div className="comment-text">{text}</div>
-
-        <div className="comment-actions">
-          <button
-            className="reply-action"
-            onClick={() => {
-              setActiveReplyBox(`main-${index}`);
-              replyInputRef.current?.focus();
-            }}
-          >
-            Répondre
-          </button>
-        </div>
-
-        {newReplies[`main-${index}`]?.length > 0 && (
-          <div className="nested">
-            {newReplies[`main-${index}`].map((reply, replyIndex) => (
-              <div className="comment-head" key={replyIndex}>
-                <div className="c-av">ML</div>
-
-                <div className="comment-content">
-                  <div className="comment-meta">
-                    <span className="comment-name">Moi</span>
-                    <span className="comment-dot">·</span>
-                    <span className="comment-time">à l'instant</span>
-                  </div>
-
-                  <div className="comment-text">{reply}</div>
+              <div className="comment-content">
+                <div className="comment-meta">
+                  <span className="comment-name">Moi</span>
+                  <span className="comment-dot">·</span>
+                  <span className="comment-time">à l'instant</span>
                 </div>
+
+                <div className="comment-text">{text}</div>
+
+                <div className="comment-actions">
+                  <button className="reply-action" onClick={() => { setActiveReplyBox(`main-${index}`); replyInputRef.current?.focus(); }}>Répondre</button>
+                </div>
+
+                {newReplies[`main-${index}`]?.length > 0 && (
+                  <div className="nested">
+                    {newReplies[`main-${index}`].map((reply, replyIndex) => (
+                      <div className="comment-head" key={replyIndex}>
+                        <div className="c-av">ML</div>
+                        <div className="comment-content">
+                          <div className="comment-meta"><span className="comment-name">Moi</span><span className="comment-dot">·</span><span className="comment-time">à l'instant</span></div>
+                          <div className="comment-text">{reply}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
-            ))}
+            </div>
           </div>
         ))}
-      </div>
-    </div>
-  </div>
-))}
-        
 
-        
         <div className="reply-bar">
-          <input
-            ref={replyInputRef}
-            className="reply-input"
-            value={replyText}
-            onChange={(e) => setReplyText(e.target.value)}
-            placeholder={activeReplyBox === null ? "Répondre à la publication..." : "Répondre au commentaire..."}
-          />
+          <input ref={replyInputRef} className="reply-input" value={replyText} onChange={(e) => setReplyText(e.target.value)} placeholder={activeReplyBox === null ? "Répondre à la publication..." : "Répondre au commentaire..."} />
 
           <button type="button" className="send-btn" onClick={sendReply}>
             <Send size={17} strokeWidth={2} />
@@ -1122,7 +1029,6 @@ const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments
     </div>
   );
 }
-
 // ─── SCREEN: GALERIE ──────────────────────────────────────────────────────────
 
 function GalerieAtelier({ atelier, onBack }: { atelier: Atelier | null; onBack: () => void }) {
