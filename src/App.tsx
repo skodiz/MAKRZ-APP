@@ -443,7 +443,7 @@ const css = `
   .detail-meta { font-size: 12px; color: #7F7770; margin-bottom: 10px; }
   .detail-text { font-size: 13px; line-height: 19px; color: #4E4842; margin-bottom: 12px; }
   .detail-actions { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #E6DDD2; }
-  .reply-count { display: flex; align-items: center; gap: 5px; color: #78917F; font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+  .reply-count { display: flex; align-items: center; gap: 5px; color: #78917F; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
   .share-btn-sm { border: none; border-radius: 999px; background: #EFEAE3; color: #8E867D; padding: 6px 12px; font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
 
   /* ADD RESOURCE */
