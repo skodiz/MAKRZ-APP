@@ -1097,7 +1097,7 @@ const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments
               </div>
             ))}
           </div>
-        )}
+        ))}
       </div>
     </div>
   </div>
