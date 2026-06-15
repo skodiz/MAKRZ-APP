@@ -240,7 +240,7 @@ const css = `
   .tab.active::after { content: ""; position: absolute; left: 30px; right: 30px; bottom: 0; height: 2px; background: #5C3F2A; }
 
   /* CONTENT */
-  .content { flex:1; background:#E8DED1; padding:14px 12px 12px; overflow-y:auto; scrollbar-width:none; -ms-overflow-style:none; min-height:0; }
+.content { flex:1; background:#E8DED1; padding:14px 12px 12px; overflow-y:auto; scrollbar-width:none; -ms-overflow-style:none; min-height:0; }
   .content::-webkit-scrollbar { display: none; }
   .content-white { flex: 1; background: #FAF8F4; padding: 14px 16px; overflow-y: auto; scrollbar-width: none; min-height: 0; }
   .content-white::-webkit-scrollbar { display: none; }
@@ -421,7 +421,7 @@ const css = `
  .nested { margin-left:14px; margin-top:14px; padding-left:12px; border-left:1px solid #D8CDBE; display:flex; flex-direction:column; gap:12px; }
  .nested-reply { margin:0; }
   .nested .comment-text, .nested .comment-actions { margin-left:0; }
-  .reply-bar { position:sticky; bottom:0; height:64px; background:#FAF8F4; border-top:1px solid #E6DDD2; display:flex; align-items:center; gap:10px; padding:8px 14px; flex-shrink:0; z-index:10; }
+ .reply-bar { position:sticky; bottom:0; background:#FAF8F4; border-top:1px solid #E6DDD2; display:flex; align-items:center; gap:10px; padding:10px 14px; margin:0 -12px -12px; z-index:20; }
   .reply-input { flex: 1; height: 40px; border-radius: 999px; border: 1px solid #E6DDD2; background: #FDFBF8; padding: 0 14px; color: #8B837B; font-size: 13px; display: flex; align-items: center; }
   .send-btn { width: 38px; height: 38px; border-radius: 50%; border: none; background: #3F5248; color: #FFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; }
 .comment-meta { display:flex; align-items:center; gap:5px; line-height:15px; margin-bottom:2px; }
@@ -827,7 +827,7 @@ function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
   const thomasReplyCount = 1 + (newReplies.thomas?.length || 0);
   const dynamicMainRepliesCount = newMainComments.reduce((total, _, i) => total + (newReplies[`main-${i}`]?.length || 0), 0);
   const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments.length + dynamicMainRepliesCount;
-
+const replyPlaceholder = activeReplyBox === "lucie" ? "Répondre à Lucie..." : activeReplyBox === "thomas" ? "Répondre à Thomas..." : activeReplyBox?.startsWith("main-") ? "Répondre à Moi..." : "Répondre à la publication...";
   const sendReply = () => {
     const text = replyText.trim();
     if (!text) return;
@@ -1020,7 +1020,9 @@ function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
         ))}
 
         <div className="reply-bar">
-          <input ref={replyInputRef} className="reply-input" value={replyText} onChange={(e) => setReplyText(e.target.value)} placeholder={activeReplyBox === null ? "Répondre à la publication..." : "Répondre au commentaire..."} />
+          <input ref={replyInputRef} 
+            className="reply-input" value={replyText} onChange={(e) => setReplyText(e.target.value)} 
+            placeholder={replyPlaceholder}
 
           <button type="button" className="send-btn" onClick={sendReply}>
             <Send size={17} strokeWidth={2} />
