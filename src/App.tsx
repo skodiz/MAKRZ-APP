@@ -421,8 +421,29 @@ const css = `
  .nested { margin-left:14px; margin-top:14px; padding-left:12px; border-left:1px solid #D8CDBE; display:flex; flex-direction:column; gap:12px; }
  .nested-reply { margin:0; }
   .nested .comment-text, .nested .comment-actions { margin-left:0; }
-.post-detail-reply-bar { position:sticky; bottom:0; background:#FAF8F4; border-top:1px solid #E6DDD2; display:flex; align-items:center; gap:10px; padding:10px 14px; margin:0 -12px -12px; z-index:20; }  .reply-input { flex: 1; height: 40px; border-radius: 999px; border: 1px solid #E6DDD2; background: #FDFBF8; padding: 0 14px; color: #8B837B; font-size: 13px; display: flex; align-items: center; }
-  .send-btn { width: 38px; height: 38px; border-radius: 50%; border: none; background: #3F5248; color: #FFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; }
+.post-detail-screen {
+  position:relative;
+  overflow:hidden;
+}
+
+.post-detail-content {
+  padding-bottom:86px;
+}
+
+.post-detail-reply-bar {
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:72px;
+  background:#FAF8F4;
+  border-top:1px solid #E6DDD2;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  z-index:30;
+}  .send-btn { width: 38px; height: 38px; border-radius: 50%; border: none; background: #3F5248; color: #FFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; }
 .comment-meta { display:flex; align-items:center; gap:5px; line-height:15px; margin-bottom:2px; }
 .comment-dot { font-size:11px; color:#8B837B; }
 .reply-action { border:none; background:transparent; padding:0; margin:0; color:#78917F; font-size:12px; font-weight:600; font-family:'Inter', system-ui, sans-serif; cursor:pointer; }
@@ -465,7 +486,42 @@ const css = `
   .form-actions { height: 64px; background: #FAF8F4; border-top: 1px solid #E6DDD2; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; flex-shrink: 0; }
   .cancel-lnk { border: none; background: transparent; color: #7F7770; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
   .submit-btn { border: none; border-radius: 999px; background: #3F5248; color: #FFF; font-size: 14px; font-weight: 700; padding: 10px 18px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+@media (max-width:520px) {
+  body {
+    background:#FAF8F4;
+  }
 
+  .app {
+    width:100vw;
+    height:100dvh;
+    padding:0;
+    background:#FAF8F4;
+  }
+
+  .screen {
+    width:100vw;
+    height:100dvh;
+    max-width:none;
+    border-radius:0;
+    overflow:hidden;
+  }
+
+  .header,
+  .topbar {
+    padding-top:max(18px, env(safe-area-inset-top));
+  }
+
+  .nav {
+    display:grid;
+    height:calc(74px + env(safe-area-inset-bottom));
+    padding-bottom:env(safe-area-inset-bottom);
+    flex-shrink:0;
+  }
+
+  .content {
+    min-height:0;
+  }
+}
   `;
 
 // ─── SUB-COMPONENTS ───────────────────────────────────────────────────────────
@@ -811,7 +867,7 @@ const replyPlaceholder = activeReplyBox === "lucie" ? "Répondre à Lucie..." : 
   };
 
   return (
-    <div className="screen">
+  <div className="screen post-detail-screen">
       <div className="topbar" style={{ borderBottom: "1px solid #E6DDD2" }}>
         <div className="topbar-left">
           <button className="icon-btn" onClick={onBack}>
@@ -820,7 +876,7 @@ const replyPlaceholder = activeReplyBox === "lucie" ? "Répondre à Lucie..." : 
         </div>
       </div>
 
-      <div className="content">
+      <div className="content post-detail-content">
         <div className="post" style={{ cursor: "default" }}>
           <div className="post-head">
             <div className="av" style={{ background: post.avColor }}>{post.av}</div>
