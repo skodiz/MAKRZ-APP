@@ -549,18 +549,14 @@ body {
 }
 
   .nav {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  height: 74px;
+  padding-bottom: 0;
+  flex-shrink: 0;
   display: grid;
-  height: calc(74px + env(safe-area-inset-bottom));
-  padding-bottom: env(safe-area-inset-bottom);
-  z-index: 40;
 }
 
   .content {
-  padding-bottom: calc(90px + env(safe-area-inset-bottom));
+  padding-bottom: 12px;
 }
 }
   `;
