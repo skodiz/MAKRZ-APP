@@ -216,19 +216,19 @@ body,
   }
 
  .phone {
-  width: 375px;
-  height: 820px;
-  background: #FAF8F4;
-  border-radius: 44px;
-  overflow: hidden;
-  color: #2C2623;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  border: 1px solid #2a2826;
+  width:375px;
+  height:820px;
+  background:#FAF8F4;
+  border-radius:44px;
+  overflow:hidden;
+  color:#2C2623;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  border:1px solid #2a2826;
 }
 
-.screen { flex:1; display:flex; flex-direction:column; overflow:hidden; min-height:0; height:100%; }
+.screen { flex:1; display:flex; flex-direction:column; overflow:hidden; min-height:0; }
 
   /* STATUS */
   .status { height: 32px; padding: 10px 20px 0; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
@@ -507,33 +507,7 @@ body,
   .form-actions { height: 64px; background: #FAF8F4; border-top: 1px solid #E6DDD2; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; flex-shrink: 0; }
   .cancel-lnk { border: none; background: transparent; color: #7F7770; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
   .submit-btn { border: none; border-radius: 999px; background: #3F5248; color: #FFF; font-size: 14px; font-weight: 700; padding: 10px 18px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
-@media (max-width:520px) {
 
-body {
-    display: block;
-  }
-  
-  .phone {
-    width: 100vw;
-    height: 100dvh;
-    border-radius: 0;
-    border: none;
-  }
-
-  .screen {
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-    border-radius: 0;
-  }
-
-  .nav {
-    display: grid;
-    height: calc(74px + env(safe-area-inset-bottom));
-    padding-bottom: env(safe-area-inset-bottom);
-    flex-shrink: 0;
-  }
-}
   `;
 
 // ─── SUB-COMPONENTS ───────────────────────────────────────────────────────────
