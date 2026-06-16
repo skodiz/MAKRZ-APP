@@ -242,8 +242,8 @@ body {
   .status { height: 32px; padding: 10px 20px 0; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
 
   /* NAV */
-  .nav { height: 30px; background: #FAF8F4; border-top: 1px solid #E6DDD2; display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; flex-shrink: 0; }
-  .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding-top: 15px; color: #8C857E; font-size: 11px; cursor: pointer; border: none; background: none; font-family: 'DM Sans', sans-serif; }
+  .nav { height: 60px; background: #FAF8F4; border-top: 1px solid #E6DDD2; display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; flex-shrink: 0; }
+  .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding-top: 15px; color: #8C857E; font-size: 12px; font-weight: 600; cursor: pointer; border: none; background: none; font-family: 'DM Sans', sans-serif; }
   .nav-item.active { color: #C6784F; }
 
   /* HEADER */
@@ -567,15 +567,15 @@ function NavBar({ tab, setTab }: { tab: string; setTab: (t: string) => void }) {
   return (
     <div className="nav">
       <button className={`nav-item ${tab === "feed" ? "active" : ""}`} onClick={() => setTab("feed")}>
-        <Home size={22} strokeWidth={1.8} />
+        <Home size={25} strokeWidth={1.8} />
         <span>Fil</span>
       </button>
       <button className={`nav-item ${tab === "ateliers" ? "active" : ""}`} onClick={() => setTab("ateliers")}>
-        <Palette size={22} strokeWidth={1.8} />
+        <Palette size={25} strokeWidth={1.8} />
         <span>Ateliers</span>
       </button>
       <button className={`nav-item ${tab === "galerie" ? "active" : ""}`} onClick={() => setTab("galerie")}>
-        <ImageIcon size={22} strokeWidth={1.8} />
+        <ImageIcon size={25} strokeWidth={1.8} />
         <span>Galerie</span>
       </button>
     </div>
