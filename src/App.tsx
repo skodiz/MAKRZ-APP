@@ -243,7 +243,7 @@ body {
 
   /* NAV */
   .nav { height: 30px; background: #FAF8F4; border-top: 1px solid #E6DDD2; display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; flex-shrink: 0; }
-  .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding-top: 6px; color: #8C857E; font-size: 11px; cursor: pointer; border: none; background: none; font-family: 'DM Sans', sans-serif; }
+  .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding-top: 15px; color: #8C857E; font-size: 11px; cursor: pointer; border: none; background: none; font-family: 'DM Sans', sans-serif; }
   .nav-item.active { color: #C6784F; }
 
   /* HEADER */
