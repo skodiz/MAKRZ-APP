@@ -466,23 +466,7 @@ const css = `
   .cancel-lnk { border: none; background: transparent; color: #7F7770; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
   .submit-btn { border: none; border-radius: 999px; background: #3F5248; color: #FFF; font-size: 14px; font-weight: 700; padding: 10px 18px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
 
-  @media (max-width: 520px) {
-  .header,
-  .topbar {
-    padding-top: max(18px, env(safe-area-inset-top));
-  }
-
-  .nav {
-    height: calc(74px + env(safe-area-inset-bottom));
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  .form-actions {
-    height: calc(64px + env(safe-area-inset-bottom));
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-}
-`;
+  `;
 
 // ─── SUB-COMPONENTS ───────────────────────────────────────────────────────────
 
