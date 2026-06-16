@@ -466,39 +466,22 @@ const css = `
   .cancel-lnk { border: none; background: transparent; color: #7F7770; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
   .submit-btn { border: none; border-radius: 999px; background: #3F5248; color: #FFF; font-size: 14px; font-weight: 700; padding: 10px 18px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
 
-  @media (display-mode: standalone), (max-width: 480px) {
-    body {
-      align-items: stretch;
-      min-height: 100dvh;
-      padding: 0;
-      background: #FAF8F4;
-    }
-
-    .phone {
-      width: 100vw;
-      height: 100dvh;
-      min-height: 100vh;
-      border: 0;
-      border-radius: 0;
-    }
-
-    .header,
-    .topbar {
-      padding-top: max(18px, env(safe-area-inset-top));
-    }
-
-    .nav,
-    .form-actions,
-    .reply-bar {
-      padding-bottom: env(safe-area-inset-bottom);
-      height: calc(74px + env(safe-area-inset-bottom));
-    }
-
-    .form-actions,
-    .reply-bar {
-      height: calc(64px + env(safe-area-inset-bottom));
-    }
+  @media (max-width: 520px) {
+  .header,
+  .topbar {
+    padding-top: max(18px, env(safe-area-inset-top));
   }
+
+  .nav {
+    height: calc(74px + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .form-actions {
+    height: calc(64px + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
 `;
 
 // ─── SUB-COMPONENTS ───────────────────────────────────────────────────────────
