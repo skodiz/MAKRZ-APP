@@ -193,42 +193,48 @@ const css = `
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html,
-body,
-#root {
+html, body, #root {
   width: 100%;
   height: 100%;
-  min-height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+}
+
+body {
+  background: #1d1b19;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.phone {
+  width: 375px;
+  height: 820px;
   background: #FAF8F4;
+  border-radius: 44px;
+  overflow: hidden;
+  color: #2C2623;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid #2a2826;
 }
 
-  body {
-    background: #1d1b19;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding: 20px;
-    font-family: 'DM Sans', system-ui, sans-serif;
-  }
-
- .phone {
-  width:375px;
-  height:820px;
-  background:#FAF8F4;
-  border-radius:44px;
-  overflow:hidden;
-  color:#2C2623;
-  display:flex;
-  flex-direction:column;
-  position:relative;
-  border:1px solid #2a2826;
+.screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+  height: 100%;
 }
 
-.screen { flex:1; display:flex; flex-direction:column; overflow:hidden; min-height:0; }
+.app {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
   /* STATUS */
   .status { height: 32px; padding: 10px 20px 0; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
@@ -508,6 +514,40 @@ body,
   .cancel-lnk { border: none; background: transparent; color: #7F7770; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
   .submit-btn { border: none; border-radius: 999px; background: #3F5248; color: #FFF; font-size: 14px; font-weight: 700; padding: 10px 18px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
 
+@media (max-width:520px) {
+  body {
+    background: #FAF8F4;
+    display: block;
+  }
+
+  .app {
+    width: 100vw;
+    height: 100dvh;
+    min-height: 100dvh;
+    display: block;
+  }
+
+  .phone {
+    width: 100vw;
+    height: 100dvh;
+    border-radius: 0;
+    border: none;
+  }
+
+  .screen {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    border-radius: 0;
+  }
+
+  .nav {
+    display: grid;
+    height: calc(74px + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+    flex-shrink: 0;
+  }
+}
   `;
 
 // ─── SUB-COMPONENTS ───────────────────────────────────────────────────────────
