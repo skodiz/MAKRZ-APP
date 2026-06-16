@@ -193,6 +193,18 @@ const css = `
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #FAF8F4;
+}
+
   body {
     background: #1d1b19;
     display: flex;
@@ -203,18 +215,18 @@ const css = `
     font-family: 'DM Sans', system-ui, sans-serif;
   }
 
-  .phone {
-    width: 375px;
-    height: 820px;
-    background: #FAF8F4;
-    border-radius: 44px;
-    overflow: hidden;
-    color: #2C2623;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    border: 1px solid #2a2826;
-  }
+ .phone {
+  width: 375px;
+  height: 820px;
+  background: #FAF8F4;
+  border-radius: 44px;
+  overflow: hidden;
+  color: #2C2623;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid #2a2826;
+}
 
 .screen { flex:1; display:flex; flex-direction:column; overflow:hidden; min-height:0; height:100%; }
 
@@ -428,19 +440,29 @@ const css = `
 }
 
 .post-detail-reply-bar {
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:72px;
-  background:#FAF8F4;
-  border-top:1px solid #E6DDD2;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 14px;
-  z-index:30;
-} 
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 76px;
+  background: #FAF8F4;
+  border-top: 1px solid #E6DDD2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px max(10px, env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  z-index: 30;
+}
+
+.post-detail-reply-bar .reply-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-detail-reply-bar .send-btn {
+  flex-shrink: 0;
+}
 
 .send-btn { width: 38px; height: 38px; border-radius: 50%; border: none; background: #3F5248; color: #FFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; }
 .comment-meta { display:flex; align-items:center; gap:5px; line-height:15px; margin-bottom:2px; }
@@ -486,25 +508,30 @@ const css = `
   .cancel-lnk { border: none; background: transparent; color: #7F7770; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
   .submit-btn { border: none; border-radius: 999px; background: #3F5248; color: #FFF; font-size: 14px; font-weight: 700; padding: 10px 18px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
 @media (max-width:520px) {
+
+body {
+    display: block;
+  }
+  
   .phone {
-    width:100vw;
-    height:100dvh;
-    border-radius:0;
-    border:none;
+    width: 100vw;
+    height: 100dvh;
+    border-radius: 0;
+    border: none;
   }
 
   .screen {
-    width:100%;
-    height:100%;
-    min-height:0;
-    border-radius:0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    border-radius: 0;
   }
 
   .nav {
-    display:grid;
-    height:calc(74px + env(safe-area-inset-bottom));
-    padding-bottom:env(safe-area-inset-bottom);
-    flex-shrink:0;
+    display: grid;
+    height: calc(74px + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+    flex-shrink: 0;
   }
 }
   `;
