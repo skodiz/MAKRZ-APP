@@ -542,11 +542,19 @@ body {
     border-radius: 0;
   }
 
+  .header,
+.topbar {
+  padding-top: calc(env(safe-area-inset-top) + 18px);
+}
+
   .nav {
     display: grid;
     height: calc(74px + env(safe-area-inset-bottom));
     padding-bottom: env(safe-area-inset-bottom);
     flex-shrink: 0;
+  }
+  .content {
+    padding-bottom: calc(90px + env(safe-area-inset-bottom));
   }
 }
   `;
