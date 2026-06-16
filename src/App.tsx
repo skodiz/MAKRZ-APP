@@ -228,6 +228,7 @@ body {
   overflow: hidden;
   min-height: 0;
   height: 100%;
+    position: relative;
 }
 
 .app {
@@ -548,14 +549,19 @@ body {
 }
 
   .nav {
-    display: grid;
-    height: calc(74px + env(safe-area-inset-bottom));
-    padding-bottom: env(safe-area-inset-bottom);
-    flex-shrink: 0;
-  }
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  height: calc(74px + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 40;
+}
+
   .content {
-    padding-bottom: calc(90px + env(safe-area-inset-bottom));
-  }
+  padding-bottom: calc(90px + env(safe-area-inset-bottom));
+}
 }
   `;
 
