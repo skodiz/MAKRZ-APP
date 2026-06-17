@@ -550,10 +550,10 @@ body {
   .submit-btn { border: none; border-radius: 999px; background: #3F5248; color: #FFF; font-size: 14px; font-weight: 700; padding: 10px 18px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
 
 @media (max-width:520px) {
-  body {
-    background: #FAF8F4;
-    display: block;
-  }
+ body {
+  background: var(--shell);
+  display: block;
+}
 
   .app {
     width: 100vw;
@@ -587,8 +587,10 @@ body {
   border-top: none;
 }
 
-.nav .nav-item: {
-transform: translateY(8px) !important;
+.nav .nav-item {
+  justify-content: flex-end;
+  padding-bottom: 16px;
+  padding-top: 0;
 }
 
   .content {
