@@ -676,7 +676,7 @@ body {
   }
 
   .nav {
-    height: 50px;
+    height: 30px;
     padding-bottom: 0;
   }
 
