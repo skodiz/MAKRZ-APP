@@ -234,6 +234,7 @@ body {
   min-height: 0;
   height: 100%;
     position: relative;
+    background: var(--shell);
 }
 
 .app {
@@ -294,16 +295,16 @@ body {
   /* CONTENT */
 .content { flex:1; background: var(--content); padding:14px 12px 12px; overflow-y:auto; scrollbar-width:none; -ms-overflow-style:none; min-height:0; }
   .content::-webkit-scrollbar { display: none; }
-  .content-white { flex: 1; background: #FAF8F4; padding: 14px 16px; overflow-y: auto; scrollbar-width: none; min-height: 0; }
+  .content-white { flex: 1; background: var(--shell); padding: 14px 16px; overflow-y: auto; scrollbar-width: none; min-height: 0; }
   .content-white::-webkit-scrollbar { display: none; }
 
   /* SEARCH */
-  .search { height: 40px; border-radius: 14px; background: #FAF8F4; color: #B6ADA4; display: flex; align-items: center; gap: 8px; padding: 0 13px; margin-bottom: 14px; font-size: 13px; flex-shrink: 0; }
+  .search { height: 40px; border-radius: 14px; background: var(--paper); color: #B6ADA4; display: flex; align-items: center; gap: 8px; padding: 0 13px; margin-bottom: 14px; font-size: 13px; flex-shrink: 0; }
 .search-input { border:none; outline:none; background:transparent; flex:1; font-family:'Inter', system-ui, sans-serif; font-size:13px; color:#2C2623; }
 .search-input::placeholder { color:#B6ADA4; }
 
   /* CARDS */
-  .card { background: #FAF8F4; border-radius: 18px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; }
+  .card { background: var(--paper); border-radius: 18px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; }
   .card-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 6px; }
   .icon { width: 42px; height: 42px; border-radius: 14px; background: #F6EBDD; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
   .card-info { flex: 1; min-width: 0;  text-align: left; }
@@ -389,7 +390,7 @@ body {
   .poll-add { color: #78917F; font-size: 12px; font-weight: 700; cursor: pointer; }
 
   /* POSTS */
-  .post { background: #FAF8F4; border-radius: 18px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; }
+  .post { background: var(--paper); border-radius: 18px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; }
   .post.pinned { border-left: 3px solid #78917F; }
   .pin-label { font-size: 11px; color: #78917F; font-weight: 700; margin-bottom: 8px; text-align: left; display:block; width:100%; }
   .post-head { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
@@ -461,7 +462,7 @@ body {
   .more-members { text-align: center; color: #7F7770; font-size: 13px; margin-top: 16px; }
 
   /* THREAD */
-  .comment-card { background: #FAF8F4; border-radius: 18px; padding: 14px 16px; margin-bottom: 10px; }
+  .comment-card { background: var(--paper); border-radius: 18px; padding: 14px 16px; margin-bottom: 10px; }
  .comment-head { display:flex; gap:9px; align-items:flex-start; margin-bottom:0px; }
   .c-av { width: 30px; height: 30px; border-radius: 50%; background: #F6EBDD; color: #5C3F2A; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
   .comment-name { font-size:13px; font-weight:700; color:#2C2623; }
@@ -583,6 +584,11 @@ body {
   .nav {
   height: 78px;
   padding-bottom: 0;
+  border-top: none;
+}
+
+.nav .nav-item: {
+transform: translateY(8px) !important;
 }
 
   .content {
