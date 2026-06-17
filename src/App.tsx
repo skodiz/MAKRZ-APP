@@ -248,7 +248,7 @@ body {
 
   /* NAV */
   .nav {
-  height: 86px;
+  height: 78px;
   padding-bottom: 0;
   background: var(--shell);
   border-top: none;
@@ -264,7 +264,7 @@ body {
   align-items: center;
   justify-content: center;
   transform: none !important;
-  padding-top: 0;
+  padding-top: 8;
   gap: 5px;
   color: #8C857E;
   font-size: 13px;
@@ -580,8 +580,8 @@ body {
 }
 
   .nav {
-  height: calc(96px + env(safe-area-inset-bottom));
-  padding-bottom: env(safe-area-inset-bottom);
+  height: 78px;
+  padding-bottom: 0;
 }
 
   .content {
