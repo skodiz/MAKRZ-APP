@@ -664,11 +664,12 @@ body {
   }
 
   .screen {
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-    border-radius: 0;
-  }
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border-radius: 0;
+  position: relative;
+}
 
   .header,
   .topbar {
@@ -676,15 +677,33 @@ body {
   }
 
   .nav {
-    height: 30px;
-    padding-bottom: 0;
-  }
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 92px;
+  background: var(--shell);
+  border-top: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  z-index: 50;
+}
 
+.nav-item {
+  height: 100%;
+  padding-top: 14px;
+  padding-bottom: 8px;
+}
 
-  .content,
-  .content-white {
-    padding-bottom: 0px;
-  }
+ .content,
+.content-white {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  background: var(--shell);
+  padding-bottom: 100px;
+}
 }
   `;
 
