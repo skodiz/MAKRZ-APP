@@ -683,7 +683,7 @@ body {
 
   .content,
   .content-white {
-    padding-bottom: 12px;
+    padding-bottom: 0px;
   }
 }
   `;
