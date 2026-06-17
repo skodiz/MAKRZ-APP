@@ -567,6 +567,8 @@ body {
   grid-template-columns: 1fr 1fr;
   border-bottom: 1px solid #E6DDD2;
   flex-shrink: 0;
+
+  background: transparent;
 }
 
 .tab {
@@ -577,6 +579,10 @@ body {
   font-weight: 500;
   color: #8B837B;
   cursor: pointer;
+
+  background: transparent;
+  border: none;
+  border-radius: 0;
 }
 
 .tab.active {
