@@ -692,8 +692,8 @@ body {
 
 .nav-item {
   height: 100%;
-  padding-top: 14px;
-  padding-bottom: 2px;
+  padding-top: 2px;
+  padding-bottom: 8px;
 }
 
  .content,
