@@ -693,7 +693,7 @@ body {
 .nav-item {
   height: 100%;
   padding-top: 14px;
-  padding-bottom: 8px;
+  padding-bottom: 2px;
 }
 
  .content,
@@ -702,7 +702,7 @@ body {
   min-height: 0;
   overflow-y: auto;
   background: var(--shell);
-  padding-bottom: 10px;
+  padding-bottom: 52px;
 }
 }
   `;
