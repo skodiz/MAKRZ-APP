@@ -193,6 +193,11 @@ const css = `
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
+:root {
+  --shell: #F4EFE7;
+  --paper: #FAF8F4;
+  --content: #E8DED1;
+}
 html, body, #root {
   width: 100%;
   height: 100%;
@@ -242,9 +247,35 @@ body {
   .status { height: 32px; padding: 10px 20px 0; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
 
   /* NAV */
-  .nav { height: 60px; background: #FAF8F4; border-top: 1px solid #E6DDD2; display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; flex-shrink: 0; }
-  .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;   padding-top: 10; color: #8C857E; font-size: 12px; font-weight: 600; cursor: pointer; border: none; background: none; font-family: 'DM Sans', sans-serif; }
-  .nav-item.active { color: #C6784F; }
+  .nav {
+  height: 86px;
+  padding-bottom: 0;
+  background: var(--shell);
+  border-top: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: none !important;
+  padding-top: 0;
+  gap: 5px;
+  color: #8C857E;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.nav-item.active { color: #C6784F; }
 
   /* HEADER */
   .header { padding: 18px 22px 12px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
@@ -260,7 +291,7 @@ body {
   .tab.active::after { content: ""; position: absolute; left: 30px; right: 30px; bottom: 0; height: 2px; background: #5C3F2A; }
 
   /* CONTENT */
-.content { flex:1; background:#E8DED1; padding:14px 12px 12px; overflow-y:auto; scrollbar-width:none; -ms-overflow-style:none; min-height:0; }
+.content { flex:1; background: var(--content); padding:14px 12px 12px; overflow-y:auto; scrollbar-width:none; -ms-overflow-style:none; min-height:0; }
   .content::-webkit-scrollbar { display: none; }
   .content-white { flex: 1; background: #FAF8F4; padding: 14px 16px; overflow-y: auto; scrollbar-width: none; min-height: 0; }
   .content-white::-webkit-scrollbar { display: none; }
@@ -549,20 +580,13 @@ body {
 }
 
   .nav {
-  display: grid;
   height: calc(96px + env(safe-area-inset-bottom));
   padding-bottom: env(safe-area-inset-bottom);
-  flex-shrink: 0;
 }
 
   .content {
   padding-bottom: 6px;
 }
-
-.nav .nav-item {
-     transform: translateY(70px) !important;
-  }
-  
 }
   `;
 
