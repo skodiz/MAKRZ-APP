@@ -255,10 +255,26 @@ body {
   background: var(--shell);
 }
 
-.header,
-.topbar {
+.header {
   background: var(--shell);
+  padding: 18px 22px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-shrink: 0;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  font-family: 'Fraunces', serif;
 }
 
 .content,
@@ -278,7 +294,7 @@ body {
 }
 
 .nav {
-  height: 88px;
+  height: 78px;
   background: var(--shell);
   border-top: none;
   display: grid;
@@ -294,14 +310,13 @@ body {
   align-items: center;
   justify-content: center;
   gap: 5px;
-  padding-top: 10px;
+  padding-top: 0;
   border: none;
   background: none;
   color: var(--muted);
   font-family: 'DM Sans', sans-serif;
   font-size: 13px;
   font-weight: 600;
-  cursor: pointer;
 }
 
 .nav-item.active {
@@ -601,13 +616,10 @@ body {
   }
 
   .nav {
-    height: 92px;
+    height: 82px;
     padding-bottom: 0;
   }
 
-  .nav-item {
-    padding-top: 16px;
-  }
 
   .content,
   .content-white {
