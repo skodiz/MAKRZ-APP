@@ -681,7 +681,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 92px;
+  height: 52px;
   background: var(--shell);
   border-top: none;
   display: grid;
