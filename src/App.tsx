@@ -560,7 +560,7 @@ body {
 }
 
 .nav .nav-item {
-     transform: translateY(20px) !important;
+     transform: translateY(40px) !important;
   }
   
 }
