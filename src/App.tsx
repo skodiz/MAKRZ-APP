@@ -550,7 +550,7 @@ body {
 
   .nav {
   display: grid;
-  height: calc(86px + env(safe-area-inset-bottom));
+  height: calc(96px + env(safe-area-inset-bottom));
   padding-bottom: env(safe-area-inset-bottom);
   flex-shrink: 0;
 }
@@ -558,6 +558,12 @@ body {
   .content {
   padding-bottom: 6px;
 }
+
+.nav .nav-item {
+    transform: translateY(6px);
+    padding-top: 0;
+  }
+  
 }
   `;
 
