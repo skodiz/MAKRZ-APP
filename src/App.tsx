@@ -560,8 +560,7 @@ body {
 }
 
 .nav .nav-item {
-    transform: translateY(6px);
-    padding-top: 0;
+     transform: translateY(20px) !important;
   }
   
 }
