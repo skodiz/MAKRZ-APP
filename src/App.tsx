@@ -681,7 +681,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 52px;
+  height: 30px;
   background: var(--shell);
   border-top: none;
   display: grid;
@@ -702,7 +702,7 @@ body {
   min-height: 0;
   overflow-y: auto;
   background: var(--shell);
-  padding-bottom: 52px;
+  padding-bottom: 30px;
 }
 }
   `;
