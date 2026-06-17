@@ -264,17 +264,40 @@ body {
   flex-shrink: 0;
 }
 
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  font-family: 'Fraunces', serif;
+}
+
 .header-right {
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-.logo {
-  font-size: 26px;
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: #6F6862;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #E2D1BC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2C2623;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: -0.04em;
-  font-family: 'Fraunces', serif;
 }
 
 .content,
@@ -539,6 +562,37 @@ body {
   flex-shrink: 0;
 }
 
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid #E6DDD2;
+  flex-shrink: 0;
+}
+
+.tab {
+  position: relative;
+  padding: 13px 0 11px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #8B837B;
+  cursor: pointer;
+}
+
+.tab.active {
+  color: #2C2623;
+  font-weight: 700;
+}
+
+.tab.active::after {
+  content: "";
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  bottom: 0;
+  height: 2px;
+  background: #5C3F2A;
+}
 .send-btn { width: 38px; height: 38px; border-radius: 50%; border: none; background: #3F5248; color: #FFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; }
 .comment-meta { display:flex; align-items:center; gap:5px; line-height:15px; margin-bottom:2px; }
 .comment-dot { font-size:11px; color:#8B837B; }
