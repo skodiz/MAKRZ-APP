@@ -207,7 +207,7 @@ html, body, #root {
 }
 
 body {
-  background: #1d1b19;
+  background: var(--shell);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -216,7 +216,7 @@ body {
 .phone {
   width: 375px;
   height: 820px;
-  background: #FAF8F4;
+  background: var(--shell);
   border-radius: 44px;
   overflow: hidden;
   color: #2C2623;
@@ -241,6 +241,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: var(--shell);
 }
 
   /* STATUS */
@@ -264,7 +265,7 @@ body {
   align-items: center;
   justify-content: center;
   transform: none !important;
-  padding-top: 8;
+  padding-top: 12px;
   gap: 5px;
   color: #8C857E;
   font-size: 13px;
@@ -278,7 +279,7 @@ body {
 .nav-item.active { color: #C6784F; }
 
   /* HEADER */
-  .header { padding: 18px 22px 12px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+  .header { background: var(--shell); padding: 18px 22px 12px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
   .logo { font-size: 26px; font-weight: 700; letter-spacing: -0.04em; font-family: 'Fraunces', serif; }
   .avatar { width: 36px; height: 36px; border-radius: 50%; background: #E2D1BC; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; }
   .header-right { display: flex; align-items: center; gap: 14px; }
@@ -339,7 +340,7 @@ body {
   .join-btn { display:inline-flex; align-items:center; justify-content:center; border:none; border-radius:999px; background:#6F4E37; color:#fff; font-size:11px; font-weight:700; padding:5px 10px; cursor:pointer; }
 
   /* TOPBAR */
-  .topbar { padding: 16px 20px 12px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+  .topbar { background: var(--shell); padding: 16px 20px 12px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
   .topbar-left { display: flex; align-items: center; gap: 10px; }
   .topbar-title { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; color: #2C2623; }
 
