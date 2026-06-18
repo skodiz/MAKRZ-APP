@@ -373,7 +373,7 @@ body {
   height: auto;
   border: none;
   background: transparent;
-  font-size: 10px;
+  font-size: 12px;
   color: #8A837B;
 }
   .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: none; padding-top: 2px; text-align: left; }
@@ -403,11 +403,11 @@ body {
   /* WORKSHOP HEADER */
   .ws-header { padding: 0 20px 14px; background: var(--shell); flex-shrink: 0; }
   .ws-main { display: flex; gap: 12px; align-items: center; }
-  .ws-icon { width: 48px; height: 48px; border-radius: 14px; background: #F6EBDD; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .ws-icon { width: 58px; height: 58px; border-radius: 14px; background: #442803; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
   .ws-name { font-family: 'Fraunces', serif; font-size: 19px; line-height: 23px; font-weight: 500; color: #2C2623; }
 
   /* ABOUT */
-  .about { padding: 0 20px; height: 42px; border-top: 1px solid #E6DDD2; border-bottom: 1px solid #E6DDD2; display: flex; align-items: center; justify-content: space-between; color: #7F7770; font-size: 13px; background: #FAF8F4; cursor: pointer; flex-shrink: 0; }
+  .about { padding: 0 20px; height: 42px; border-top: 1px solid #E6DDD2; border-bottom: 1px solid #E6DDD2; display: flex; align-items: center; justify-content: space-between; color: #7F7770; font-size: 13px; background: var(--shell); cursor: pointer; flex-shrink: 0; }
   .about-open { padding: 14px 20px 16px; border-top: 1px solid #E6DDD2; border-bottom: 1px solid #E6DDD2; background: #FAF8F4; flex-shrink: 0; }
   .about-title-row { display: flex; align-items: center; justify-content: space-between; color: #2C2623; font-size: 13px; font-weight: 700; margin-bottom: 8px; cursor: pointer; }
   .about-text { font-size: 13px; line-height: 19px; color: #5F5A54; }
@@ -789,12 +789,12 @@ function AtelierDetail({
           <div>
             <div className="ws-name">{atelier.name}</div>
             <div className="members">{atelier.members} membres</div>
-          </div>
-        </div>
-        <div className="tags" style={{ marginTop: 10 }}>
+             <div className="tags" style={{ marginTop: 10 }}>
           {atelier.tags.map((t) => <span className="tag" key={t}>{t}</span>)}
         </div>
-      </div>
+          </div>
+        </div>
+              </div>
 
       {aboutOpen ? (
         <div className="about-open">
