@@ -694,7 +694,7 @@ body {
 .nav-item {
   height: 100%;
   padding-top: 0px;
-  padding-bottom: 22;
+  padding-bottom: 22px;
   justify-content: flex-start;
   }
 
