@@ -243,7 +243,7 @@ body {
 
 .header {
   background: var(--shell);
-  padding: 52px 22px 12px;
+  padding: 28px 22px 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -396,7 +396,7 @@ body {
   .join-btn { display:inline-flex; align-items:center; justify-content:center; border:none; border-radius:999px; background:#6F4E37; color:#fff; font-size:11px; font-weight:700; padding:5px 10px; cursor:pointer; }
 
   /* TOPBAR */
-  .topbar { background: var(--shell); padding: 16px 20px 12px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+  .topbar { background: var(--shell); padding: 28px 20px 12px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
   .topbar-left { display: flex; align-items: center; gap: 10px; }
   .topbar-title { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; color: #2C2623; }
 
