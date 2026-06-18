@@ -677,23 +677,25 @@ body {
   }
 
   .nav {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 30px;
+  height: 96px;
+  padding-bottom: 18px;
   background: var(--shell);
   border-top: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  align-items: center;
+  align-items: end;
   z-index: 50;
 }
 
 .nav-item {
-  height: 100%;
-  padding-top: 2px;
-  padding-bottom: 60px;
+  height: auto;
+  padding: 0 0 8px 0;
+  justify-content: center;
+  gap: 4px;
 }
 
  .content,
