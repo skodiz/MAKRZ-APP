@@ -681,7 +681,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  height: auto;
+  height: 22px;
   padding-top: 10px;
   padding-bottom: max(env(safe-area-inset-bottom), 8px);
   background: var(--shell);
