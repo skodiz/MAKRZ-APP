@@ -206,21 +206,34 @@ html,
 body,
 #root {
   width: 100%;
-  height: 100dvh;
+  height: 100%;
+  min-height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden;
-}
-
-* {
-  box-sizing: border-box;
+  background: var(--shell);
 }
 
 body {
+  position: fixed;
+  inset: 0;
   background: var(--shell);
-  display: block;
   font-family: 'DM Sans', sans-serif;
   color: var(--text);
+}
+
+.phone {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--shell);
+  border-radius: 0;
+  overflow: hidden;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  border: none;
 }
 
 .app {
@@ -229,19 +242,6 @@ body {
   overflow: hidden;
   display: flex;
   justify-content: center;
-}
-
-.phone {
-  width: 100vw;
-  height: 100dvh;
-  background: var(--shell);
-  border-radius: 0;
-  overflow: hidden;
-  color: var(--text);
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  border: none;
 }
 
 .screen {
@@ -324,15 +324,14 @@ body {
 }
 
 .nav {
-  flex: 0 0 74px;
   height: 74px;
+  flex-shrink: 0;
   background: var(--shell);
   border-top: 1px solid var(--line);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
 }
-
 
 .nav-item {
   height: 74px;
@@ -343,11 +342,8 @@ body {
   gap: 4px;
   color: var(--muted);
   font-size: 11px;
-  cursor: pointer;
   border: none;
   background: none;
-  font-family: 'DM Sans', sans-serif;
-  padding: 0;
 }
 
 .nav-item.active {
