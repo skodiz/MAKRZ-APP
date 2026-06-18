@@ -206,7 +206,7 @@ html,
 body,
 #root {
   width: 100%;
-  height: 100%;
+  height: 100dvh;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -224,15 +224,16 @@ body {
 }
 
 .app {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
   display: flex;
   justify-content: center;
 }
 
 .phone {
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background: var(--shell);
   border-radius: 0;
   overflow: hidden;
@@ -555,7 +556,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 14px max(10px, env(safe-area-inset-bottom));
+  padding: 10px 14px 0;
   box-sizing: border-box;
   z-index: 30;
 }
