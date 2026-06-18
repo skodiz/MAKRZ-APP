@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Home,
   Palette,
@@ -189,9 +189,7 @@ const typeClass = (t: PostType) =>
 // ─── STYLES ───────────────────────────────────────────────────────────────────
 
 const css = `
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap');
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+ @import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap');
 
 :root {
   --shell: #EDE5D8;
@@ -200,6 +198,13 @@ const css = `
   --muted: #8C857E;
   --accent: #C6784F;
   --line: #E6DDD2;
+  --app-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,
@@ -207,9 +212,6 @@ body,
 #root {
   width: 100%;
   height: 100%;
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
   overflow: hidden;
   background: var(--shell);
 }
@@ -217,36 +219,21 @@ body,
 body {
   position: fixed;
   inset: 0;
-  background: var(--shell);
   font-family: 'DM Sans', sans-serif;
   color: var(--text);
 }
 
 .phone {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: var(--app-height);
   background: var(--shell);
-  border-radius: 0;
   overflow: hidden;
-  color: var(--text);
   display: flex;
   flex-direction: column;
-  border: none;
-}
-
-.app {
-  width: 100vw;
-  height: 100dvh;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
 }
 
 .screen {
-  flex: 1 1 auto;
-  height: auto !important;
+  flex: 1;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -256,7 +243,7 @@ body {
 
 .header {
   background: var(--shell);
-  padding: 28px 22px 12px;
+  padding: 52px 22px 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -299,24 +286,22 @@ body {
   font-weight: 700;
 }
 
-.content {
+.content,
+.content-white {
   flex: 1;
-  background: var(--shell);
-  padding: 14px 12px 12px;
-  overflow-y: auto;
-  scrollbar-width: none;
   min-height: 0;
+  overflow-y: auto;
+  background: var(--shell);
+  scrollbar-width: none;
+}
+
+.content {
+  padding: 14px 12px 12px;
 }
 
 .content-white {
-  flex: 1;
-  background: var(--shell);
   padding: 14px 16px;
-  overflow-y: auto;
-  scrollbar-width: none;
-  min-height: 0;
 }
-
 
 .content::-webkit-scrollbar,
 .content-white::-webkit-scrollbar {
@@ -324,8 +309,8 @@ body {
 }
 
 .nav {
+  flex: 0 0 74px;
   height: 74px;
-  flex-shrink: 0;
   background: var(--shell);
   border-top: 1px solid var(--line);
   display: grid;
@@ -334,22 +319,31 @@ body {
 }
 
 .nav-item {
+  appearance: none;
+  -webkit-appearance: none;
   height: 74px;
+  border: none;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 4px;
+
   color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
-  border: none;
-  background: none;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .nav-item.active {
   color: var(--accent);
 }
-
 .post,
 .card,
 .comment-card,
@@ -1361,6 +1355,21 @@ export default function App() {
   const [selectedAtelier, setSelectedAtelier] = useState<Atelier | null>(null);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
+  useEffect(() => {
+  const setAppHeight = () => {
+    document.documentElement.style.setProperty("--app-height", `${window.innerHeight}px`);
+  };
+
+  setAppHeight();
+  window.addEventListener("resize", setAppHeight);
+  window.addEventListener("orientationchange", setAppHeight);
+
+  return () => {
+    window.removeEventListener("resize", setAppHeight);
+    window.removeEventListener("orientationchange", setAppHeight);
+  };
+}, []);
+  
   const handleNavTab = (t: string) => {
     setScreen(null);
     setNavTab(t);
