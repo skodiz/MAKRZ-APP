@@ -217,10 +217,8 @@ body,
 }
 
 body {
-  background: #1d1b19;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: var(--shell);
+  display: block;
   font-family: 'DM Sans', sans-serif;
   color: var(--text);
 }
@@ -233,16 +231,16 @@ body {
 }
 
 .phone {
-  width: 375px;
-  height: 820px;
+  width: 100vw;
+  height: 100vh;
   background: var(--shell);
-  border-radius: 44px;
+  border-radius: 0;
   overflow: hidden;
   color: var(--text);
   display: flex;
   flex-direction: column;
   position: relative;
-  border: 1px solid #2a2826;
+  border: none;
 }
 
 .screen {
@@ -257,7 +255,7 @@ body {
 
 .header {
   background: var(--shell);
-  padding: 18px 22px 12px;
+  padding: 52px 22px 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
