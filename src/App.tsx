@@ -789,8 +789,7 @@ function AtelierDetail({
           <div>
             <div className="ws-name">{atelier.name}</div>
             <div className="members">{atelier.members} membres</div>
-             <div className="tags" style={{ marginTop: 10 }}>
-          {atelier.tags.map((t) => <span className="tag" key={t}>{t}</span>)}
+             <div className="tags">{atelier.tags.map((t) => <span className="tag" key={t}>{t}</span>)}
         </div>
           </div>
         </div>
