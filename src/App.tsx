@@ -408,12 +408,12 @@ body {
 
   /* ABOUT */
   .about { padding: 0 20px; height: 42px; border-top: 1px solid #E6DDD2; border-bottom: 1px solid #E6DDD2; display: flex; align-items: center; justify-content: space-between; color: #7F7770; font-size: 13px; background: var(--shell); cursor: pointer; flex-shrink: 0; }
-  .about-open { padding: 14px 20px 16px; border-top: 1px solid #E6DDD2; border-bottom: 1px solid #E6DDD2; background: #FAF8F4; flex-shrink: 0; }
+  .about-open { padding: 14px 20px 16px; border-top: 1px solid #E6DDD2; border-bottom: none; background: #FAF8F4; flex-shrink: 0; }
   .about-title-row { display: flex; align-items: center; justify-content: space-between; color: #2C2623; font-size: 13px; font-weight: 700; margin-bottom: 8px; cursor: pointer; }
   .about-text { font-size: 13px; line-height: 19px; color: #5F5A54; }
 
   /* INNER TABS */
-  .inner-tabs { display: grid; grid-template-columns: repeat(3, 1fr); height: 46px; background: #FAF8F4; border-bottom: 1px solid #E6DDD2; flex-shrink: 0; }
+  .inner-tabs { display: grid; grid-template-columns: repeat(3, 1fr); height: 46px; background: var(--shell); border-bottom: none; flex-shrink: 0; }
   .inner-tab { position: relative; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #8B837B; font-weight: 500; cursor: pointer; border: none; background: none; font-family: 'DM Sans', sans-serif; }
   .inner-tab.active { color: #C6784F; font-weight: 700; }
   .inner-tab.active::after { content: ""; position: absolute; left: 20px; right: 20px; bottom: 0; height: 2px; background: #C6784F; }
