@@ -309,7 +309,8 @@ body {
 }
 
 .nav {
-  height: 88px;
+  height: calc(88px + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
   background: var(--shell);
   border-top: none;
   display: grid;
@@ -319,7 +320,7 @@ body {
 }
 
 .nav-item {
-  height: 100%;
+  height: 88px;
   display: flex;
   flex-direction: column;
   align-items: center;
