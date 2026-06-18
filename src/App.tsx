@@ -708,6 +708,11 @@ body {
     background: var(--shell);
     padding-bottom: calc(env(safe-area-inset-bottom) + 65px);
   }
+  html,
+body,
+#root {
+  background: red !important;
+}
 }
   `;
 
