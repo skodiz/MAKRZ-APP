@@ -309,10 +309,9 @@ body {
 }
 
 .nav {
-  height: calc(88px + env(safe-area-inset-bottom));
-  padding-bottom: env(safe-area-inset-bottom);
+  height: 74px;
   background: var(--shell);
-  border-top: none;
+  border-top: 1px solid var(--line);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
@@ -320,12 +319,19 @@ body {
 }
 
 .nav-item {
-  height: 88px;
+  appearance: none;
+  -webkit-appearance: none;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: 'DM Sans', sans-serif;
   padding: 0;
 }
 
