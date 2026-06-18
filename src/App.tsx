@@ -401,7 +401,7 @@ body {
   .topbar-title { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; color: #2C2623; }
 
   /* WORKSHOP HEADER */
-  .ws-header { padding: 0 20px 14px; background: #FAF8F4; flex-shrink: 0; }
+  .ws-header { padding: 0 20px 14px; background: var(--shell); flex-shrink: 0; }
   .ws-main { display: flex; gap: 12px; align-items: center; }
   .ws-icon { width: 48px; height: 48px; border-radius: 14px; background: #F6EBDD; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
   .ws-name { font-family: 'Fraunces', serif; font-size: 19px; line-height: 23px; font-weight: 500; color: #2C2623; }
