@@ -681,7 +681,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;                          /* coller au bas de l'écran */
-    height: auto;                       /* hauteur automatique */
+    height: 20px;                       /* hauteur automatique */
     padding-top: 12px;
     padding-bottom: calc(env(safe-area-inset-bottom) + 8px);  /* ← clé du fix */
     background: var(--shell);
