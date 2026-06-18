@@ -242,8 +242,7 @@ body {
 }
 
 .header {
-  background: red !important;
-  padding-top: 0 !important;
+  background: var(--shell);
   padding: 28px 22px 12px;
   display: flex;
   justify-content: space-between;
