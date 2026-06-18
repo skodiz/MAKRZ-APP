@@ -256,7 +256,7 @@ body {
 
 .header {
   background: var(--shell);
-  padding: 52px 22px 12px;
+  padding: 28px 22px 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
