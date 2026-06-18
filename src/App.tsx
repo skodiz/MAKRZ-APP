@@ -680,7 +680,7 @@ body {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 0px;
+  bottom: -2px;
   height: 50px;
   padding-bottom: 18px;
   background: var(--shell);
