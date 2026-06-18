@@ -658,7 +658,7 @@ body {
 
   .phone {
     width: 100vw;
-    height: 100dvh;
+    height: 100vh;
     border-radius: 0;
     border: none;
   }
@@ -680,9 +680,9 @@ body {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 100px;
+  bottom: 20px;
   height: 20px;
-  padding-bottom: 60px;
+  padding-bottom: 18px;
   background: var(--shell);
   border-top: none;
   display: grid;
@@ -694,7 +694,7 @@ body {
 .nav-item {
   height: 100%;
   padding-top: 0px;
-  padding-bottom: 0;
+  padding-bottom: 22;
   justify-content: flex-start;
   }
 
