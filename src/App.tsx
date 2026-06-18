@@ -693,7 +693,7 @@ body {
 
 .nav-item {
   height: 100%;
-  padding-top: 22px;
+  padding-top: 0px;
   padding-bottom: 0;
   justify-content: flex-start;
   }
