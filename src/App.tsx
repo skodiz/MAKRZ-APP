@@ -682,7 +682,7 @@ body {
   right: 0;
   bottom: 100px;
   height: 20px;
-  padding-bottom: 18px;
+  padding-bottom: 60px;
   background: var(--shell);
   border-top: none;
   display: grid;
