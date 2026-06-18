@@ -244,10 +244,12 @@ body {
 }
 
 .screen {
-  height: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-height: 0;
+  background: var(--shell);
 }
 
 .header {
@@ -295,13 +297,24 @@ body {
   font-weight: 700;
 }
 
-.content,
+.content {
+  flex: 1;
+  background: var(--shell);
+  padding: 14px 12px 12px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  min-height: 0;
+}
+
 .content-white {
   flex: 1;
-  min-height: 0;
+  background: var(--shell);
+  padding: 14px 16px;
   overflow-y: auto;
-  padding-bottom: 12px;
+  scrollbar-width: none;
+  min-height: 0;
 }
+
 
 .content::-webkit-scrollbar,
 .content-white::-webkit-scrollbar {
@@ -319,8 +332,6 @@ body {
 }
 
 .nav-item {
-  appearance: none;
-  -webkit-appearance: none;
   display: flex;
   flex-direction: column;
   align-items: center;
