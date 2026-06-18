@@ -244,14 +244,10 @@ body {
 }
 
 .screen {
-  width: 100%;
   height: 100%;
-  min-height: 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: var(--shell);
-  position: relative;
 }
 
 .header {
@@ -304,11 +300,7 @@ body {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
-  background: var(--shell);
-  padding: 14px 12px 12px;
-  padding-bottom: 90px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  padding-bottom: 12px;
 }
 
 .content::-webkit-scrollbar,
@@ -317,26 +309,23 @@ body {
 }
 
 .nav {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 68px;
+  height: 88px;
   background: var(--shell);
   border-top: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  z-index: 50;
+  flex-shrink: 0;
 }
 
 .nav-item {
-  height: 78px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 5px;
+  padding: 0;
 }
 
 .nav-item.active {
