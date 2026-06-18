@@ -658,7 +658,7 @@ body {
 
   .phone {
     width: 100vw;
-    height: 100dvh;
+    height: 100vh;
     border-radius: 0;
     border: none;
   }
