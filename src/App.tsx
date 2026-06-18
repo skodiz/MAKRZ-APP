@@ -702,7 +702,7 @@ body {
   min-height: 0;
   overflow-y: auto;
   background: var(--shell);
-  padding-bottom: 60px;
+  padding-bottom: 10px;
 }
 }
   `;
