@@ -317,7 +317,7 @@ body {
 }
 
 .nav {
-  height: 78px;
+  height: auto;
   background: var(--shell);
   border-top: none;
   display: grid;
@@ -681,7 +681,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 22px;
+  height: auto;
   padding-top: 10px;
   padding-bottom: max(env(safe-area-inset-bottom), 8px);
   background: var(--shell);
