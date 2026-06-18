@@ -677,50 +677,35 @@ body {
   }
 
   .nav {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 20px;
-  height: 20px;
-  padding-bottom: 18px;
-  background: var(--shell);
-  border-top: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  align-items: center;
-  z-index: 50;
-}
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;                          /* coller au bas de l'écran */
+    height: auto;                       /* hauteur automatique */
+    padding-top: 12px;
+    padding-bottom: calc(env(safe-area-inset-bottom) + 8px);  /* ← clé du fix */
+    background: var(--shell);
+    border-top: 1px solid #E6DDD2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: flex-start;
+    z-index: 50;
+  }
 
 .nav-item {
-  height: 100%;
-  padding-top: 22px;
-  padding-bottom: 0px;
-  justify-content: flex-start;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    justify-content: flex-start;
   }
 
  .content,
-.content-white {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  background: var(--shell);
-  padding-bottom: 60px;
-}
-/* TEST COULEURS */
-  .app {
-    background: red !important;
-  }
-
-  .phone {
-    background: blue !important;
-  }
-
-  .screen {
-    background: green !important;
-  }
-
-  .nav {
-    background: yellow !important;
+  .content-white {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    background: var(--shell);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 70px);  /* ← évite que le contenu passe sous la nav */
   }
 }
   `;
