@@ -403,11 +403,11 @@ body {
   /* WORKSHOP HEADER */
   .ws-header { padding: 0 20px 14px; background: var(--shell); flex-shrink: 0; }
   .ws-main { display: flex; gap: 12px; align-items: center; }
-  .ws-icon { width: 58px; height: 58px; border-radius: 14px; background: #442803; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .ws-icon { width: 58px; height: 58px; border-radius: 14px; background: #F59C27; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
   .ws-name { font-family: 'Fraunces', serif; font-size: 19px; line-height: 23px; font-weight: 500; color: #2C2623; }
 
   /* ABOUT */
-  .about { padding: 0 20px; height: 42px; border-top: 1px solid #E6DDD2; border-bottom: 1px solid #E6DDD2; display: flex; align-items: center; justify-content: space-between; color: #7F7770; font-size: 13px; background: var(--shell); cursor: pointer; flex-shrink: 0; }
+  .about { padding: 0 20px; height: 42px; border-top: none; border-bottom: none; display: flex; align-items: center; justify-content: space-between; color: #7F7770; font-size: 13px; background: var(--shell); cursor: pointer; flex-shrink: 0; }
   .about-open { padding: 14px 20px 16px; border-top: 1px solid #E6DDD2; border-bottom: none; background: #FAF8F4; flex-shrink: 0; }
   .about-title-row { display: flex; align-items: center; justify-content: space-between; color: #2C2623; font-size: 13px; font-weight: 700; margin-bottom: 8px; cursor: pointer; }
   .about-text { font-size: 13px; line-height: 19px; color: #5F5A54; }
