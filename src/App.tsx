@@ -681,7 +681,7 @@ body {
   left: 0;
   right: 0;
   bottom: 20px;
-  height: 50px;
+  height: 20px;
   padding-bottom: 18px;
   background: var(--shell);
   border-top: none;
