@@ -706,6 +706,22 @@ body {
   background: var(--shell);
   padding-bottom: 60px;
 }
+/* TEST COULEURS */
+  .app {
+    background: red !important;
+  }
+
+  .phone {
+    background: blue !important;
+  }
+
+  .screen {
+    background: green !important;
+  }
+
+  .nav {
+    background: yellow !important;
+  }
 }
   `;
 
