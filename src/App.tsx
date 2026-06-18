@@ -680,8 +680,8 @@ body {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: -18px;
-  height: 5px;
+  bottom: -30px;
+  height: 20px;
   padding-bottom: 18px;
   background: var(--shell);
   border-top: none;
