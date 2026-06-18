@@ -244,11 +244,12 @@ body {
 }
 
 .screen {
-  flex: 1;
+  flex: 1 1 auto;
+  height: auto !important;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  min-height: 0;
   background: var(--shell);
 }
 
@@ -322,16 +323,18 @@ body {
 }
 
 .nav {
+  flex: 0 0 74px;
   height: 74px;
   background: var(--shell);
   border-top: 1px solid var(--line);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  flex-shrink: 0;
 }
 
+
 .nav-item {
+  height: 74px;
   display: flex;
   flex-direction: column;
   align-items: center;
