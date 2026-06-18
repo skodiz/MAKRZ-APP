@@ -367,7 +367,7 @@ body {
   .atelier-name { font-family: 'Fraunces', serif; font-size: 16px; line-height: 21px; font-weight: 500; color: #2C2623; }
   .members { text-align: left; margin-top: px; font-size: 14px; color: #7F7770; line-height: 18px; }
   .new-badge { display: inline-flex; align-items: center; border-radius: 999px; background: #7EA38A; color: #FFF; font-size: 9px; font-weight: 700; padding: 3px 8px; height: 18px; white-space: nowrap; margin-top: 4px; }
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 6px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0px; }
   .tag {
   padding: 0;
   height: auto;
