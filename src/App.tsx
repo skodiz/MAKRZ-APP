@@ -251,6 +251,7 @@ body {
   flex-direction: column;
   overflow: hidden;
   background: var(--shell);
+  position: relative;
 }
 
 .header {
@@ -305,6 +306,7 @@ body {
   overflow-y: auto;
   background: var(--shell);
   padding: 14px 12px 12px;
+  padding-bottom: 90px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -315,30 +317,26 @@ body {
 }
 
 .nav {
-  height: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 68px;
   background: var(--shell);
   border-top: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  flex-shrink: 0;
+  z-index: 50;
 }
 
 .nav-item {
-  height: 100%;
+  height: 78px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 5px;
-  padding-top: 0;
-  padding-bottom: max(env(safe-area-inset-bottom), 8px);
-  border: none;
-  background: none;
-  color: var(--muted);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
 }
 
 .nav-item.active {
