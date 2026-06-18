@@ -651,14 +651,14 @@ body {
 
   .app {
     width: 100vw;
-    height: 100dvh;
+    height: 100vh;
     min-height: 100dvh;
     display: block;
   }
 
   .phone {
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     border-radius: 0;
     border: none;
   }
