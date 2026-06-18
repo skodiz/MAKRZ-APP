@@ -331,9 +331,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 5px;
   padding-top: 0;
+  padding-bottom: max(env(safe-area-inset-bottom), 8px);
   border: none;
   background: none;
   color: var(--muted);
@@ -693,15 +694,11 @@ body {
 }
 
 .nav-item {
-  height: auto;
-  padding-top: 0;
-  padding-bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 4px;
-}
+    height: 100%;
+    justify-content: flex-end;
+    padding-bottom: max(env(safe-area-inset-bottom), 8px);
+    padding-top: 0;
+  }
 
  .content,
   .content-white {
