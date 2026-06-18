@@ -692,11 +692,11 @@ body {
 }
 
 .nav-item {
-  height: auto;
-  padding: 0 0 8px 0;
-  justify-content: center;
-  gap: 4px;
-}
+  height: 100%;
+  padding-top: 22px;
+  padding-bottom: 0;
+  justify-content: flex-start;
+  }
 
  .content,
 .content-white {
