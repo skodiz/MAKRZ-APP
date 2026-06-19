@@ -650,15 +650,15 @@ function NavBar({ tab, setTab }: { tab: string; setTab: (t: string) => void }) {
   return (
     <div className="nav">
       <button className={`nav-item ${tab === "feed" ? "active" : ""}`} onClick={() => setTab("feed")}>
-        <Home size={20} strokeWidth={1.8} />
+        <Home size={22} strokeWidth={1.8} />
         <span>Fil</span>
       </button>
       <button className={`nav-item ${tab === "ateliers" ? "active" : ""}`} onClick={() => setTab("ateliers")}>
-        <Palette size={20} strokeWidth={1.8} />
+        <Palette size={22} strokeWidth={1.8} />
         <span>Ateliers</span>
       </button>
       <button className={`nav-item ${tab === "galerie" ? "active" : ""}`} onClick={() => setTab("galerie")}>
-        <ImageIcon size={20} strokeWidth={1.8} />
+        <ImageIcon size={22} strokeWidth={1.8} />
         <span>Galerie</span>
       </button>
     </div>
