@@ -755,6 +755,8 @@ function AtelierDetail({
   atelier, onBack, onPost, onGalerie, onAddRes,
 }: {
   atelier: Atelier;
+  posts: Post[];
+setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
   onBack: () => void;
   onPost: (p: Post) => void;
   onGalerie: () => void;
@@ -766,7 +768,6 @@ function AtelierDetail({
   const [postType, setPostType] = useState<PostType>("Question");
   const [newPostTitle, setNewPostTitle] = useState("");
 const [newPostBody, setNewPostBody] = useState("");
-  const [atelierPosts, setAtelierPosts] = useState<Post[]>(POSTS);
 
   const galleryIds = [
     "photo-1565193566173-7a0ee3dbe261",
@@ -884,7 +885,7 @@ onChange={(e) => setNewPostBody(e.target.value)}
       pinned: false,
     };
 
-    setAtelierPosts([newPost, ...atelierPosts]);
+    setPosts([newPost, ...atelierPosts]);
     setNewPostTitle("");
     setNewPostBody("");
     setComposerOpen(false);
@@ -895,7 +896,7 @@ onChange={(e) => setNewPostBody(e.target.value)}
               </div>
             </div>
           )}
-          {atelierPosts.map((p) => (
+          {posts.map((p) => (
             <div className={`post ${p.pinned ? "pinned" : ""}`} key={p.id} onClick={() => onPost(p)}>
               {p.pinned && <div className="pin-label">📌 Épinglé par la référente</div>}
               <div className="post-head">
@@ -1393,6 +1394,7 @@ export default function App() {
   const [screen, setScreen] = useState<ScreenKey>(null);
   const [selectedAtelier, setSelectedAtelier] = useState<Atelier | null>(null);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [atelierPosts, setAtelierPosts] = useState<Post[]>(POSTS);
 
   useEffect(() => {
   const setAppHeight = () => {
@@ -1420,12 +1422,14 @@ export default function App() {
     if (screen === "atelier" && selectedAtelier) {
       return (
         <AtelierDetail
-          atelier={selectedAtelier}
-          onBack={() => setScreen(null)}
-          onPost={(p) => { setSelectedPost(p); setScreen("post"); }}
-          onGalerie={() => setScreen("galerie")}
-          onAddRes={() => setScreen("addres")}
-        />
+  atelier={selectedAtelier}
+  posts={atelierPosts}
+  setPosts={setAtelierPosts}
+  onBack={() => setScreen(null)}
+  onPost={(p) => { setSelectedPost(p); setScreen("post"); }}
+  onGalerie={() => setScreen("galerie")}
+  onAddRes={() => setScreen("addres")}
+/>
       );
     }
     if (screen === "post" && selectedPost) {
