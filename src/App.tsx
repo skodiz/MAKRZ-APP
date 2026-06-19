@@ -403,7 +403,7 @@ body {
   /* WORKSHOP HEADER */
   .ws-header { padding: 0 20px 14px; background: var(--shell); flex-shrink: 0; }
   .ws-main { display: flex; gap: 12px; align-items: center; }
-  .ws-icon { width: 52px; height: 52px; padding-top: 1px; border-radius: 14px; background: #F8B763; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .ws-icon { width: 52px; height: 52px; padding-top: 1px; border-radius: 14px; background: #FACB8F; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
   .ws-name { font-family: 'Fraunces', serif; font-size: 19px; line-height: 23px; font-weight: 500; color: #2C2623; }
 
   /* ABOUT */
@@ -650,15 +650,15 @@ function NavBar({ tab, setTab }: { tab: string; setTab: (t: string) => void }) {
   return (
     <div className="nav">
       <button className={`nav-item ${tab === "feed" ? "active" : ""}`} onClick={() => setTab("feed")}>
-        <Home size={25} strokeWidth={1.8} />
+        <Home size={20} strokeWidth={1.8} />
         <span>Fil</span>
       </button>
       <button className={`nav-item ${tab === "ateliers" ? "active" : ""}`} onClick={() => setTab("ateliers")}>
-        <Palette size={25} strokeWidth={1.8} />
+        <Palette size={20} strokeWidth={1.8} />
         <span>Ateliers</span>
       </button>
       <button className={`nav-item ${tab === "galerie" ? "active" : ""}`} onClick={() => setTab("galerie")}>
-        <ImageIcon size={25} strokeWidth={1.8} />
+        <ImageIcon size={20} strokeWidth={1.8} />
         <span>Galerie</span>
       </button>
     </div>
