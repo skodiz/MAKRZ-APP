@@ -431,7 +431,7 @@ body {
   .type-chip.resultat { background: #F6EBDD; color: #A76437; }
   .type-chip.sondage { background: #F4E9D8; color: #8A6B3F; }
   .type-chip.active { box-shadow: inset 0 0 0 1.5px currentColor; font-weight: 700; }
-  .comp-input, .comp-textarea { width: 100%; border: 1px solid #E6DDD2; background: #FDFBF8; border-radius: 12px; padding: 10px 12px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: #2C2623; outline: none; margin-bottom: 10px; }
+  .comp-input, .comp-textarea { width: 100%; border: 1px solid #E6DDD2; background: #FDFBF8; border-radius: 12px; padding: 10px 12px; font-family: 'DM Sans', sans-serif; font-size: 16px; color: #2C2623; outline: none; margin-bottom: 10px; }
   .comp-input { height: 42px; }
   .comp-textarea { height: 64px; resize: none; line-height: 1Fpx; }
   .comp-input::placeholder, .comp-textarea::placeholder { color: #B6ADA4; }
