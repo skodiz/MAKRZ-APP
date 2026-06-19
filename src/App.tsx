@@ -1067,8 +1067,9 @@ const replyPlaceholder = activeReplyBox === "lucie" ? "Répondre à Lucie..." : 
         </div>
 
      
-        <div className="comment-card">
-          <div className="comment-head">
+{post.replies > 0 && (<>
+    <div className="comment-card">          
+      <div className="comment-head">
             <div className="c-av">LM</div>
 
             <div className="comment-content">
@@ -1160,6 +1161,8 @@ const replyPlaceholder = activeReplyBox === "lucie" ? "Répondre à Lucie..." : 
             </div>
           </div>
         </div>
+   </>
+)}
 
         {newMainComments.map((text, index) => (
           <div className="comment-card" key={index}>
