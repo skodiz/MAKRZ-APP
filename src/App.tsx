@@ -628,7 +628,7 @@ body {
   .field { margin-bottom: 16px; }
   .label { display: block; font-size: 12px; font-weight: 700; color: #2C2623; margin-bottom: 7px; }
   .select-look { height: 42px; border-radius: 12px; background: #F4EFE8; border: 1px solid #E6DDD2; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; color: #2C2623; font-size: 14px; }
-  .f-input, .f-textarea { width: 100%; border: 1px solid #E6DDD2; background: #FDFBF8; border-radius: 12px; padding: 10px 12px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: #2C2623; outline: none; }
+  .f-input, .f-textarea { width: 100%; border: 1px solid #E6DDD2; background: #FDFBF8; border-radius: 12px; padding: 10px 12px; font-family: 'DM Sans', sans-serif; font-size: 16px; color: #2C2623; outline: none; }
   .f-input { height: 42px; }
   .f-textarea { height: 80px; resize: none; line-height: 19px; }
   .f-input::placeholder, .f-textarea::placeholder { color: #B6ADA4; }
