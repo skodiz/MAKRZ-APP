@@ -433,7 +433,7 @@ body {
   .type-chip.active { box-shadow: inset 0 0 0 1.5px currentColor; font-weight: 700; }
   .comp-input, .comp-textarea { width: 100%; border: 1px solid #E6DDD2; background: #FDFBF8; border-radius: 12px; padding: 10px 12px; font-family: 'DM Sans', sans-serif; font-size: 16px; color: #2C2623; outline: none; margin-bottom: 10px; }
   .comp-input { height: 48px; }
-  .comp-textarea { height: 64px; resize: none; line-height: 1Fpx; }
+  .comp-textarea { height: 60px; resize: none; line-height: 1Fpx; }
   .comp-input::placeholder, .comp-textarea::placeholder { color: #B6ADA4; font-size: 14px; }
   .photo-line { display: flex; align-items: center; justify-content: space-between; color: #7F7770; font-size: 12px; margin-bottom: 12px; }
   .photo-btn { border: none; border-radius: 999px; background: #EFEAE3; color: #5E5750; padding: 6px 12px; font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; }
@@ -764,6 +764,8 @@ function AtelierDetail({
   const [aboutOpen, setAboutOpen] = useState(false);
   const [composerOpen, setComposerOpen] = useState(false);
   const [postType, setPostType] = useState<PostType>("Question");
+  const [newPostTitle, setNewPostTitle] = useState("");
+const [newPostBody, setNewPostBody] = useState("");
 
   const galleryIds = [
     "photo-1565193566173-7a0ee3dbe261",
@@ -833,14 +835,21 @@ function AtelierDetail({
                   >{t}</button>
                 ))}
               </div>
-              <input className="comp-input" placeholder="Titre de la publication *" />
-              <textarea className="comp-textarea" placeholder={
+<input
+  className="comp-input"
+  placeholder="Titre de la publication *"
+  value={newPostTitle}
+  onChange={(e) => setNewPostTitle(e.target.value)}
+/>              <textarea className="comp-textarea" placeholder={
                 postType === "Question" ? "Décrivez votre question ou le problème rencontré..."
                   : postType === "Découverte" ? "Partagez une technique, un outil ou une inspiration..."
                   : postType === "Résultat" ? "Présentez votre création terminée..."
                   : postType === "Sondage" ? "Présentez rapidement le sujet du sondage..."
                   : "Partagez l'évolution de votre projet..."
-              } />
+              }
+                  value={newPostBody}
+onChange={(e) => setNewPostBody(e.target.value)}
+                  />
               <div className="photo-line">
                 <button className="photo-btn">+ Photos</button>
                 <span>0 / 7</span>
