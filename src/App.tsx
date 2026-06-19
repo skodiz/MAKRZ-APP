@@ -752,16 +752,23 @@ const visibleDiscover = DISCOVER.filter((a) => (a.name.toLowerCase().includes(se
 // ─── SCREEN: ATELIER DETAIL ───────────────────────────────────────────────────
 
 function AtelierDetail({
-  atelier, onBack, onPost, onGalerie, onAddRes,
+  atelier,
+  posts,
+  setPosts,
+  onBack,
+  onPost,
+  onGalerie,
+  onAddRes,
 }: {
   atelier: Atelier;
   posts: Post[];
-setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
+  setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
   onBack: () => void;
   onPost: (p: Post) => void;
   onGalerie: () => void;
   onAddRes: () => void;
 }) {
+  
   const [innerTab, setInnerTab] = useState<"fil" | "res" | "mem">("fil");
   const [aboutOpen, setAboutOpen] = useState(false);
   const [composerOpen, setComposerOpen] = useState(false);
@@ -885,7 +892,7 @@ onChange={(e) => setNewPostBody(e.target.value)}
       pinned: false,
     };
 
-    setPosts([newPost, ...atelierPosts]);
+    setPosts([newPost, ...posts]);
     setNewPostTitle("");
     setNewPostBody("");
     setComposerOpen(false);
