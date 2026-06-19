@@ -766,6 +766,7 @@ function AtelierDetail({
   const [postType, setPostType] = useState<PostType>("Question");
   const [newPostTitle, setNewPostTitle] = useState("");
 const [newPostBody, setNewPostBody] = useState("");
+  const [atelierPosts, setAtelierPosts] = useState<Post[]>(POSTS);
 
   const galleryIds = [
     "photo-1565193566173-7a0ee3dbe261",
@@ -863,11 +864,38 @@ onChange={(e) => setNewPostBody(e.target.value)}
               )}
               <div className="comp-actions">
                 <button className="cancel-btn" onClick={() => setComposerOpen(false)}>Annuler</button>
-                <button className="publish-btn" onClick={() => setComposerOpen(false)}>Publier</button>
+               <button
+  className="publish-btn"
+  onClick={() => {
+    if (!newPostTitle.trim()) return;
+
+    const newPost: Post = {
+      id: Date.now(),
+      av: "ML",
+      avColor: "#E2D1BC",
+      author: "Moi",
+      role: null,
+      time: "à l'instant",
+      type: postType === "Avancement" ? "Process" : postType,
+      typeKey: postType.toLowerCase() as Post["typeKey"],
+      title: newPostTitle,
+      body: newPostBody,
+      replies: 0,
+      pinned: false,
+    };
+
+    setAtelierPosts([newPost, ...atelierPosts]);
+    setNewPostTitle("");
+    setNewPostBody("");
+    setComposerOpen(false);
+  }}
+>
+  Publier
+</button>
               </div>
             </div>
           )}
-          {POSTS.map((p) => (
+          {atelierPosts.map((p) => (
             <div className={`post ${p.pinned ? "pinned" : ""}`} key={p.id} onClick={() => onPost(p)}>
               {p.pinned && <div className="pin-label">📌 Épinglé par la référente</div>}
               <div className="post-head">
