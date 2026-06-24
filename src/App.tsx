@@ -1411,8 +1411,7 @@ function AddResource({ atelier, onBack }: { atelier: Atelier | null; onBack: () 
 
 // ─── SCREEN: FEED GLOBAL ──────────────────────────────────────────────────────
 
-function FeedScreen() {
-  return (
+function FeedScreen({ posts }: { posts: Post[] }) {  return (
     <div className="screen">
           <div className="header">
         <div className="logo">MAKRZ</div>
@@ -1423,7 +1422,7 @@ function FeedScreen() {
       </div>
       <div className="content">
         <div className="sect">Fil global</div>
-        {POSTS.map((p) => (
+        {posts.map((p) => (
           <div className="post" key={p.id} style={{ cursor: "default" }}>
             <div className="post-head">
               <div className="av" style={{ background: p.avColor }}>{p.av}</div>
@@ -1514,7 +1513,7 @@ export default function App() {
     if (screen === "addres") {
       return <AddResource atelier={selectedAtelier} onBack={() => setScreen("atelier")} />;
     }
-    if (navTab === "feed") return <FeedScreen />;
+if (navTab === "feed") return <FeedScreen posts={atelierPosts} />;
     if (navTab === "galerie") return <GalerieAtelier atelier={null} onBack={() => handleNavTab("ateliers")} />;
     return (
       <AteliersList onOpen={(a) => { setSelectedAtelier(a); setScreen("atelier"); }} />
