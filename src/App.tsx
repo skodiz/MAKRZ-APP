@@ -932,7 +932,7 @@ onChange={(e) => setNewPostBody(e.target.value)}
               <div className="post-body">{p.body}</div>
               {p.img && <img className="post-img" src={p.img} alt="" />}
               <div className="post-actions">
-                <div className="post-action"><MessageCircle size={14} strokeWidth={1.8} />{replyCount}</div>
+                <div className="post-action"><MessageCircle size={14} strokeWidth={1.8} />{p.replies}</div>
                 <div className="share-ml"><Share2 size={15} strokeWidth={1.8} /></div>
               </div>
             </div>
@@ -1436,7 +1436,7 @@ function FeedScreen({ posts }: { posts: Post[] }) {  return (
             <div className="post-body">{p.body}</div>
             {p.img && <img className="post-img" src={p.img} alt="" />}
             <div className="post-actions">
-              <div className="post-action"><MessageCircle size={14} strokeWidth={1.8} /> {replyCount}</div>
+              <div className="post-action"><MessageCircle size={14} strokeWidth={1.8} /> {p.replies}</div>
               <div className="share-ml"><Share2 size={15} strokeWidth={1.8} /></div>
             </div>
           </div>
