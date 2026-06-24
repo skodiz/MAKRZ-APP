@@ -999,8 +999,19 @@ onChange={(e) => setNewPostBody(e.target.value)}
 
 // ─── SCREEN: POST DETAIL ──────────────────────────────────────────────────────
 
-function PostDetail({ post, onBack }: { post: Post; onBack: () => void }) {
-  const [open1, setOpen1] = useState(false);
+function PostDetail({
+  post,
+  onBack,
+  commentsByPost,
+  setCommentsByPost,
+}: {
+  post: Post;
+  onBack: () => void;
+  commentsByPost: Record<number, { main: string[]; replies: Record<string, string[]> }>;
+  setCommentsByPost: React.Dispatch<
+    React.SetStateAction<Record<number, { main: string[]; replies: Record<string, string[]> }>>
+  >;
+}) {  const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [replyText, setReplyText] = useState("");
   const [saved, setSaved] = useState(false);
@@ -1402,6 +1413,9 @@ export default function App() {
   const [selectedAtelier, setSelectedAtelier] = useState<Atelier | null>(null);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [atelierPosts, setAtelierPosts] = useState<Post[]>(POSTS);
+  const [commentsByPost, setCommentsByPost] = useState<
+  Record<number, { main: string[]; replies: Record<string, string[]> }>
+>({});
 
   useEffect(() => {
   const setAppHeight = () => {
@@ -1439,9 +1453,16 @@ export default function App() {
 />
       );
     }
-    if (screen === "post" && selectedPost) {
-      return <PostDetail post={selectedPost} onBack={() => setScreen("atelier")} />;
-    }
+   if (screen === "post" && selectedPost) {
+  return (
+    <PostDetail
+      post={selectedPost}
+      onBack={() => setScreen("atelier")}
+      commentsByPost={commentsByPost}
+      setCommentsByPost={setCommentsByPost}
+    />
+  );
+}
     if (screen === "galerie") {
       return <GalerieAtelier atelier={selectedAtelier} onBack={() => setScreen("atelier")} />;
     }
