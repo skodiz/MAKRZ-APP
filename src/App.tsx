@@ -1151,7 +1151,7 @@ const totalReplyCount =
                 </button>
               </div>
 
-              {(open1 || newReplies.lucie.length > 0) && (
+              {(open1 || postComments.replies.lucie.length > 0) && (
                 <div className="nested">
                   {open1 && (
                     <div className="comment-head">
@@ -1163,7 +1163,7 @@ const totalReplyCount =
                     </div>
                   )}
 
-                  {newReplies.lucie.map((text, index) => (
+                  {postComments.replies.lucie.map((text, index) => (
                     <div className="comment-head" key={index}>
                       <div className="c-av">ML</div>
                       <div className="comment-content">
@@ -1198,7 +1198,7 @@ const totalReplyCount =
                 </button>
               </div>
 
-              {(open2 || newReplies.thomas.length > 0) && (
+              {(open2 || postComments.replies.thomas.length > 0) && (
                 <div className="nested">
                   {open2 && (
                     <div className="comment-head">
@@ -1210,7 +1210,7 @@ const totalReplyCount =
                     </div>
                   )}
 
-                  {newReplies.thomas.map((text, index) => (
+                  {postComments.replies.thomas.map((text, index) => (
                     <div className="comment-head" key={index}>
                       <div className="c-av">ML</div>
                       <div className="comment-content">
