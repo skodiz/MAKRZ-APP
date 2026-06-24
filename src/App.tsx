@@ -755,6 +755,7 @@ function AtelierDetail({
   atelier,
   posts,
   setPosts,
+  commentsByPost,
   onBack,
   onPost,
   onGalerie,
@@ -763,6 +764,7 @@ function AtelierDetail({
   atelier: Atelier;
   posts: Post[];
   setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
+  commentsByPost: Record<number, { main: string[]; replies: Record<string, string[]> }>;
   onBack: () => void;
   onPost: (p: Post) => void;
   onGalerie: () => void;
@@ -903,8 +905,18 @@ onChange={(e) => setNewPostBody(e.target.value)}
               </div>
             </div>
           )}
-          {posts.map((p) => (
-            <div className={`post ${p.pinned ? "pinned" : ""}`} key={p.id} onClick={() => onPost(p)}>
+         {posts.map((p) => {
+  const extraReplies =
+    (commentsByPost[p.id]?.main?.length || 0) +
+    Object.values(commentsByPost[p.id]?.replies || {}).reduce(
+      (total, replies) => total + replies.length,
+      0
+    );
+
+  const replyCount = p.replies + extraReplies;
+
+  return (
+    <div className={`post ${p.pinned ? "pinned" : ""}`} key={p.id} onClick={() => onPost(p)}>
               {p.pinned && <div className="pin-label">📌 Épinglé par la référente</div>}
               <div className="post-head">
   <div className="av" style={{ background: p.avColor }}>{p.av}</div>
@@ -920,11 +932,12 @@ onChange={(e) => setNewPostBody(e.target.value)}
               <div className="post-body">{p.body}</div>
               {p.img && <img className="post-img" src={p.img} alt="" />}
               <div className="post-actions">
-                <div className="post-action"><MessageCircle size={14} strokeWidth={1.8} /> {p.replies}</div>
+                <div className="post-action"><MessageCircle size={14} strokeWidth={1.8} />{replyCount}</div>
                 <div className="share-ml"><Share2 size={15} strokeWidth={1.8} /></div>
               </div>
             </div>
-          ))}
+          );
+})}
         </div>
       )}
 
@@ -1424,7 +1437,7 @@ function FeedScreen() {
             <div className="post-body">{p.body}</div>
             {p.img && <img className="post-img" src={p.img} alt="" />}
             <div className="post-actions">
-              <div className="post-action"><MessageCircle size={14} strokeWidth={1.8} /> {p.replies}</div>
+              <div className="post-action"><MessageCircle size={14} strokeWidth={1.8} /> {replyCount}</div>
               <div className="share-ml"><Share2 size={15} strokeWidth={1.8} /></div>
             </div>
           </div>
@@ -1477,6 +1490,7 @@ export default function App() {
   atelier={selectedAtelier}
   posts={atelierPosts}
   setPosts={setAtelierPosts}
+          commentsByPost={commentsByPost}
   onBack={() => setScreen(null)}
   onPost={(p) => { setSelectedPost(p); setScreen("post"); }}
   onGalerie={() => setScreen("galerie")}
