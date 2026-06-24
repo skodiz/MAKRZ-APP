@@ -1026,8 +1026,14 @@ const postComments = commentsByPost[post.id] || {
     
  const lucieReplyCount = 1 + (postComments.replies.lucie?.length || 0);
 const thomasReplyCount = 1 + (postComments.replies.thomas?.length || 0);
-const dynamicMainRepliesCount = postComments.main.length;  const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments.length + dynamicMainRepliesCount;
-const replyPlaceholder = activeReplyBox === "lucie" ? "Répondre à Lucie..." : activeReplyBox === "thomas" ? "Répondre à Thomas..." : activeReplyBox?.startsWith("main-") ? "Répondre à Moi..." : "Répondre à la publication...";
+const dynamicMainRepliesCount = postComments.main.length;
+
+const totalReplyCount =
+  2 +
+  lucieReplyCount +
+  thomasReplyCount +
+  dynamicMainRepliesCount;
+    const replyPlaceholder = activeReplyBox === "lucie" ? "Répondre à Lucie..." : activeReplyBox === "thomas" ? "Répondre à Thomas..." : activeReplyBox?.startsWith("main-") ? "Répondre à Moi..." : "Répondre à la publication...";
   const sendReply = () => {
     const text = replyText.trim();
     if (!text) return;
@@ -1208,8 +1214,8 @@ const replyPlaceholder = activeReplyBox === "lucie" ? "Répondre à Lucie..." : 
    </>
 )}
 
-        {newMainComments.map((text, index) => (
-          <div className="comment-card" key={index}>
+{postComments.main.map((text, index) => (
+  <div className="comment-card" key={index}>
             <div className="comment-head">
               <div className="c-av">ML</div>
 
