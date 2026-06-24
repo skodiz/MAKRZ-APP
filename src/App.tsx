@@ -1019,23 +1019,48 @@ function PostDetail({
   const [newMainComments, setNewMainComments] = useState<string[]>([]);
   const [newReplies, setNewReplies] = useState<Record<string, string[]>>({ lucie: [], thomas: [] });
   const replyInputRef = useRef<HTMLInputElement>(null);
-
-  const lucieReplyCount = 1 + (newReplies.lucie?.length || 0);
-  const thomasReplyCount = 1 + (newReplies.thomas?.length || 0);
-  const dynamicMainRepliesCount = newMainComments.reduce((total, _, i) => total + (newReplies[`main-${i}`]?.length || 0), 0);
-  const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments.length + dynamicMainRepliesCount;
+const postComments = commentsByPost[post.id] || {
+  main: [],
+  replies: { lucie: [], thomas: [] }
+};
+    
+ const lucieReplyCount = 1 + (postComments.replies.lucie?.length || 0);
+const thomasReplyCount = 1 + (postComments.replies.thomas?.length || 0);
+const dynamicMainRepliesCount = postComments.main.length;  const totalReplyCount = 2 + lucieReplyCount + thomasReplyCount + newMainComments.length + dynamicMainRepliesCount;
 const replyPlaceholder = activeReplyBox === "lucie" ? "Répondre à Lucie..." : activeReplyBox === "thomas" ? "Répondre à Thomas..." : activeReplyBox?.startsWith("main-") ? "Répondre à Moi..." : "Répondre à la publication...";
   const sendReply = () => {
     const text = replyText.trim();
     if (!text) return;
 
-    if (activeReplyBox) {
-      setNewReplies((r) => ({ ...r, [activeReplyBox]: [...(r[activeReplyBox] || []), text] }));
-      if (activeReplyBox === "lucie") setOpen1(true);
-      if (activeReplyBox === "thomas") setOpen2(true);
-    } else {
-      setNewMainComments((items) => [...items, text]);
+  if (activeReplyBox) {
+  setCommentsByPost((prev) => ({
+    ...prev,
+    [post.id]: {
+      main: prev[post.id]?.main || [],
+      replies: {
+        ...(prev[post.id]?.replies || { lucie: [], thomas: [] }),
+        [activeReplyBox]: [
+          ...((prev[post.id]?.replies?.[activeReplyBox] || [])),
+          text
+        ]
+      }
     }
+  }));
+
+  if (activeReplyBox === "lucie") setOpen1(true);
+  if (activeReplyBox === "thomas") setOpen2(true);
+
+} else {
+
+  setCommentsByPost((prev) => ({
+    ...prev,
+    [post.id]: {
+      main: [...(prev[post.id]?.main || []), text],
+      replies: prev[post.id]?.replies || { lucie: [], thomas: [] }
+    }
+  }));
+
+}
 
     setReplyText("");
     setActiveReplyBox(null);
