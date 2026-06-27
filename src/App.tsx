@@ -460,13 +460,10 @@ body {
  .post-title { font-family:'Fraunces', serif; font-size:16px; line-height:21px; font-weight:500; color:#2C2623; margin-bottom:6px; text-align:left; }
 .post-body { font-size:13px; line-height:19px; color:#4F4842; margin-bottom:10px; text-align:left; }
   .post-img { width: 100%; height: 160px; border-radius: 14px; object-fit: cover; display: block; margin-bottom: 8px; }
- .post-actions {
+.post-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid #E6DDD2;
 }
 
 .post-actions-right {
@@ -474,6 +471,12 @@ body {
   gap: 16px;
   align-items: center;
 }
+.post-actions-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
 
 .post-action {
   display: flex;
@@ -633,13 +636,12 @@ body {
 .comment-dot { font-size:11px; color:#8B837B; }
 .reply-action {
   border: none;
-  background: #EEF4EF;
-  color: #5C7A6F;
-  border-radius: 999px;
-  padding: 5px 10px;
-  font-size: 13px;
+  background: transparent;
+  padding: 0;
+  color: #78917F;
+  font-size: 15px;
   font-weight: 700;
-  font-family: "DM Sans", sans-serif;
+  cursor: pointer;
 }
 
   /* GALLERY */
@@ -657,8 +659,11 @@ body {
   .detail-meta { font-size: 12px; color: #7F7770; margin-bottom: 10px; }
   .detail-text { font-size: 13px; line-height: 19px; color: #4E4842; margin-bottom: 12px; }
   .detail-actions { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #E6DDD2; }
-  .reply-count { display: flex; align-items: center; gap: 5px; color: #78917F; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-  .share-btn-sm { border: none; border-radius: 999px; background: #EFEAE3; color: #8E867D; padding: 6px 12px; font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
+.reply-count {
+  color: #78917F;
+  font-size: 15px;
+  font-weight: 600;
+}  .share-btn-sm { border: none; border-radius: 999px; background: #EFEAE3; color: #8E867D; padding: 6px 12px; font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
 
   /* ADD RESOURCE */
   .add-res-content { flex: 1; background: linear-gradient(180deg, #DCCCB8 0%, #D3C1AB 100%); padding: 16px 14px 20px; overflow-y: auto; scrollbar-width: none; }
@@ -1155,8 +1160,20 @@ const totalReplyCount =
           {post.img && <img className="post-img" style={{ height: 200 }} src={post.img} alt="" />}
 
           <div className="post-actions">
-            <div className="reply-count">
-  {totalReplyCount} RÉPONSES
+           <div className="post-actions-left">
+  <button
+    className="reply-action"
+    onClick={() => {
+      setActiveReplyBox(null);
+      replyInputRef.current?.focus();
+    }}
+  >
+    Répondre
+  </button>
+
+  <span className="reply-count">
+    {totalReplyCount} réponse{totalReplyCount > 1 ? "s" : ""}
+  </span>
 </div>
 
             <div className="post-actions-right">
