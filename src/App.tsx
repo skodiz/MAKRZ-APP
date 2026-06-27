@@ -557,16 +557,14 @@ body {
 
 .post-detail-reply-bar .reply-input {
   flex: 1;
-  min-width: 0;
   height: 42px;
-  border: 1px solid #E6DDD2;
-  border-radius: 999px;
-  background: #FFFBF8;
   padding: 0 14px;
-  font-size: 16px;
-  font-family: "DM Sans", sans-serif;
-  color: #2C2623;
+  border: none;
+  border-radius: 999px;
+  background: #FFFDFB;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04);
   outline: none;
+  font-size: 16px;
 }
 
 .post-detail-reply-bar .reply-input::placeholder {
