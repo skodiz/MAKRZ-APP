@@ -550,7 +550,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 14px 0;
+  padding: 10px 14px 10px;
   box-sizing: border-box;
   z-index: 30;
 }
@@ -558,9 +558,35 @@ body {
 .post-detail-reply-bar .reply-input {
   flex: 1;
   min-width: 0;
+  height: 42px;
+  border: 1px solid #E6DDD2;
+  border-radius: 999px;
+  background: #FFFBF8;
+  padding: 0 14px;
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  color: #2C2623;
+  outline: none;
+}
+
+.post-detail-reply-bar .reply-input::placeholder {
+  color: #B8AEA6;
+}
+
+.post-detail-reply-bar .reply-input:focus {
+  border-color: #78917F;
 }
 
 .post-detail-reply-bar .send-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: #3F5248;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
