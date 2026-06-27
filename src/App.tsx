@@ -471,12 +471,11 @@ body {
   gap: 16px;
   align-items: center;
 }
-.post-actions-left {
-  display: flex;
-  align-items: center;
-  gap: 18px;
+.post-actions-left{
+  display:flex;
+  align-items:center;
+  gap:18px;
 }
-
 
 .post-action {
   display: flex;
@@ -634,16 +633,29 @@ body {
 .send-btn { width: 38px; height: 38px; border-radius: 50%; border: none; background: #3F5248; color: #FFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; }
 .comment-meta { display:flex; align-items:center; gap:5px; line-height:15px; margin-bottom:2px; }
 .comment-dot { font-size:11px; color:#8B837B; }
-.reply-action {
-  border: none;
-  background: transparent;
-  padding: 0;
-  color: #78917F;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
+.reply-action{
+  background:none;
+  border:none;
+  padding:0;
+  color:#6D8A78;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+}
+.reply-total{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  color:#9B9B9B;
+  font-size:15px;
+  font-weight:500;
 }
 
+.reply-total svg{
+  width:15px;
+  height:15px;
+  stroke:#9B9B9B;
+}
   /* GALLERY */
   .masonry { column-count: 2; column-gap: 8px; }
   .m-photo { width: 100%; display: block; border-radius: 14px; margin-bottom: 8px; object-fit: cover; break-inside: avoid; cursor: pointer; }
@@ -1160,7 +1172,7 @@ const totalReplyCount =
           {post.img && <img className="post-img" style={{ height: 200 }} src={post.img} alt="" />}
 
           <div className="post-actions">
-           <div className="post-actions-left">
+          <div className="post-actions-left">
   <button
     className="reply-action"
     onClick={() => {
@@ -1171,9 +1183,10 @@ const totalReplyCount =
     Répondre
   </button>
 
-  <span className="reply-count">
-    {totalReplyCount} réponse{totalReplyCount > 1 ? "s" : ""}
-  </span>
+  <div className="reply-total">
+    <MessageCircle size={15} strokeWidth={1.8} />
+    <span>{totalReplyCount}</span>
+  </div>
 </div>
 
             <div className="post-actions-right">
