@@ -606,13 +606,13 @@ body {
 .comment-dot { font-size:11px; color:#8B837B; }
 .reply-action {
   border: none;
-  background: transparent;
-  padding: 0;
-  color: #78917F;
-  font-size: 14px;
+  background: #EEF4EF;
+  color: #5C7A6F;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 13px;
   font-weight: 700;
   font-family: "DM Sans", sans-serif;
-  cursor: pointer;
 }
 
   /* GALLERY */
