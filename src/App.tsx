@@ -1245,9 +1245,9 @@ const totalReplyCount =
                   <button className="reply-action" onClick={() => { setActiveReplyBox(`main-${index}`); replyInputRef.current?.focus(); }}>Répondre</button>
                 </div>
 
-                {newReplies[`main-${index}`]?.length > 0 && (
-                  <div className="nested">
-                    {newReplies[`main-${index}`].map((reply, replyIndex) => (
+               {postComments.replies[`main-${index}`]?.length > 0 && (
+  <div className="nested">
+    {postComments.replies[`main-${index}`].map((reply, replyIndex) => (
                       <div className="comment-head" key={replyIndex}>
                         <div className="c-av">ML</div>
                         <div className="comment-content">
