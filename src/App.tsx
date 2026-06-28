@@ -747,8 +747,7 @@ function AteliersList({
 }:{ 
   onOpen: (a: Atelier) => void;
   onProfile: () => void;
-}
-                     ) {
+}) {
   const [tab, setTab] = useState<"mes" | "discover">("mes");
 const [, setFilter] = useState("Tous");
 const [showFilters, setShowFilters] = useState(false);
@@ -1588,7 +1587,6 @@ function AddResource({ atelier, onBack }: { atelier: Atelier | null; onBack: () 
 
 // ─── SCREEN: FEED GLOBAL ──────────────────────────────────────────────────────
 
-function FeedScreen({
   function FeedScreen({
   posts,
   savedPostIds,
