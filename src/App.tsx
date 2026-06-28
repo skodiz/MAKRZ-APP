@@ -366,7 +366,7 @@ body {
   .title-row { display: flex; justify-content: space-between; align-items: flex-start;  text-align: left; }
   .atelier-name { font-family: 'Fraunces', serif; font-size: 16px; line-height: 21px; font-weight: 500; color: #2C2623; }
   .atelier-join-btn{
-    margin-bottom:4px;
+    margin-bottom:6px;
     align-self:flex-end;
 }
 .join-btn {
