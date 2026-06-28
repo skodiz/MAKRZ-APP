@@ -721,10 +721,34 @@ function NavBar({ tab, setTab }: { tab: string; setTab: (t: string) => void }) {
     </div>
   );
 }
+// ─── HEADER ────────────────────────────────────────────────────
+function AppHeader({ onProfile }: { onProfile: () => void }) {
+  return (
+    <div className="header">
+      <div className="logo">MAKRZ</div>
 
+      <div className="header-right">
+        <button className="icon-btn">
+          <Search size={20} strokeWidth={1.8} />
+        </button>
+
+        <button className="avatar" onClick={onProfile}>
+          ML
+        </button>
+      </div>
+    </div>
+  );
+}
 // ─── SCREEN: ATELIERS LIST ────────────────────────────────────────────────────
 
-function AteliersList({ onOpen }: { onOpen: (a: Atelier) => void }) {
+function AteliersList({ 
+  onOpen, 
+  onProfile, 
+}:{ 
+  onOpen: (a: Atelier) => void;
+  onProfile: () => void;
+}
+                     ) {
   const [tab, setTab] = useState<"mes" | "discover">("mes");
 const [, setFilter] = useState("Tous");
 const [showFilters, setShowFilters] = useState(false);
@@ -736,13 +760,7 @@ const visibleDiscover = DISCOVER.filter((a) => (a.name.toLowerCase().includes(se
   
   return (
     <div className="screen">
-            <div className="header">
-        <div className="logo">MAKRZ</div>
-        <div className="header-right">
-          <button className="icon-btn"><Search size={20} strokeWidth={1.8} /></button>
-          <div className="avatar">ML</div>
-        </div>
-      </div>
+           <AppHeader onProfile={onProfile} />
       <div className="tabs">
         <button className={`tab ${tab === "mes" ? "active" : ""}`} onClick={() => setTab("mes")}>Mes ateliers</button>
         <button className={`tab ${tab === "discover" ? "active" : ""}`} onClick={() => setTab("discover")}>Découvrir</button>
@@ -1571,22 +1589,20 @@ function AddResource({ atelier, onBack }: { atelier: Atelier | null; onBack: () 
 // ─── SCREEN: FEED GLOBAL ──────────────────────────────────────────────────────
 
 function FeedScreen({
+  function FeedScreen({
   posts,
   savedPostIds,
   setSavedPostIds,
+  onProfile,
 }: {
   posts: Post[];
   savedPostIds: number[];
   setSavedPostIds: React.Dispatch<React.SetStateAction<number[]>>;
-}) {  return (
+  onProfile: () => void;
+}) { 
+  return (
     <div className="screen">
-          <div className="header">
-        <div className="logo">MAKRZ</div>
-        <div className="header-right">
-          <button className="icon-btn"><Search size={20} strokeWidth={1.8} /></button>
-          <div className="avatar">ML</div>
-        </div>
-      </div>
+          <AppHeader onProfile={onProfile} />
       <div className="content">
         <div className="sect">Fil global</div>
         {posts.map((p) => (
@@ -1724,14 +1740,21 @@ setSavedPostIds={setSavedPostIds}
     }
 if (navTab === "feed")
   return (
-    <FeedScreen
-      posts={atelierPosts}
-      savedPostIds={savedPostIds}
-      setSavedPostIds={setSavedPostIds}
-    />
+   <FeedScreen
+  posts={atelierPosts}
+  savedPostIds={savedPostIds}
+  setSavedPostIds={setSavedPostIds}
+  onProfile={() => setScreen("saved")}
+/>
   );    if (navTab === "galerie") return <GalerieAtelier atelier={null} onBack={() => handleNavTab("ateliers")} />;
     return (
-      <AteliersList onOpen={(a) => { setSelectedAtelier(a); setScreen("atelier"); }} />
+      <AteliersList
+  onOpen={(a) => {
+    setSelectedAtelier(a);
+    setScreen("atelier");
+  }}
+  onProfile={() => setScreen("saved")}
+/>
     );
   };
 
