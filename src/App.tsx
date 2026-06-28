@@ -393,8 +393,21 @@ body {
 .filter-choice { border:none; border-radius:999px; background:#EFE7DC; color:#6F6862; font-size:11px; padding:5px 9px; cursor:pointer; }
 
 .filter-choice.active { background:#6D9577; color:#FFFFFF; font-weight:700; }
-  .join-btn { display:inline-flex; align-items:center; justify-content:center; border:none; border-radius:999px; background:#6F4E37; color:#fff; font-size:11px; font-weight:700; padding:5px 10px; cursor:pointer; }
+.join-btn {
+  border: none;
+  background: #78917F;
+  color: white;
+  border-radius: 999px;
+  padding: 7px 13px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: "DM Sans", sans-serif;
+  cursor: pointer;
+}
 
+.join-btn:disabled {
+  opacity: 0.6;
+}
   /* TOPBAR */
   .topbar { background: var(--shell); padding: 4px 20px 12px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
   .topbar-left { display: flex; align-items: center; gap: 10px; }
@@ -744,9 +757,13 @@ function AppHeader({ onProfile }: { onProfile: () => void }) {
 function AteliersList({ 
   onOpen, 
   onProfile, 
+  joinedAtelierIds,
+setJoinedAtelierIds,
 }:{ 
   onOpen: (a: Atelier) => void;
   onProfile: () => void;
+  joinedAtelierIds: number[];
+setJoinedAtelierIds: React.Dispatch<React.SetStateAction<number[]>>;
 }) {
   const [tab, setTab] = useState<"mes" | "discover">("mes");
 const [, setFilter] = useState("Tous");
@@ -809,6 +826,17 @@ const visibleDiscover = DISCOVER.filter((a) => (a.name.toLowerCase().includes(se
                       <div>
                         <div className="atelier-name">{a.name}</div>
                         <div className="members">{a.members} membres</div>
+                        <button
+  className="join-btn"
+  onClick={(e) => {
+    e.stopPropagation();
+    setJoinedAtelierIds((ids) =>
+      ids.includes(a.id) ? ids : [...ids, a.id]
+    );
+  }}
+>
+  {joinedAtelierIds.includes(a.id) ? "Rejoint" : "Rejoindre"}
+</button>
                       </div>
                                          </div>
                   </div>
@@ -1723,7 +1751,9 @@ export default function App() {
   };
 
   const showNav = screen === null || screen === "atelier";
-
+const [joinedAtelierIds, setJoinedAtelierIds] = useState<number[]>(
+  ATELIERS.filter((a) => a.joined).map((a) => a.id)
+);
   const renderScreen = () => {
     if (screen === "atelier" && selectedAtelier) {
       return (
@@ -1785,12 +1815,14 @@ if (navTab === "feed")
 />
   );    if (navTab === "galerie") return <GalerieAtelier atelier={null} onBack={() => handleNavTab("ateliers")} />;
     return (
-      <AteliersList
+     <AteliersList
   onOpen={(a) => {
     setSelectedAtelier(a);
     setScreen("atelier");
   }}
   onProfile={() => setScreen("saved")}
+  joinedAtelierIds={joinedAtelierIds}
+  setJoinedAtelierIds={setJoinedAtelierIds}
 />
     );
   };
