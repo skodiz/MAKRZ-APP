@@ -399,8 +399,8 @@ body {
   color: white;
   border-radius: 999px;
   padding: 7px 13px;
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 650;
   font-family: "DM Sans", sans-serif;
   cursor: pointer;
 }
@@ -771,7 +771,10 @@ const [showFilters, setShowFilters] = useState(false);
 const [search, setSearch] = useState("");
 const [activeFilterTab, setActiveFilterTab] = useState<"all" | "filters">("all");
 const [activeFilters, setActiveFilters] = useState<string[]>([]);
-const visibleAteliers = ATELIERS.filter((a) => a.name.toLowerCase().includes(search.toLowerCase()));
+const visibleAteliers = DISCOVER.filter((a) =>
+  joinedAtelierIds.includes(a.id) &&
+  a.name.toLowerCase().includes(search.toLowerCase())
+);
 const visibleDiscover = DISCOVER.filter((a) => (a.name.toLowerCase().includes(search.toLowerCase()) || a.tags.join(" ").toLowerCase().includes(search.toLowerCase())) && (activeFilters.length === 0 || activeFilters.some((f) => a.tags.includes(f))));
   
   return (
@@ -1752,9 +1755,7 @@ export default function App() {
   };
 
   const showNav = screen === null || screen === "atelier";
-const [joinedAtelierIds, setJoinedAtelierIds] = useState<number[]>(
-  ATELIERS.filter((a) => a.joined).map((a) => a.id)
-);
+const [joinedAtelierIds, setJoinedAtelierIds] = useState<number[]>([]);
   const renderScreen = () => {
     if (screen === "atelier" && selectedAtelier) {
       return (
