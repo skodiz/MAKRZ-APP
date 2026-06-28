@@ -817,7 +817,10 @@ function AtelierDetail({
   onPost,
   onGalerie,
   onAddRes,
+  savedPostIds,
+  setSavedPostIds,
 }: {
+  
   atelier: Atelier;
   posts: Post[];
   setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
@@ -826,6 +829,8 @@ function AtelierDetail({
   onPost: (p: Post) => void;
   onGalerie: () => void;
   onAddRes: () => void;
+  savedPostIds: number[];
+setSavedPostIds: React.Dispatch<React.SetStateAction<number[]>>;
 }) {
   
   const [innerTab, setInnerTab] = useState<"fil" | "res" | "mem">("fil");
@@ -990,8 +995,29 @@ onChange={(e) => setNewPostBody(e.target.value)}
               {p.img && <img className="post-img" src={p.img} alt="" />}
               <div className="post-actions">
                 <div className="post-action"><MessageCircle size={14} strokeWidth={1.8} />{replyCount}</div>
-                <div className="share-ml"><Share2 size={15} strokeWidth={1.8} /></div>
-              </div>
+<div className="post-actions-right">
+  <button
+    className="post-action"
+    onClick={(e) => {
+      e.stopPropagation();
+      setSavedPostIds((ids) =>
+        ids.includes(p.id)
+          ? ids.filter((id) => id !== p.id)
+          : [...ids, p.id]
+      );
+    }}
+  >
+    <Bookmark
+      size={15}
+      strokeWidth={1.8}
+      fill={savedPostIds.includes(p.id) ? "currentColor" : "none"}
+    />
+  </button>
+
+  <button className="post-action">
+    <Share2 size={15} strokeWidth={1.8} />
+  </button>
+</div>              </div>
             </div>
           );
 })}
@@ -1373,11 +1399,39 @@ const handleShare = async () => {
   );
 }
 // ─── SCREEN: SAVED ──────────────────────────────────────────────────────────
-function SavedPostsScreen() {
+function SavedPostsScreen({
+  posts,
+  savedPostIds,
+  onBack,
+  onPost,
+}: {
+  posts: Post[];
+  savedPostIds: number[];
+  onBack: () => void;
+  onPost: (p: Post) => void;
+}) {
+  const savedPosts = posts.filter((p) => savedPostIds.includes(p.id));
+
   return (
     <div className="screen">
       <div className="topbar">
-        <h2>Enregistrés</h2>
+        <button className="icon-btn" onClick={onBack}>
+          <ArrowLeft size={22} strokeWidth={1.8} />
+        </button>
+        <div className="topbar-title">Enregistrés</div>
+      </div>
+
+      <div className="content">
+        {savedPosts.length === 0 ? (
+          <div className="empty-state">Aucune publication enregistrée pour le moment.</div>
+        ) : (
+          savedPosts.map((p) => (
+            <div className="post" key={p.id} onClick={() => onPost(p)}>
+              <div className="post-title">{p.title}</div>
+              <div className="post-body">{p.body}</div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
@@ -1516,7 +1570,15 @@ function AddResource({ atelier, onBack }: { atelier: Atelier | null; onBack: () 
 
 // ─── SCREEN: FEED GLOBAL ──────────────────────────────────────────────────────
 
-function FeedScreen({ posts }: { posts: Post[] }) {  return (
+function FeedScreen({
+  posts,
+  savedPostIds,
+  setSavedPostIds,
+}: {
+  posts: Post[];
+  savedPostIds: number[];
+  setSavedPostIds: React.Dispatch<React.SetStateAction<number[]>>;
+}) {  return (
     <div className="screen">
           <div className="header">
         <div className="logo">MAKRZ</div>
@@ -1542,8 +1604,29 @@ function FeedScreen({ posts }: { posts: Post[] }) {  return (
             {p.img && <img className="post-img" src={p.img} alt="" />}
             <div className="post-actions">es
               <div className="post-action"><MessageCircle size={14} strokeWidth={1.8} />{p.replies}</div>
-              <div className="share-ml"><Share2 size={15} strokeWidth={1.8} /></div>
-            </div>
+<div className="post-actions-right">
+ <button
+  className="post-action"
+  onClick={(e) => {
+    e.stopPropagation();
+    setSavedPostIds((ids) =>
+      ids.includes(p.id)
+        ? ids.filter((id) => id !== p.id)
+        : [...ids, p.id]
+    );
+  }}
+>
+  <Bookmark
+    size={15}
+    strokeWidth={1.8}
+    fill={savedPostIds.includes(p.id) ? "currentColor" : "none"}
+  />
+</button>
+
+  <button className="post-action">
+    <Share2 size={15} strokeWidth={1.8} />
+  </button>
+</div>            </div>
           </div>
         ))}
       </div>
@@ -1595,11 +1678,16 @@ export default function App() {
   atelier={selectedAtelier}
   posts={atelierPosts}
   setPosts={setAtelierPosts}
-          commentsByPost={commentsByPost}
+  commentsByPost={commentsByPost}
   onBack={() => setScreen(null)}
-  onPost={(p) => { setSelectedPost(p); setScreen("post"); }}
+  onPost={(p) => {
+    setSelectedPost(p);
+    setScreen("post");
+  }}
   onGalerie={() => setScreen("galerie")}
-  onAddRes={() => setScreen("addres")}
+  onAddRes={() => setScreen("address")}
+  savedPostIds={savedPostIds}
+  setSavedPostIds={setSavedPostIds}
 />
       );
     }
@@ -1617,7 +1705,15 @@ setSavedPostIds={setSavedPostIds}
 }
     if (screen === "saved") {
   return (
-    <SavedPostsScreen />
+    <SavedPostsScreen
+      posts={atelierPosts}
+      savedPostIds={savedPostIds}
+      onBack={() => setScreen(null)}
+      onPost={(p) => {
+        setSelectedPost(p);
+        setScreen("post");
+      }}
+    />
   );
 }
     if (screen === "galerie") {
@@ -1626,8 +1722,14 @@ setSavedPostIds={setSavedPostIds}
     if (screen === "addres") {
       return <AddResource atelier={selectedAtelier} onBack={() => setScreen("atelier")} />;
     }
-if (navTab === "feed") return <FeedScreen posts={atelierPosts} />;
-    if (navTab === "galerie") return <GalerieAtelier atelier={null} onBack={() => handleNavTab("ateliers")} />;
+if (navTab === "feed")
+  return (
+    <FeedScreen
+      posts={atelierPosts}
+      savedPostIds={savedPostIds}
+      setSavedPostIds={setSavedPostIds}
+    />
+  );    if (navTab === "galerie") return <GalerieAtelier atelier={null} onBack={() => handleNavTab("ateliers")} />;
     return (
       <AteliersList onOpen={(a) => { setSelectedAtelier(a); setScreen("atelier"); }} />
     );
