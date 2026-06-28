@@ -369,6 +369,16 @@ body {
     margin-left:auto;
     align-self:flex-start;
 }
+.join-btn {
+  background: #B87742;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 6px 11px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: "DM Sans", sans-serif;
+}
   .members { text-align: left; margin-top: px; font-size: 14px; color: #7F7770; line-height: 18px; }
   .new-badge { display: inline-flex; align-items: center; border-radius: 999px; background: #7EA38A; color: #FFF; font-size: 9px; font-weight: 700; padding: 3px 8px; height: 18px; white-space: nowrap; margin-top: 4px; }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0px; }
@@ -397,21 +407,7 @@ body {
 .filter-choice { border:none; border-radius:999px; background:#EFE7DC; color:#6F6862; font-size:11px; padding:5px 9px; cursor:pointer; }
 
 .filter-choice.active { background:#6D9577; color:#FFFFFF; font-weight:700; }
-.join-btn {
-  border: none;
-  background: #B87742;
-  color: white;
-  border-radius: 999px;
-  padding: 7px 13px;
-  font-size: 11px;
-  font-weight: 650;
-  font-family: "DM Sans", sans-serif;
-  cursor: pointer;
-}
 
-.join-btn:disabled {
-  opacity: 0.6;
-}
   /* TOPBAR */
   .topbar { background: var(--shell); padding: 4px 20px 12px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
   .topbar-left { display: flex; align-items: center; gap: 10px; }
@@ -419,14 +415,13 @@ body {
 
   /* WORKSHOP HEADER */
   .ws-header { padding: 0 20px 14px; background: var(--shell); flex-shrink: 0; }
-.ws-main{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-}
+  .ws-main > div:nth-child(2) {  min-width: 0;}
+.ws-main{ display:flex; align-items:flex-start; justify-content:space-between; }
 .ws-icon { width: 52px; height: 52px; padding-top: 1px; border-radius: 14px; background: #FACB8F; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
-  .ws-name { font-family: 'Fraunces', serif; font-size: 19px; line-height: 23px; font-weight: 500; color: #2C2623; }
-
+  .ws-name { font-family: 'Fraunces', serif; font-size: 19px; line-height: 1.05; font-weight: 500; color: #2C2623; }
+  .join-btn {  border: none;  background: #B87742;  color: white;  border-radius: 999px;  padding: 7px 13px;  font-size: 11px;  font-weight: 650;  font-family: "DM Sans", sans-serif;  cursor: pointer;}
+.join-btn:disabled {  opacity: 0.6;}
+.join-btn.joined {  width: 34px;  height: 34px;  padding: 0;  border-radius: 50%;  background: #78917F;  color: white;  font-size: 16px;}
   /* ABOUT */
   .about { padding: 0 20px; height: 42px; border-top: none; border-bottom: none; display: flex; align-items: center; justify-content: space-between; color: #7F7770; font-size: 14px; background: var(--shell); cursor: pointer; flex-shrink: 0; }
   .about-open { padding: 14px 20px 16px; border-top: 1px solid #E6DDD2; border-bottom: none; background: #FAF8F4; flex-shrink: 0; }
@@ -951,18 +946,20 @@ const handleShare = async (p: Post) => {
              <div className="tags">{atelier.tags.map((t) => <span className="tag" key={t}>{t}</span>)}
                       </div>
           </div>
-          {!joinedAtelierIds.includes(atelier.id) && (
     <button
-        className="join-btn atelier-join-btn"
-        onClick={() => {
-            setJoinedAtelierIds((ids) =>
-                ids.includes(atelier.id) ? ids : [...ids, atelier.id]
-            );
-        }}
-    >
-        Rejoindre
-    </button>
-)}
+  className={`join-btn atelier-join-btn ${
+    joinedAtelierIds.includes(atelier.id) ? "joined" : ""
+  }`}
+  onClick={() => {
+    setJoinedAtelierIds((ids) =>
+      ids.includes(atelier.id)
+        ? ids.filter((id) => id !== atelier.id)
+        : [...ids, atelier.id]
+    );
+  }}
+>
+  {joinedAtelierIds.includes(atelier.id) ? "✓" : "Rejoindre"}
+</button>
         </div>
               </div>
 
