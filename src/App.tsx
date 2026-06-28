@@ -1146,7 +1146,20 @@ const totalReplyCount =
     setReplyText("");
     setActiveReplyBox(null);
   };
+const handleShare = async () => {
+  const shareText = `${post.title}\n\n${post.body}`;
 
+  if (navigator.share) {
+    await navigator.share({
+      title: post.title,
+      text: shareText,
+      url: window.location.href,
+    });
+  } else {
+    await navigator.clipboard.writeText(shareText);
+    alert("Lien copié");
+  }
+};
   return (
   <div className="screen post-detail-screen">
       <div className="topbar" style={{ borderBottom: "1px solid #E6DDD2" }}>
@@ -1204,9 +1217,9 @@ const totalReplyCount =
                 <Bookmark size={14} strokeWidth={1.8} fill={saved ? "currentColor" : "none"} />
               </button>
 
-              <button className="post-action">
-                <Share2 size={14} strokeWidth={1.8} />
-              </button>
+              <button className="post-action" onClick={handleShare}>
+  <Share2 size={14} strokeWidth={1.8} />
+</button>
             </div>
           </div>
         </div>
