@@ -366,8 +366,8 @@ body {
   .title-row { display: flex; justify-content: space-between; align-items: flex-start;  text-align: left; }
   .atelier-name { font-family: 'Fraunces', serif; font-size: 16px; line-height: 21px; font-weight: 500; color: #2C2623; }
   .atelier-join-btn{
-    margin-left:auto;
-    align-self:flex-start;
+    margin-bottom:4px;
+    align-self:flex-end;
 }
 .join-btn {
   background: #B87742;
@@ -416,7 +416,7 @@ body {
   /* WORKSHOP HEADER */
   .ws-header { padding: 0 20px 14px; background: var(--shell); flex-shrink: 0; }
   .ws-main > div:nth-child(2) {  min-width: 0;}
-.ws-main{ display:flex; align-items:flex-start; justify-content:space-between; gap: 18px; }
+.ws-main{ display:flex; align-items:flex-end; gap: 18px; }
 .ws-icon { width: 52px; height: 52px; padding-top: 1px; border-radius: 14px; background: #FACB8F; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
 .ws-info { flex: 1; }
   .ws-name { font-family: 'Fraunces', serif; font-size: 19px; line-height: 1.05; font-weight: 500; color: #2C2623; }
