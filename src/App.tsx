@@ -365,9 +365,9 @@ body {
   .card-info { flex: 1; min-width: 0;  text-align: left; }
   .title-row { display: flex; justify-content: space-between; align-items: flex-start;  text-align: left; }
   .atelier-name { font-family: 'Fraunces', serif; font-size: 16px; line-height: 21px; font-weight: 500; color: #2C2623; }
-  .atelier-join-btn {
-  margin-top: 12px;
-  width: fit-content;
+  .atelier-join-btn{
+    margin-left:auto;
+    align-self:flex-start;
 }
   .members { text-align: left; margin-top: px; font-size: 14px; color: #7F7770; line-height: 18px; }
   .new-badge { display: inline-flex; align-items: center; border-radius: 999px; background: #7EA38A; color: #FFF; font-size: 9px; font-weight: 700; padding: 3px 8px; height: 18px; white-space: nowrap; margin-top: 4px; }
@@ -419,8 +419,12 @@ body {
 
   /* WORKSHOP HEADER */
   .ws-header { padding: 0 20px 14px; background: var(--shell); flex-shrink: 0; }
-  .ws-main { display: flex; gap: 12px; align-items: center; }
-  .ws-icon { width: 52px; height: 52px; padding-top: 1px; border-radius: 14px; background: #FACB8F; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.ws-main{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+}
+.ws-icon { width: 52px; height: 52px; padding-top: 1px; border-radius: 14px; background: #FACB8F; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
   .ws-name { font-family: 'Fraunces', serif; font-size: 19px; line-height: 23px; font-weight: 500; color: #2C2623; }
 
   /* ABOUT */
@@ -945,20 +949,20 @@ const handleShare = async (p: Post) => {
             <div className="ws-name">{atelier.name}</div>
             <div className="members">{atelier.members} membres</div>
              <div className="tags">{atelier.tags.map((t) => <span className="tag" key={t}>{t}</span>)}
-               {!joinedAtelierIds.includes(atelier.id) && (
-  <button
-    className="join-btn atelier-join-btn"
-    onClick={() => {
-      setJoinedAtelierIds((ids) =>
-        ids.includes(atelier.id) ? ids : [...ids, atelier.id]
-      );
-    }}
-  >
-    Rejoindre
-  </button>
-)}
-        </div>
+                      </div>
           </div>
+          {!joinedAtelierIds.includes(atelier.id) && (
+    <button
+        className="join-btn atelier-join-btn"
+        onClick={() => {
+            setJoinedAtelierIds((ids) =>
+                ids.includes(atelier.id) ? ids : [...ids, atelier.id]
+            );
+        }}
+    >
+        Rejoindre
+    </button>
+)}
         </div>
               </div>
 
