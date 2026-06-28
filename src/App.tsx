@@ -1528,6 +1528,7 @@ export default function App() {
   const [selectedAtelier, setSelectedAtelier] = useState<Atelier | null>(null);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [atelierPosts, setAtelierPosts] = useState<Post[]>(POSTS);
+  const [savedPostIds, setSavedPostIds] = useState<number[]>([]);
   const [commentsByPost, setCommentsByPost] = useState<
   Record<number, { main: string[]; replies: Record<string, string[]> }>
 >({});
@@ -1576,6 +1577,8 @@ export default function App() {
       onBack={() => setScreen("atelier")}
       commentsByPost={commentsByPost}
       setCommentsByPost={setCommentsByPost}
+      savedPostIds={savedPostIds}
+setSavedPostIds={setSavedPostIds}
     />
   );
 }
