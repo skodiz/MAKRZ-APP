@@ -865,7 +865,20 @@ const [newPostBody, setNewPostBody] = useState("");
     "photo-1605721911519-3dfeb3be25e7",
     "photo-1579820010410-c10411aaaa88",
   ];
+const handleShare = async (p: Post) => {
+  const shareText = `${p.title}\n\n${p.body}`;
 
+  if (navigator.share) {
+    await navigator.share({
+      title: p.title,
+      text: shareText,
+      url: window.location.href,
+    });
+  } else {
+    await navigator.clipboard.writeText(shareText);
+    alert("Lien copié");
+  }
+};
   return (
     <div className="screen">
            <div className="topbar">
@@ -1031,9 +1044,15 @@ onChange={(e) => setNewPostBody(e.target.value)}
     />
   </button>
 
-  <button className="post-action">
-    <Share2 size={15} strokeWidth={1.8} />
-  </button>
+  <button
+  className="post-action"
+  onClick={(e) => {
+    e.stopPropagation();
+    handleShare(p);
+  }}
+>
+  <Share2 size={15} strokeWidth={1.8} />
+</button>
 </div>              </div>
             </div>
           );
@@ -1598,6 +1617,20 @@ function AddResource({ atelier, onBack }: { atelier: Atelier | null; onBack: () 
   setSavedPostIds: React.Dispatch<React.SetStateAction<number[]>>;
   onProfile: () => void;
 }) { 
+    const handleShare = async (p: Post) => {
+  const shareText = `${p.title}\n\n${p.body}`;
+
+  if (navigator.share) {
+    await navigator.share({
+      title: p.title,
+      text: shareText,
+      url: window.location.href,
+    });
+  } else {
+    await navigator.clipboard.writeText(shareText);
+    alert("Lien copié");
+  }
+};
   return (
     <div className="screen">
           <AppHeader onProfile={onProfile} />
@@ -1637,9 +1670,15 @@ function AddResource({ atelier, onBack }: { atelier: Atelier | null; onBack: () 
   />
 </button>
 
-  <button className="post-action">
-    <Share2 size={15} strokeWidth={1.8} />
-  </button>
+  <button
+  className="post-action"
+  onClick={(e) => {
+    e.stopPropagation();
+    handleShare(p);
+  }}
+>
+  <Share2 size={15} strokeWidth={1.8} />
+</button>
 </div>            </div>
           </div>
         ))}
