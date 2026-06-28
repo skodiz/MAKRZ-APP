@@ -773,15 +773,14 @@ const [activeFilterTab, setActiveFilterTab] = useState<"all" | "filters">("all")
 const [activeFilters, setActiveFilters] = useState<string[]>([]);
 const joinedDiscover = DISCOVER.filter((a) => joinedAtelierIds.includes(a.id));
 
-const visibleAteliers = [
-  ...ATELIERS,
-  ...joinedDiscover.map((a) => ({
+const visibleAteliers = joinedDiscover
+  .map((a) => ({
     ...a,
     last: a.last || "Nouvelle activité dans l'atelier",
     time: a.time || "à l'instant",
     unread: 0,
-  })),
-].filter((a) => a.name.toLowerCase().includes(search.toLowerCase()));
+  }))
+  .filter((a) => a.name.toLowerCase().includes(search.toLowerCase()));
 const visibleDiscover = DISCOVER.filter((a) =>
   !joinedAtelierIds.includes(a.id) &&
   (a.name.toLowerCase().includes(search.toLowerCase()) ||
