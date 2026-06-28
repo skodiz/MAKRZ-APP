@@ -771,12 +771,23 @@ const [showFilters, setShowFilters] = useState(false);
 const [search, setSearch] = useState("");
 const [activeFilterTab, setActiveFilterTab] = useState<"all" | "filters">("all");
 const [activeFilters, setActiveFilters] = useState<string[]>([]);
-const visibleAteliers = DISCOVER.filter((a) =>
-  joinedAtelierIds.includes(a.id) &&
-  a.name.toLowerCase().includes(search.toLowerCase())
-);
-const visibleDiscover = DISCOVER.filter((a) => (a.name.toLowerCase().includes(search.toLowerCase()) || a.tags.join(" ").toLowerCase().includes(search.toLowerCase())) && (activeFilters.length === 0 || activeFilters.some((f) => a.tags.includes(f))));
-  
+const joinedDiscover = DISCOVER.filter((a) => joinedAtelierIds.includes(a.id));
+
+const visibleAteliers = [
+  ...ATELIERS,
+  ...joinedDiscover.map((a) => ({
+    ...a,
+    last: a.last || "Nouvelle activité dans l'atelier",
+    time: a.time || "à l'instant",
+    unread: 0,
+  })),
+].filter((a) => a.name.toLowerCase().includes(search.toLowerCase()));
+const visibleDiscover = DISCOVER.filter((a) =>
+  !joinedAtelierIds.includes(a.id) &&
+  (a.name.toLowerCase().includes(search.toLowerCase()) ||
+    a.tags.join(" ").toLowerCase().includes(search.toLowerCase())) &&
+  (activeFilters.length === 0 || activeFilters.some((f) => a.tags.includes(f)))
+);  
   return (
     <div className="screen">
            <AppHeader onProfile={onProfile} />
