@@ -1074,18 +1074,21 @@ function PostDetail({
   onBack,
   commentsByPost,
   setCommentsByPost,
+  savedPostIds,
+setSavedPostIds,
 }: {
   post: Post;
   onBack: () => void;
   commentsByPost: Record<number, { main: string[]; replies: Record<string, string[]> }>;
-  setCommentsByPost: React.Dispatch<
-    React.SetStateAction<Record<number, { main: string[]; replies: Record<string, string[]> }>>
-  >;
-}) {  const [open1, setOpen1] = useState(false);
+  setCommentsByPost: React.Dispatch<React.SetStateAction<Record<number, { main: string[]; replies: Record<string, string[]> }>>>;
+  savedPostIds: number[];
+setSavedPostIds: React.Dispatch<React.SetStateAction<number[]>>;
+}) 
+{  const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [replyText, setReplyText] = useState("");
-  const [saved, setSaved] = useState(false);
-  const [activeReplyBox, setActiveReplyBox] = useState<string | null>(null);
+const saved = savedPostIds.includes(post.id);
+    const [activeReplyBox, setActiveReplyBox] = useState<string | null>(null);
   const [newMainComments, setNewMainComments] = useState<string[]>([]);
   const [newReplies, setNewReplies] = useState<Record<string, string[]>>({ lucie: [], thomas: [] });
   const replyInputRef = useRef<HTMLInputElement>(null);
@@ -1190,7 +1193,14 @@ const totalReplyCount =
 </div>
 
             <div className="post-actions-right">
-              <button className="post-action save-action" onClick={() => setSaved(!saved)}>
+              <button className="post-action save-action" onClick={() => {
+  setSavedPostIds((ids) =>
+    ids.includes(post.id)
+      ? ids.filter((id) => id !== post.id)
+      : [...ids, post.id]
+  );
+}}
+                >
                 <Bookmark size={14} strokeWidth={1.8} fill={saved ? "currentColor" : "none"} />
               </button>
 
