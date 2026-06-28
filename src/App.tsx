@@ -395,7 +395,7 @@ body {
 .filter-choice.active { background:#6D9577; color:#FFFFFF; font-weight:700; }
 .join-btn {
   border: none;
-  background: #78917F;
+  background: #B87742;
   color: white;
   border-radius: 999px;
   padding: 7px 13px;
@@ -823,22 +823,23 @@ const visibleDiscover = DISCOVER.filter((a) => (a.name.toLowerCase().includes(se
                   <div className="icon">{a.emoji}</div>
                   <div className="card-info">
                     <div className="title-row">
-                      <div>
-                        <div className="atelier-name">{a.name}</div>
-                        <div className="members">{a.members} membres</div>
-                        <button
-  className="join-btn"
-  onClick={(e) => {
-    e.stopPropagation();
-    setJoinedAtelierIds((ids) =>
-      ids.includes(a.id) ? ids : [...ids, a.id]
-    );
-  }}
->
-  {joinedAtelierIds.includes(a.id) ? "Rejoint" : "Rejoindre"}
-</button>
-                      </div>
-                                         </div>
+  <div>
+    <div className="atelier-name">{a.name}</div>
+    <div className="members">{a.members} membres</div>
+  </div>
+
+  {!joinedAtelierIds.includes(a.id) && (
+    <button
+      className="join-btn"
+      onClick={(e) => {
+        e.stopPropagation();
+        setJoinedAtelierIds(ids => [...ids, a.id]);
+      }}
+    >
+      Rejoindre
+    </button>
+  )}
+</div>
                   </div>
                 </div>
                <div className="discover-description full">{a.description}</div>
