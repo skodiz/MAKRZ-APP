@@ -1372,6 +1372,16 @@ const handleShare = async () => {
     </div>
   );
 }
+// ─── SCREEN: SAVED ──────────────────────────────────────────────────────────
+function SavedPostsScreen() {
+  return (
+    <div className="screen">
+      <div className="topbar">
+        <h2>Enregistrés</h2>
+      </div>
+    </div>
+  );
+}
 // ─── SCREEN: GALERIE ──────────────────────────────────────────────────────────
 
 function GalerieAtelier({ atelier, onBack }: { atelier: Atelier | null; onBack: () => void }) {
@@ -1543,7 +1553,7 @@ function FeedScreen({ posts }: { posts: Post[] }) {  return (
 
 // ─── ROOT APP ─────────────────────────────────────────────────────────────────
 
-type ScreenKey = "atelier" | "post" | "galerie" | "addres" | null;
+type ScreenKey = "atelier" | "post" | "galerie" | "addres" | "saved" |null;
 
 export default function App() {
   const [navTab, setNavTab] = useState("ateliers");
@@ -1603,6 +1613,11 @@ export default function App() {
       savedPostIds={savedPostIds}
 setSavedPostIds={setSavedPostIds}
     />
+  );
+}
+    if (screen === "saved") {
+  return (
+    <SavedPostsScreen />
   );
 }
     if (screen === "galerie") {
