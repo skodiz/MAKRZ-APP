@@ -365,6 +365,10 @@ body {
   .card-info { flex: 1; min-width: 0;  text-align: left; }
   .title-row { display: flex; justify-content: space-between; align-items: flex-start;  text-align: left; }
   .atelier-name { font-family: 'Fraunces', serif; font-size: 16px; line-height: 21px; font-weight: 500; color: #2C2623; }
+  .atelier-join-btn {
+  margin-top: 12px;
+  width: fit-content;
+}
   .members { text-align: left; margin-top: px; font-size: 14px; color: #7F7770; line-height: 18px; }
   .new-badge { display: inline-flex; align-items: center; border-radius: 999px; background: #7EA38A; color: #FFF; font-size: 9px; font-weight: 700; padding: 3px 8px; height: 18px; white-space: nowrap; margin-top: 4px; }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0px; }
@@ -878,6 +882,8 @@ function AtelierDetail({
   onAddRes,
   savedPostIds,
   setSavedPostIds,
+  joinedAtelierIds,
+setJoinedAtelierIds,
 }: {
   
   atelier: Atelier;
@@ -890,6 +896,8 @@ function AtelierDetail({
   onAddRes: () => void;
   savedPostIds: number[];
 setSavedPostIds: React.Dispatch<React.SetStateAction<number[]>>;
+  joinedAtelierIds: number[];
+setJoinedAtelierIds: React.Dispatch<React.SetStateAction<number[]>>;
 }) {
   
   const [innerTab, setInnerTab] = useState<"fil" | "res" | "mem">("fil");
@@ -937,6 +945,18 @@ const handleShare = async (p: Post) => {
             <div className="ws-name">{atelier.name}</div>
             <div className="members">{atelier.members} membres</div>
              <div className="tags">{atelier.tags.map((t) => <span className="tag" key={t}>{t}</span>)}
+               {!joinedAtelierIds.includes(atelier.id) && (
+  <button
+    className="join-btn atelier-join-btn"
+    onClick={() => {
+      setJoinedAtelierIds((ids) =>
+        ids.includes(atelier.id) ? ids : [...ids, atelier.id]
+      );
+    }}
+  >
+    Rejoindre
+  </button>
+)}
         </div>
           </div>
         </div>
@@ -1771,6 +1791,8 @@ const [joinedAtelierIds, setJoinedAtelierIds] = useState<number[]>([]);
       return (
         <AtelierDetail
   atelier={selectedAtelier}
+          joinedAtelierIds={joinedAtelierIds}
+setJoinedAtelierIds={setJoinedAtelierIds}
   posts={atelierPosts}
   setPosts={setAtelierPosts}
   commentsByPost={commentsByPost}
