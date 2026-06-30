@@ -365,9 +365,14 @@ body {
   .card-info { flex: 1; min-width: 0;  text-align: left; }
   .title-row { display: flex; justify-content: space-between; align-items: flex-start;  text-align: left; }
   .atelier-name { font-family: 'Fraunces', serif; font-size: 16px; line-height: 21px; font-weight: 500; color: #2C2623; }
-  .atelier-join-btn{
-    margin-bottom:6px;
-    align-self:flex-end;
+ .atelier-join-btn {
+  margin-left: auto;
+  margin-right: -4px;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+  padding: 6px 10px;
+  font-size: 12px;
+  min-width: 0;
 }
 .join-btn {
   background: #B87742;
@@ -416,14 +421,30 @@ body {
   /* WORKSHOP HEADER */
   .ws-header { padding: 0 20px 14px; background: var(--shell); flex-shrink: 0; }
   .ws-main > div:nth-child(2) {  min-width: 0;}
-.ws-main{ display:flex; align-items:flex-end; gap: 18px; }
+.ws-main {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
 .ws-icon { width: 52px; height: 52px; padding-top: 1px; border-radius: 14px; background: #FACB8F; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
-.ws-info { flex: 1; }
-  .ws-name { font-family: 'Fraunces', serif; font-size: 19px; line-height: 1.05; font-weight: 500; color: #2C2623; }
+.ws-info {
+  flex: 1;
+  min-width: 0;
+}
+
+ .ws-name {
+  line-height: 1.05;
+  max-width: 100%;
+}
   .join-btn {  border: none;  background: #B87742;  color: white;  border-radius: 999px;  padding: 7px 13px;  font-size: 11px;  font-weight: 650;  font-family: "DM Sans", sans-serif;  cursor: pointer;}
 .join-btn:disabled {  opacity: 0.6;}
-.join-btn.joined {  width: 34px;  height: 34px;  padding: 0;  border-radius: 50%;  background: #78917F;  color: white;  font-size: 16px;}
-  /* ABOUT */
+.join-btn.joined {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  margin-right: -6px;
+}  /* ABOUT */
   .about { padding: 0 20px; height: 42px; border-top: none; border-bottom: none; display: flex; align-items: center; justify-content: space-between; color: #7F7770; font-size: 14px; background: var(--shell); cursor: pointer; flex-shrink: 0; }
   .about-open { padding: 14px 20px 16px; border-top: 1px solid #E6DDD2; border-bottom: none; background: #FAF8F4; flex-shrink: 0; }
   .about-title-row { display: flex; align-items: center; justify-content: space-between; color: #2C2623; font-size: 13px; font-weight: 700; margin-bottom: 8px; cursor: pointer; }
