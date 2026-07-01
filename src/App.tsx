@@ -25,6 +25,8 @@ import { EmptyState } from "./components/common/EmptyState";
 import { TagPill } from "./components/common/TagPill";
 import { WorkshopCard } from "./components/workshops/WorkshopCard";
 import { PostCard } from "./components/posts/PostCard";
+import { PostComposer } from "./components/posts/PostComposer";
+import { CommentThread } from "./components/comments/CommentThread";
 
 // ─── SUB-COMPONENTS ───────────────────────────────────────────────────────────
 
@@ -159,10 +161,6 @@ setJoinedAtelierIds: React.Dispatch<React.SetStateAction<number[]>>;
   
   const [innerTab, setInnerTab] = useState<"fil" | "res" | "mem">("fil");
   const [aboutOpen, setAboutOpen] = useState(false);
-  const [composerOpen, setComposerOpen] = useState(false);
-  const [postType, setPostType] = useState<PostType>("Question");
-  const [newPostTitle, setNewPostTitle] = useState("");
-const [newPostBody, setNewPostBody] = useState("");
 
   const galleryIds = [
     "photo-1565193566173-7a0ee3dbe261", // céramique
@@ -244,81 +242,7 @@ const handleShare = async (p: Post) => {
       {/* FIL */}
       {innerTab === "fil" && (
         <div className="content">
-          {!composerOpen ? (
-            <div className="composer-bar" onClick={() => setComposerOpen(true)}>
-              <div className="av-small">V</div>
-              <span>Publier dans l'atelier...</span>
-            </div>
-          ) : (
-            <div className="composer-open">
-              <div className="type-row">
-                {POST_TYPES.map((t) => (
-                  <button
-                    key={t}
-                    className={`type-chip ${typeClass(t)} ${postType === t ? "active" : ""}`}
-                    onClick={() => setPostType(t)}
-                  >{t}</button>
-                ))}
-              </div>
-<input
-  className="comp-input"
-  placeholder="Titre de la publication *"
-  value={newPostTitle}
-  onChange={(e) => setNewPostTitle(e.target.value)}
-/>              <textarea className="comp-textarea" placeholder={
-                postType === "Question" ? "Décrivez votre question ou le problème rencontré..."
-                  : postType === "Découverte" ? "Partagez une technique, un outil ou une inspiration..."
-                  : postType === "Résultat" ? "Présentez votre création terminée..."
-                  : postType === "Sondage" ? "Présentez rapidement le sujet du sondage..."
-                  : "Partagez l'évolution de votre projet..."
-              }
-                  value={newPostBody}
-onChange={(e) => setNewPostBody(e.target.value)}
-                  />
-              <div className="photo-line">
-                <button className="photo-btn">+ Photos</button>
-                <span>0 / 7</span>
-              </div>
-              {postType === "Sondage" && (
-                <div className="poll-opts">
-                  <div className="poll-opt">Option 1</div>
-                  <div className="poll-opt">Option 2</div>
-                  <div className="poll-add">+ Ajouter un choix</div>
-                </div>
-              )}
-              <div className="comp-actions">
-                <button className="cancel-btn" onClick={() => setComposerOpen(false)}>Annuler</button>
-               <button
-  className="publish-btn"
-  onClick={() => {
-    if (!newPostTitle.trim()) return;
-
-    const newPost: Post = {
-      id: Date.now(),
-      av: "ML",
-      avColor: "#E2D1BC",
-      author: "Moi",
-      role: null,
-      time: "à l'instant",
-      type: postType === "Avancement" ? "Process" : postType,
-      typeKey: postType.toLowerCase() as Post["typeKey"],
-      title: newPostTitle,
-      body: newPostBody,
-      replies: 0,
-      pinned: false,
-    };
-
-    setPosts([newPost, ...posts]);
-    setNewPostTitle("");
-    setNewPostBody("");
-    setComposerOpen(false);
-  }}
->
-  Publier
-</button>
-              </div>
-            </div>
-          )}
+          <PostComposer posts={posts} setPosts={setPosts} />
          {posts.map((p) => {
   const extraReplies =
     (commentsByPost[p.id]?.main?.length || 0) +
@@ -436,68 +360,17 @@ setSavedPostIds,
   savedPostIds: number[];
 setSavedPostIds: React.Dispatch<React.SetStateAction<number[]>>;
 }) 
-{  const [open1, setOpen1] = useState(false);
-  const [open2, setOpen2] = useState(false);
-  const [replyText, setReplyText] = useState("");
+{
 const saved = savedPostIds.includes(post.id);
-    const [activeReplyBox, setActiveReplyBox] = useState<string | null>(null);
-  const [newMainComments, setNewMainComments] = useState<string[]>([]);
-  const [newReplies, setNewReplies] = useState<Record<string, string[]>>({ lucie: [], thomas: [] });
-  const replyInputRef = useRef<HTMLInputElement>(null);
 const postComments = commentsByPost[post.id] || {
   main: [],
   replies: { lucie: [], thomas: [] }
 };
-    
- const lucieReplyCount = 1 + (postComments.replies.lucie?.length || 0);
-const thomasReplyCount = 1 + (postComments.replies.thomas?.length || 0);
 const allDynamicRepliesCount = Object.values(postComments.replies || {}).reduce(
   (total, replies) => total + replies.length,
   0
 );
-
-const totalReplyCount =
-  post.replies +
-  postComments.main.length +
-  allDynamicRepliesCount;
-    const replyPlaceholder = activeReplyBox === "lucie" ? "Répondre à Lucie..." : activeReplyBox === "thomas" ? "Répondre à Thomas..." : activeReplyBox?.startsWith("main-") ? "Répondre à Moi..." : "Répondre à la publication...";
-  const sendReply = () => {
-    const text = replyText.trim();
-    if (!text) return;
-
-  if (activeReplyBox) {
-  setCommentsByPost((prev) => ({
-    ...prev,
-    [post.id]: {
-      main: prev[post.id]?.main || [],
-      replies: {
-        ...(prev[post.id]?.replies || { lucie: [], thomas: [] }),
-        [activeReplyBox]: [
-          ...((prev[post.id]?.replies?.[activeReplyBox] || [])),
-          text
-        ]
-      }
-    }
-  }));
-
-  if (activeReplyBox === "lucie") setOpen1(true);
-  if (activeReplyBox === "thomas") setOpen2(true);
-
-} else {
-
-  setCommentsByPost((prev) => ({
-    ...prev,
-    [post.id]: {
-      main: [...(prev[post.id]?.main || []), text],
-      replies: prev[post.id]?.replies || { lucie: [], thomas: [] }
-    }
-  }));
-
-}
-
-    setReplyText("");
-    setActiveReplyBox(null);
-  };
+const totalReplyCount = post.replies + postComments.main.length + allDynamicRepliesCount;
 const handleShare = async () => {
   const shareText = `${post.title}\n\n${post.body}`;
 
@@ -544,8 +417,7 @@ const handleShare = async () => {
   <button
     className="reply-action"
     onClick={() => {
-      setActiveReplyBox(null);
-      replyInputRef.current?.focus();
+      document.querySelector<HTMLInputElement>(".post-detail-reply-bar input")?.focus();
     }}
   >
     Répondre
@@ -577,149 +449,11 @@ const handleShare = async () => {
         </div>
 
      
-{post.replies > 0 && (<>
-    <div className="comment-card">          
-      <div className="comment-head">
-            <div className="c-av">LM</div>
-
-            <div className="comment-content">
-              <div className="comment-meta">
-                <span className="comment-name">Lucie M.</span>
-                <span className="comment-dot">·</span>
-                <span className="comment-time">il y a 1 h</span>
-              </div>
-
-              <div className="comment-text">Magnifique résultat !</div>
-
-              <div className="comment-actions">
-                <button className="reply-action" onClick={() => { setActiveReplyBox("lucie"); replyInputRef.current?.focus(); }}>Répondre</button>
-                <button className="toggle-btn" onClick={() => setOpen1(!open1)}>
-                  {open1 ? <><span>Masquer</span><ChevronUp size={13} /></> : <><span>Voir {lucieReplyCount} réponse{lucieReplyCount > 1 ? "s" : ""}</span><ChevronDown size={13} /></>}
-                </button>
-              </div>
-
-              {(open1 || postComments.replies.lucie.length > 0) && (
-                <div className="nested">
-                  {open1 && (
-                    <div className="comment-head">
-                      <div className="c-av">TR</div>
-                      <div className="comment-content">
-                        <div className="comment-meta"><span className="comment-name">Théo R.</span><span className="comment-dot">·</span><span className="comment-time">il y a 45 min</span></div>
-                        <div className="comment-text">La texture est superbe.</div>
-                      </div>
-                    </div>
-                  )}
-
-                  {postComments.replies.lucie.map((text, index) => (
-                    <div className="comment-head" key={index}>
-                      <div className="c-av">ML</div>
-                      <div className="comment-content">
-                        <div className="comment-meta"><span className="comment-name">Moi</span><span className="comment-dot">·</span><span className="comment-time">à l'instant</span></div>
-                        <div className="comment-text">{text}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="comment-card">
-          <div className="comment-head">
-            <div className="c-av">TR</div>
-
-            <div className="comment-content">
-              <div className="comment-meta">
-                <span className="comment-name">Thomas R.</span>
-                <span className="comment-dot">·</span>
-                <span className="comment-time">il y a 30 min</span>
-              </div>
-
-              <div className="comment-text">Tu as utilisé quel émail ?</div>
-
-              <div className="comment-actions">
-                <button className="reply-action" onClick={() => { setActiveReplyBox("thomas"); replyInputRef.current?.focus(); }}>Répondre</button>
-                <button className="toggle-btn" onClick={() => setOpen2(!open2)}>
-                  {open2 ? <><span>Masquer</span><ChevronUp size={13} /></> : <><span>Voir {thomasReplyCount} réponse{thomasReplyCount > 1 ? "s" : ""}</span><ChevronDown size={13} /></>}
-                </button>
-              </div>
-
-              {(open2 || postComments.replies.thomas.length > 0) && (
-                <div className="nested">
-                  {open2 && (
-                    <div className="comment-head">
-                      <div className="c-av">MD</div>
-                      <div className="comment-content">
-                        <div className="comment-meta"><span className="comment-name">Marie D.</span><span className="comment-dot">·</span><span className="comment-time">il y a 20 min</span></div>
-                        <div className="comment-text">Émail blanc mat Solargil.</div>
-                      </div>
-                    </div>
-                  )}
-
-                  {postComments.replies.thomas.map((text, index) => (
-                    <div className="comment-head" key={index}>
-                      <div className="c-av">ML</div>
-                      <div className="comment-content">
-                        <div className="comment-meta"><span className="comment-name">Moi</span><span className="comment-dot">·</span><span className="comment-time">à l'instant</span></div>
-                        <div className="comment-text">{text}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-   </>
-)}
-
-{postComments.main.map((text, index) => (
-  <div className="comment-card" key={index}>
-            <div className="comment-head">
-              <div className="c-av">ML</div>
-
-              <div className="comment-content">
-                <div className="comment-meta">
-                  <span className="comment-name">Moi</span>
-                  <span className="comment-dot">·</span>
-                  <span className="comment-time">à l'instant</span>
-                </div>
-
-                <div className="comment-text">{text}</div>
-
-                <div className="comment-actions">
-                  <button className="reply-action" onClick={() => { setActiveReplyBox(`main-${index}`); replyInputRef.current?.focus(); }}>Répondre</button>
-                </div>
-
-               {postComments.replies[`main-${index}`]?.length > 0 && (
-  <div className="nested">
-    {postComments.replies[`main-${index}`].map((reply, replyIndex) => (
-                      <div className="comment-head" key={replyIndex}>
-                        <div className="c-av">ML</div>
-                        <div className="comment-content">
-                          <div className="comment-meta"><span className="comment-name">Moi</span><span className="comment-dot">·</span><span className="comment-time">à l'instant</span></div>
-                          <div className="comment-text">{reply}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
-
-<div className="post-detail-reply-bar">
-  <input ref={replyInputRef} 
-            className="reply-input" value={replyText} onChange={(e) => setReplyText(e.target.value)} 
-            placeholder={replyPlaceholder}
-            />
-
-          <button type="button" className="send-btn" onClick={sendReply}>
-            <Send size={17} strokeWidth={2} />
-          </button>
-        </div>
+<CommentThread
+          post={post}
+          commentsByPost={commentsByPost}
+          setCommentsByPost={setCommentsByPost}
+        />
       </div>
     </div>
   );
