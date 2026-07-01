@@ -13,7 +13,7 @@ export function UnansweredQuestions({ posts, onOpen }: UnansweredQuestionsProps)
 
   return (
     <>
-      <div className="sect">Questions de la communauté</div>
+      <div className="sect-soft">Un coup de main ?</div>
       {questions.map((q) => (
         <div key={q.id}>
           <div
@@ -27,7 +27,7 @@ export function UnansweredQuestions({ posts, onOpen }: UnansweredQuestionsProps)
                   : "var(--color-accent-dark)",
             }}
           >
-            {q.questionStatus === "resolue" ? "✓ Résolue" : "Cherche un coup de main"}
+            {q.questionStatus === "resolue" ? "✓ Résolue" : "En attente"}
           </div>
           <PostCard post={q} variant="compact" onOpen={onOpen} />
           {q.questionStatus === "resolue" && (

@@ -54,19 +54,21 @@ export function ProjectsScreen({ onBack }: { onBack: () => void }) {
 
               {expanded && (
                 <div className="timeline">
+                  <div className="timeline-track">
+                    <div
+                      className="timeline-track-fill"
+                      style={{ height: `${Math.round((doneSteps / project.steps.length) * 100)}%` }}
+                    />
+                  </div>
                   {project.steps.map((step, index) => {
                     const isCurrent = !step.done && index === firstPendingIndex;
-                    const statusLabel = step.done ? "Terminée" : isCurrent ? "En cours" : "À venir";
+                    const stateClass = step.done ? "done" : isCurrent ? "current" : "upcoming";
 
                     return (
                       <div className="timeline-item" key={step.id}>
-                        <div
-                          className={`timeline-dot ${step.done ? "done" : isCurrent ? "current" : ""}`}
-                        />
-                        <div className={`timeline-title ${isCurrent ? "current" : ""}`}>
-                          {step.label}
-                        </div>
-                        <div className="timeline-status">{statusLabel}</div>
+                        <div className={`timeline-dot ${stateClass}`} />
+                        <div className={`timeline-title ${stateClass}`}>{step.label}</div>
+                        {isCurrent && <div className="timeline-status">En cours</div>}
                         {step.note && <div className="timeline-note">{step.note}</div>}
                       </div>
                     );

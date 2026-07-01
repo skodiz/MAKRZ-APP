@@ -38,11 +38,13 @@ export function FeedScreen({
             onNotifications={onNotifications}
           />
       <div className="content">
-        <UnansweredQuestions posts={posts} onOpen={onOpenPost} />
+        <div className="feed-questions">
+          <UnansweredQuestions posts={posts} onOpen={onOpenPost} />
+        </div>
 
         {projectUpdates.length > 0 && (
-          <div style={{ marginTop: "var(--space-12)" }}>
-            <div className="sect">Avancées de projet</div>
+          <div style={{ marginTop: "var(--space-9)" }}>
+            <div className="sect-soft">Avancées de projet</div>
             {projectUpdates.map((p) => (
               <PostCard
                 key={p.id}
@@ -57,7 +59,7 @@ export function FeedScreen({
           </div>
         )}
 
-        <div className="sect" style={{ marginTop: "var(--space-12)" }}>Fil global</div>
+        <div className="sect" style={{ marginTop: "var(--space-9)" }}>Fil global</div>
         {mainPosts.map((p) => (
           <PostCard
             key={p.id}

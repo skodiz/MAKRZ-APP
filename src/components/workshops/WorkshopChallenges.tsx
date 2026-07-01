@@ -13,7 +13,7 @@ export function WorkshopChallenges() {
       {activeChallenges.map((challenge) => {
         const joined = joinedIds.includes(challenge.id);
         return (
-          <div className="card" key={challenge.id} style={{ cursor: "default" }}>
+          <div className="card card-static" key={challenge.id}>
             <div className="title-row">
               <div className="atelier-name">{challenge.title}</div>
               <span className="type-chip question" style={{ cursor: "default" }}>
