@@ -945,7 +945,8 @@ const visibleDiscover = DISCOVER.filter((a) =>
       </>
     )}
   </>
-) : (
+)}
+{tab === "discover" && (
           <>
             <div className="filters">
               <button className={`filter ${activeFilterTab === "all" ? "active" : ""}`} onClick={() => { setActiveFilterTab("all"); setShowFilters(false); setFilter("Tous"); }}>Tous</button>
