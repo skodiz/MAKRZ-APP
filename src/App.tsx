@@ -902,7 +902,7 @@ const visibleDiscover = DISCOVER.filter((a) =>
       </div>
       <div className="content">
         <div className="search"><Search size={14} color="#B6ADA4" /><input className="search-input" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Rechercher un atelier..." /></div>
-       {tab === "mes" ? (
+{tab === "mes" && (
   <>
     {visibleAteliers.length === 0 ? (
       <div className="empty-state">
@@ -983,6 +983,8 @@ const visibleDiscover = DISCOVER.filter((a) =>
             ))}
           </>
         )}
+        </>
+)}
       </div>
     </div>
   );
