@@ -4,8 +4,8 @@ import { TagPill } from "../common/TagPill";
 
 type WorkshopHeaderProps = {
   atelier: Atelier;
-  innerTab: "fil" | "res" | "mem";
-  setInnerTab: React.Dispatch<React.SetStateAction<"fil" | "res" | "mem">>;
+  innerTab: "fil" | "res" | "carnet" | "mem";
+  setInnerTab: React.Dispatch<React.SetStateAction<"fil" | "res" | "carnet" | "mem">>;
   aboutOpen: boolean;
   setAboutOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isJoined: boolean;
@@ -89,6 +89,12 @@ export function WorkshopHeader({
           onClick={() => setInnerTab("res")}
         >
           Ressources
+        </button>
+        <button
+          className={`inner-tab ${innerTab === "carnet" ? "active" : ""}`}
+          onClick={() => setInnerTab("carnet")}
+        >
+          Carnet
         </button>
         <button
           className={`inner-tab ${innerTab === "mem" ? "active" : ""}`}

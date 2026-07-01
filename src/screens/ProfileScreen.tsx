@@ -1,14 +1,16 @@
 import { ArrowLeft } from "lucide-react";
-import { CURRENT_USER, RECENT_ACTIVITY } from "../data/mockData";
+import { CURRENT_USER, PROJECTS, RECENT_ACTIVITY } from "../data/mockData";
 
 export function ProfileScreen({
   savedCount,
   onBack,
   onSavedPosts,
+  onProjects,
 }: {
   savedCount: number;
   onBack: () => void;
   onSavedPosts: () => void;
+  onProjects: () => void;
 }) {
   return (
     <div className="screen">
@@ -34,6 +36,13 @@ export function ProfileScreen({
           <div className="sect" style={{ marginBottom: 0 }}>Publications enregistrées</div>
           <button className="section-link" onClick={onSavedPosts}>
             Voir tout ({savedCount})
+          </button>
+        </div>
+
+        <div className="section-row" style={{ marginTop: 16 }}>
+          <div className="sect" style={{ marginBottom: 0 }}>Mes projets</div>
+          <button className="section-link" onClick={onProjects}>
+            Voir tout ({PROJECTS.length})
           </button>
         </div>
 

@@ -3,6 +3,8 @@ import type { Dispatch, SetStateAction } from "react";
 import type { Atelier, Post } from "../types";
 import { WorkshopHeader } from "../components/workshops/WorkshopHeader";
 import { WorkshopResources } from "../components/workshops/WorkshopResources";
+import { WorkshopNotebook } from "../components/workshops/WorkshopNotebook";
+import { WorkshopChallenges } from "../components/workshops/WorkshopChallenges";
 import { PostCard } from "../components/posts/PostCard";
 import { PostComposer } from "../components/posts/PostComposer";
 import { sharePost, toggleId } from "../utils/postActions";
@@ -36,7 +38,7 @@ setSavedPostIds: Dispatch<SetStateAction<number[]>>;
 setJoinedAtelierIds: Dispatch<SetStateAction<number[]>>;
 }) {
   
-  const [innerTab, setInnerTab] = useState<"fil" | "res" | "mem">("fil");
+  const [innerTab, setInnerTab] = useState<"fil" | "res" | "carnet" | "mem">("fil");
   const [aboutOpen, setAboutOpen] = useState(false);
 
   const galleryIds = [
@@ -69,6 +71,7 @@ setJoinedAtelierIds: Dispatch<SetStateAction<number[]>>;
       {/* FIL */}
       {innerTab === "fil" && (
         <div className="content">
+          <WorkshopChallenges />
           <PostComposer posts={posts} setPosts={setPosts} />
          {posts.map((p) => {
   const extraReplies =
@@ -103,6 +106,9 @@ setJoinedAtelierIds: Dispatch<SetStateAction<number[]>>;
           onAddRes={onAddRes}
         />
       )}
+
+      {/* CARNET */}
+      {innerTab === "carnet" && <WorkshopNotebook />}
 
       {/* MEMBRES */}
       {innerTab === "mem" && (

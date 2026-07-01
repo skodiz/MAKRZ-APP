@@ -27,6 +27,45 @@ export interface Post {
   img?: string;
   replies: number;
   pinned: boolean;
+  questionStatus?: "attente" | "resolue";
+}
+
+export type ProjectStatus = "En cours" | "Terminé" | "En pause";
+
+export interface ProjectStep {
+  id: number;
+  label: string;
+  done: boolean;
+}
+
+export interface Project {
+  id: number;
+  title: string;
+  discipline: string;
+  status: ProjectStatus;
+  description: string;
+  steps: ProjectStep[];
+}
+
+export type NotebookCategory = "Matériaux" | "Outils" | "Techniques" | "Erreurs fréquentes";
+
+export interface NotebookEntry {
+  id: number;
+  category: NotebookCategory;
+  title: string;
+  summary: string;
+  updatedAt: string;
+  contributor: string;
+}
+
+export type ChallengeStatus = "active" | "termine";
+
+export interface Challenge {
+  id: number;
+  title: string;
+  description: string;
+  status: ChallengeStatus;
+  linkedPostsCount: number;
 }
 
 export type ScreenKey =
@@ -39,6 +78,7 @@ export type ScreenKey =
   | "search"
   | "messages"
   | "notifications"
+  | "projects"
   | null;
 
 export interface CurrentUser {

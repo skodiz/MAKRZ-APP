@@ -14,6 +14,7 @@ import { ProfileScreen } from "./screens/ProfileScreen";
 import { SearchScreen } from "./screens/SearchScreen";
 import { MessagesScreen } from "./screens/MessagesScreen";
 import { NotificationsScreen } from "./screens/NotificationsScreen";
+import { ProjectsScreen } from "./screens/ProjectsScreen";
 
 // ─── ROOT APP ─────────────────────────────────────────────────────────────────
 
@@ -109,8 +110,12 @@ setSavedPostIds={setSavedPostIds}
           savedCount={savedPostIds.length}
           onBack={() => setScreen(null)}
           onSavedPosts={() => setScreen("saved")}
+          onProjects={() => setScreen("projects")}
         />
       );
+    }
+    if (screen === "projects") {
+      return <ProjectsScreen onBack={() => setScreen("profile")} />;
     }
     if (screen === "search") {
       return (
@@ -144,6 +149,10 @@ if (navTab === "feed")
   onSearch={() => setScreen("search")}
   onMessages={() => setScreen("messages")}
   onNotifications={() => setScreen("notifications")}
+  onOpenPost={(p) => {
+    setSelectedPost(p);
+    setScreen("post");
+  }}
 />
   );    if (navTab === "galerie") return <GalleryScreen atelier={null} onBack={() => handleNavTab("ateliers")} />;
     return (

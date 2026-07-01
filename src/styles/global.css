@@ -289,8 +289,8 @@ body {
   .about-text { font-size: 13px; line-height: 19px; color: var(--color-text-taupe-alt); }
 
   /* INNER TABS */
-  .inner-tabs { display: grid; grid-template-columns: repeat(3, 1fr); height: 46px; background: var(--shell); border-bottom: none; flex-shrink: 0; }
-  .inner-tab { position: relative; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--color-text-muted-light); font-weight: 500; cursor: pointer; border: none; background: none; font-family: var(--font-sans); }
+  .inner-tabs { display: grid; grid-template-columns: repeat(4, 1fr); height: 46px; background: var(--shell); border-bottom: none; flex-shrink: 0; }
+  .inner-tab { position: relative; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--color-text-muted-light); font-weight: 500; cursor: pointer; border: none; background: none; font-family: var(--font-sans); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 4px; }
   .inner-tab.active { color: var(--color-accent); font-weight: 700; }
   .inner-tab.active::after { content: ""; position: absolute; left: 20px; right: 20px; bottom: 0; height: 2px; background: var(--color-accent); }
 

@@ -2,10 +2,13 @@ import type {
   ActivityItem,
   AppNotification,
   Atelier,
+  Challenge,
   Conversation,
   CurrentUser,
+  NotebookEntry,
   Post,
   PostType,
+  Project,
 } from "../types";
 
 export const ATELIERS: Atelier[] = [
@@ -137,6 +140,37 @@ export const POSTS: Post[] = [
     body: "Mon émail blanc mat craquelle systématiquement après refroidissement. Quelqu'un a déjà eu ce problème ?",
     replies: 2,
     pinned: false,
+    questionStatus: "attente",
+  },
+  {
+    id: 4,
+    av: "NB",
+    avColor: "#8A6B4F",
+    author: "Nora B.",
+    role: null,
+    time: "il y a 1 jour",
+    type: "Question",
+    typeKey: "question",
+    title: "Comment fixer une anse qui se détache après séchage ?",
+    body: "Sur ma dernière théière, l'anse se détache légèrement au séchage malgré le collage à la barbotine. Une astuce ?",
+    replies: 1,
+    pinned: false,
+    questionStatus: "attente",
+  },
+  {
+    id: 5,
+    av: "VL",
+    avColor: "#6D8A78",
+    author: "Victor L.",
+    role: null,
+    time: "il y a 4 jours",
+    type: "Question",
+    typeKey: "question",
+    title: "Quelle terre pour un four à bois ?",
+    body: "Je débute la cuisson au four à bois, quelle terre me conseillez-vous pour bien résister ?",
+    replies: 3,
+    pinned: false,
+    questionStatus: "resolue",
   },
 ];
 
@@ -228,6 +262,112 @@ export const RECENT_ACTIVITY: ActivityItem[] = [
     icon: "💬",
     title: "Vous avez commenté une publication de Thomas R.",
     time: "il y a 3 j",
+  },
+];
+
+export const PROJECTS: Project[] = [
+  {
+    id: 1,
+    title: "Service à thé raku",
+    discipline: "Céramique",
+    status: "En cours",
+    description:
+      "Un service à thé complet (théière, 4 tasses) en grès émaillé, cuisson raku traditionnelle.",
+    steps: [
+      { id: 1, label: "Tournage des pièces", done: true },
+      { id: 2, label: "Séchage et tournassage", done: true },
+      { id: 3, label: "Émaillage", done: false },
+      { id: 4, label: "Cuisson raku", done: false },
+    ],
+  },
+  {
+    id: 2,
+    title: "Carnet photo argentique — quartier Belleville",
+    discipline: "Photographie",
+    status: "En pause",
+    description:
+      "Série de portraits de commerçants du quartier, développée en chambre noire.",
+    steps: [
+      { id: 1, label: "Repérage et prises de vue", done: true },
+      { id: 2, label: "Développement des négatifs", done: false },
+      { id: 3, label: "Tirages", done: false },
+    ],
+  },
+  {
+    id: 3,
+    title: "Reliure japonaise — carnet de croquis",
+    discipline: "Reliure",
+    status: "Terminé",
+    description: "Carnet relié à la main selon la technique de reliure japonaise à 4 trous.",
+    steps: [
+      { id: 1, label: "Préparation du papier", done: true },
+      { id: 2, label: "Pliage et assemblage", done: true },
+      { id: 3, label: "Reliure", done: true },
+    ],
+  },
+];
+
+export const NOTEBOOK_ENTRIES: NotebookEntry[] = [
+  {
+    id: 1,
+    category: "Matériaux",
+    title: "Terre chamottée pour le raku",
+    summary:
+      "Résiste mieux aux chocs thermiques que la terre lisse. Privilégier une chamotte fine pour les pièces à parois fines.",
+    updatedAt: "12 jan.",
+    contributor: "Lucie M.",
+  },
+  {
+    id: 2,
+    category: "Matériaux",
+    title: "Émail craquelé blanc",
+    summary: "Un mélange fiable et ses proportions de base, testé sur plusieurs cuissons.",
+    updatedAt: "28 déc.",
+    contributor: "Marie D.",
+  },
+  {
+    id: 3,
+    category: "Outils",
+    title: "Choisir ses mirettes",
+    summary: "Les mirettes fines permettent un tournassage précis sans fragiliser la pièce.",
+    updatedAt: "20 déc.",
+    contributor: "Thomas R.",
+  },
+  {
+    id: 4,
+    category: "Techniques",
+    title: "Refroidissement post-cuisson raku",
+    summary:
+      "Un refroidissement trop rapide provoque des chocs thermiques. Prévoir une phase de réduction en sciure.",
+    updatedAt: "15 jan.",
+    contributor: "Lucie M.",
+  },
+  {
+    id: 5,
+    category: "Erreurs fréquentes",
+    title: "Émail qui craquelle après refroidissement",
+    summary:
+      "Souvent lié à une épaisseur d'émail irrégulière ou un séchage trop rapide entre les couches.",
+    updatedAt: "22 jan.",
+    contributor: "Marie D.",
+  },
+];
+
+export const CHALLENGES: Challenge[] = [
+  {
+    id: 1,
+    title: "Une pièce, une couleur",
+    description:
+      "Réalisez une pièce en n'utilisant qu'un seul émail. Partagez le résultat, même imparfait !",
+    status: "active",
+    linkedPostsCount: 6,
+  },
+  {
+    id: 2,
+    title: "Défi tasses d'hiver",
+    description: "Créez une tasse inspirée par la saison froide.",
+    status: "termine",
+    linkedPostsCount: 14,
   },
 ];
 
