@@ -962,19 +962,19 @@ const visibleDiscover = DISCOVER.filter((a) =>
     <div className="members">{a.members} membres</div>
   </div>
 
-  {!joinedAtelierIds.includes(a.id) && (
-   <button
+  <button
   className={`join-btn ${joinedIds.includes(a.id) ? 'joined' : ''}`}
   onClick={(e) => {
     e.stopPropagation();
     setJoinedIds((prev) =>
-      prev.includes(a.id) ? prev.filter((id) => id !== a.id) : [...prev, a.id]
+      prev.includes(a.id)
+        ? prev.filter((id) => id !== a.id)
+        : [...prev, a.id]
     );
   }}
 >
   {joinedIds.includes(a.id) ? '✓ Membre' : 'Rejoindre'}
 </button>
-  )}
 </div>
                   </div>
                 </div>
@@ -1314,7 +1314,6 @@ onChange={(e) => setNewPostBody(e.target.value)}
     </div>
   );
 }
-
 // ─── SCREEN: POST DETAIL ──────────────────────────────────────────────────────
 
 function PostDetail({
