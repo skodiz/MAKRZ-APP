@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import {
   ArrowLeft,
   MoreHorizontal,
-  Search,
   Send,
   Share2,
   MessageCircle,
@@ -21,6 +20,10 @@ import { ATELIERS, DISCOVER, POSTS, POST_TYPES } from "./data/mockData";
 import { typeClass } from "./utils/postTypes";
 import { AppHeader } from "./components/common/AppHeader";
 import { NavBar } from "./components/common/NavBar";
+import { SearchBar } from "./components/common/SearchBar";
+import { EmptyState } from "./components/common/EmptyState";
+import { TagPill } from "./components/common/TagPill";
+import { WorkshopCard } from "./components/workshops/WorkshopCard";
 
 // ─── SUB-COMPONENTS ───────────────────────────────────────────────────────────
 
@@ -68,47 +71,28 @@ const visibleDiscover = DISCOVER.filter((a) =>
         <button className={`tab ${tab === "discover" ? "active" : ""}`} onClick={() => setTab("discover")}>Découvrir</button>
       </div>
       <div className="content">
-        <div className="search"><Search size={14} color="#B6ADA4" /><input className="search-input" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Rechercher un atelier..." /></div>
+        <SearchBar value={search} onChange={setSearch} placeholder="Rechercher un atelier..." />
        {tab === "mes" ? (
   <>
     {visibleAteliers.length === 0 ? (
-      <div className="empty-state">
-        <div className="empty-state-icon">🏺</div>
-        <div className="empty-state-title">Aucun atelier pour l'instant</div>
-        <div className="empty-state-text">
-          Rejoins un atelier pour commencer à échanger avec d'autres makers.
-        </div>
-        <button className="empty-state-btn" onClick={() => setTab("discover")}>
-          Découvrir des ateliers
-        </button>
-      </div>
+      <EmptyState
+        icon="🏺"
+        title="Aucun atelier pour l'instant"
+        text="Rejoins un atelier pour commencer à échanger avec d'autres makers."
+        actionLabel="Découvrir des ateliers"
+        onAction={() => setTab("discover")}
+      />
     ) : (
       <>
         <div className="sect">Actifs récemment</div>
         {visibleAteliers.map((a) => (
-              <div className="card" key={a.id} onClick={() => onOpen(a)}>
-                <div className="card-top">
-                  <div className="icon">{a.emoji}</div>
-                  <div className="card-info">
-                    <div className="title-row">
-                      <div>
-                        <div className="atelier-name">{a.name}</div>
-<div className="members"> {a.members} membres </div>
-                      </div>
-                      {(a.unread ?? 0) > 0 && (
-                        <div className="new-badge">
-                          {a.unread === 1 ? "1 nouveau" : `${a.unread} nouveaux`}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                               <div className="card-footer">
-                  <div className="last-text">{a.last}</div>
-                  <div className="time">{a.time}</div>
-                </div>
-              </div>
-           ))}
+          <WorkshopCard
+            key={a.id}
+            atelier={a}
+            onOpen={onOpen}
+            variant="mine"
+          />
+        ))}
       </>
     )}
   </>
@@ -119,37 +103,20 @@ const visibleDiscover = DISCOVER.filter((a) =>
               <button className={`filter ${activeFilterTab === "filters" ? "active" : ""}`} onClick={() => { setActiveFilterTab("filters"); setShowFilters(true); }}>Filtres</button></div>
            {showFilters && <div className="filter-panel"><div className="filter-row"><span>Matière</span><button className={`filter-choice ${activeFilters.includes("Bois") ? "active" : ""}`} onClick={() => setActiveFilters((fs) => fs.includes("Bois") ? fs.filter((f) => f !== "Bois") : [...fs, "Bois"])}>Bois</button><button className={`filter-choice ${activeFilters.includes("Céramique") ? "active" : ""}`} onClick={() => setActiveFilters((fs) => fs.includes("Céramique") ? fs.filter((f) => f !== "Céramique") : [...fs, "Céramique"])}>Céramique</button><button className={`filter-choice ${activeFilters.includes("Textile") ? "active" : ""}`} onClick={() => setActiveFilters((fs) => fs.includes("Textile") ? fs.filter((f) => f !== "Textile") : [...fs, "Textile"])}>Textile</button></div><div className="filter-row"><span>Technique</span><button className={`filter-choice ${activeFilters.includes("Tour") ? "active" : ""}`} onClick={() => setActiveFilters((fs) => fs.includes("Tour") ? fs.filter((f) => f !== "Tour") : [...fs, "Tour"])}>Tour</button><button className={`filter-choice ${activeFilters.includes("Sérigraphie") ? "active" : ""}`} onClick={() => setActiveFilters((fs) => fs.includes("Sérigraphie") ? fs.filter((f) => f !== "Sérigraphie") : [...fs, "Sérigraphie"])}>Sérigraphie</button><button className={`filter-choice ${activeFilters.includes("Broderie") ? "active" : ""}`} onClick={() => setActiveFilters((fs) => fs.includes("Broderie") ? fs.filter((f) => f !== "Broderie") : [...fs, "Broderie"])}>Broderie</button></div><div className="filter-row"><span>Niveau</span><button className={`filter-choice ${activeFilters.includes("Débutant") ? "active" : ""}`} onClick={() => setActiveFilters((fs) => fs.includes("Débutant") ? fs.filter((f) => f !== "Débutant") : [...fs, "Débutant"])}>Débutant</button><button className={`filter-choice ${activeFilters.includes("Confirmé") ? "active" : ""}`} onClick={() => setActiveFilters((fs) => fs.includes("Confirmé") ? fs.filter((f) => f !== "Confirmé") : [...fs, "Confirmé"])}>Confirmé</button></div></div>}
            {visibleDiscover.map((a) => (
-              <div className="card" key={a.id} onClick={() => onOpen(a)}>
-                <div className="card-top">
-                  <div className="icon">{a.emoji}</div>
-                  <div className="card-info">
-                    <div className="title-row">
-  <div>
-    <div className="atelier-name">{a.name}</div>
-    <div className="members">{a.members} membres</div>
-    <div className="tags" style={{ marginTop: 8, display: "flex", gap: 6, flexWrap: "wrap" }}>
-      {a.tags.map((t) => (
-        <span className="ws-tag" key={t}>{t}</span>
-      ))}
-    </div>
-  </div>
-
-  <button
-    className={`join-btn ${joinedAtelierIds.includes(a.id) ? "joined" : ""}`}
-    onClick={(e) => {
-      e.stopPropagation();
-      setJoinedAtelierIds((ids) =>
-        ids.includes(a.id) ? ids.filter((id) => id !== a.id) : [...ids, a.id]
-      );
-    }}
-  >
-    {joinedAtelierIds.includes(a.id) ? "✓ Membre" : "Rejoindre"}
-  </button>
-</div>
-                  </div>
-                </div>
-               <div className="discover-description full">{a.description}</div>
-              </div>
+              <WorkshopCard
+                key={a.id}
+                atelier={a}
+                onOpen={onOpen}
+                variant="discover"
+                isJoined={joinedAtelierIds.includes(a.id)}
+                onToggleJoin={(atelierId) => {
+                  setJoinedAtelierIds((ids) =>
+                    ids.includes(atelierId)
+                      ? ids.filter((id) => id !== atelierId)
+                      : [...ids, atelierId]
+                  );
+                }}
+              />
             ))}
           </>
         )}
@@ -234,7 +201,7 @@ const handleShare = async (p: Post) => {
             <div className="ws-info">
             <div className="ws-name">{atelier.name}</div>
             <div className="members">{atelier.members} membres</div>
-             <div className="tags" style={{ marginTop: 10, display: "flex", gap: 6, flexWrap: "wrap" }}>{atelier.tags.map((t) => <span className="ws-tag" key={t}>{t}</span>)}</div>
+             <div className="tags" style={{ marginTop: 10, display: "flex", gap: 6, flexWrap: "wrap" }}>{atelier.tags.map((t) => <TagPill key={t} label={t} />)}</div>
               </div>
           </div>
     <button
