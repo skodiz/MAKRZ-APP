@@ -1,0 +1,119 @@
+/* ─── MAKRZ DESIGN TOKENS ───────────────────────────────────────────────────
+   Single source of truth for color, typography, radius and spacing.
+   Every value below is lifted 1:1 from the existing UI (no visual changes) —
+   this file only gives each value a name so it can be reused and tuned
+   from one place. */
+
+:root {
+  /* — Typography — */
+  --font-serif: 'Fraunces', serif;
+  --font-sans: 'DM Sans', sans-serif;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* — Radius scale — */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 14px;
+  --radius-3xl: 16px;
+  --radius-4xl: 18px;
+  --radius-5xl: 20px;
+  --radius-6xl: 28px;
+  --radius-7xl: 44px;
+  --radius-pill: 999px;
+
+  /* — Spacing scale (used for gaps) — */
+  --space-1: 3px;
+  --space-2: 4px;
+  --space-3: 5px;
+  --space-4: 6px;
+  --space-5: 7px;
+  --space-6: 8px;
+  --space-7: 9px;
+  --space-8: 10px;
+  --space-9: 12px;
+  --space-10: 14px;
+  --space-11: 16px;
+  --space-12: 18px;
+
+  /* — Color: neutrals (backgrounds) — */
+  --color-bg-shell: #EDE5D8;
+  --color-bg-paper: #FAF8F4;
+  --color-bg-paper-alt: #FDFBF8;
+  --color-bg-paper-soft: #FFFBF8;
+  --color-bg-cream: #F4EFE8;
+  --color-bg-cream-dark: #F4E9D8;
+  --color-bg-tan: #F6EBDD;
+  --color-bg-tan-dark: #FACB8F;
+  --color-bg-beige: #E2D1BC;
+  --color-bg-beige-soft: #EFE7DC;
+  --color-bg-beige-alt: #E9E4DC;
+  --color-bg-taupe: #EFEAE3;
+  --color-bg-green-pale: #E6F0EA;
+  --color-bg-green-pale-alt: #E5EFE8;
+  --color-bg-teal-pale: #E6F0EF;
+  --color-white: #FFFFFF;
+
+  /* — Color: text / neutrals (foreground) — */
+  --color-text: #2C2623;
+  --color-text-secondary: #4F4842;
+  --color-text-secondary-alt: #4E4842;
+  --color-text-muted: #6F6862;
+  --color-text-muted-alt: #7F7770;
+  --color-text-muted-light: #8B837B;
+  --color-text-muted-soft: #8C857E;
+  --color-text-faint: #8A837B;
+  --color-text-faint-alt: #8A8A84;
+  --color-text-soft: #9A938C;
+  --color-text-soft-alt: #9B9B9B;
+  --color-text-placeholder: #B6ADA4;
+  --color-text-placeholder-alt: #B4A79C;
+  --color-text-placeholder-soft: #B8AEA6;
+  --color-text-warm: #7A7169;
+  --color-text-brown: #5C3F2A;
+  --color-text-taupe: #5E5750;
+  --color-text-taupe-alt: #5F5A54;
+  --color-text-cool: #8E867D;
+
+  /* — Color: borders — */
+  --color-border: #E6DDD2;
+  --color-border-soft: #D8CDBE;
+  --color-border-warm: #DCCCB8;
+  --color-border-tan-deep: #D3C1AB;
+
+  /* — Color: accent (terracotta) — */
+  --color-accent: #C6784F;
+  --color-accent-dark: #A76437;
+
+  /* — Color: green family (secondary / positive actions) — */
+  --color-green-deep: #3F5248;
+  --color-green: #4A6E58;
+  --color-green-sage: #78917F;
+  --color-green-sage-dark: #5C6F63;
+  --color-green-mid: #6D9577;
+  --color-green-mid-alt: #6D8A78;
+  --color-green-muted: #4D6A59;
+  --color-green-teal: #4F6D69;
+  --color-green-bright: #7EA38A;
+
+  /* — Color: gold/brown — */
+  --color-gold: #8A6B3F;
+
+  /* — Color: overlays — */
+  --color-overlay-scrim: rgba(44, 38, 35, 0.5);
+  --color-overlay-white: rgba(255, 255, 255, 0.45);
+  --color-overlay-hairline: rgba(0, 0, 0, 0.06);
+
+  /* — Semantic aliases (used throughout global.css) — */
+  --shell: var(--color-bg-shell);
+  --paper: var(--color-bg-paper);
+  --text: var(--color-text);
+  --muted: var(--color-text-muted-soft);
+  --accent: var(--color-accent);
+  --line: var(--color-border);
+}

@@ -19,7 +19,7 @@ export function GalleryScreen({ atelier, onBack }: { atelier: Atelier | null; on
 
   return (
     <div className="screen" style={{ position: "relative" }}>
-            <div className="topbar" style={{ borderBottom: "1px solid #E6DDD2" }}>
+            <div className="topbar" style={{ borderBottom: "1px solid var(--color-border)" }}>
         <div className="topbar-left">
           <button className="icon-btn" onClick={onBack}><ArrowLeft size={22} strokeWidth={1.8} /></button>
           <span className="topbar-title">Galerie · {atelier?.name ?? "MAKRZ"}</span>

@@ -4,7 +4,7 @@ import type { Atelier } from "../types";
 export function AddResourceScreen({ atelier, onBack }: { atelier: Atelier | null; onBack: () => void }) {
   return (
     <div className="screen">
-       <div className="topbar" style={{ borderBottom: "1px solid #E6DDD2" }}>
+       <div className="topbar" style={{ borderBottom: "1px solid var(--color-border)" }}>
         <div className="topbar-left">
           <button className="icon-btn" onClick={onBack}><ArrowLeft size={22} strokeWidth={1.8} /></button>
           <span className="topbar-title">Nouvelle ressource</span>
@@ -19,7 +19,7 @@ export function AddResourceScreen({ atelier, onBack }: { atelier: Atelier | null
             <label className="label">Type de ressource</label>
             <div className="select-look">
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <LinkIcon size={16} strokeWidth={1.8} color="#C6784F" /> Lien
+                <LinkIcon size={16} strokeWidth={1.8} color="var(--color-accent)" /> Lien
               </span>
               <ChevronDown size={17} strokeWidth={1.8} />
             </div>

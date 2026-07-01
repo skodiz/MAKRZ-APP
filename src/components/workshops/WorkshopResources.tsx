@@ -16,7 +16,7 @@ export function WorkshopResources({ galleryIds, onGalerie, onAddRes }: WorkshopR
   return (
     <div className="content-white">
       <div className="section-row">
-        <div style={{ fontSize: 15, fontWeight: 700, color: "#2C2623" }}>
+        <div style={{ fontSize: 15, fontWeight: 700, color: "var(--color-text)" }}>
           Galerie de l'atelier
         </div>
         <button className="section-link" onClick={onGalerie}>
@@ -37,7 +37,7 @@ export function WorkshopResources({ galleryIds, onGalerie, onAddRes }: WorkshopR
       </div>
 
       <div className="section-row">
-        <div style={{ fontSize: 15, fontWeight: 700, color: "#2C2623" }}>
+        <div style={{ fontSize: 15, fontWeight: 700, color: "var(--color-text)" }}>
           Documents et liens
         </div>
         <button className="section-link" onClick={onAddRes}>
@@ -58,7 +58,7 @@ export function WorkshopResources({ galleryIds, onGalerie, onAddRes }: WorkshopR
             <div className="res-title">{r.title}</div>
             <div className="res-meta">{r.meta}</div>
           </div>
-          <div style={{ color: "#B6ADA4" }}>
+          <div style={{ color: "var(--color-text-placeholder)" }}>
             <ExternalLink size={15} strokeWidth={1.8} />
           </div>
         </div>

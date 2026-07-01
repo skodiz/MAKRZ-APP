@@ -9,7 +9,7 @@ type SearchBarProps = {
 export function SearchBar({ value, onChange, placeholder = "Rechercher..." }: SearchBarProps) {
   return (
     <div className="search">
-      <Search size={14} color="#B6ADA4" />
+      <Search size={14} color="var(--color-text-placeholder)" />
       <input
         className="search-input"
         value={value}

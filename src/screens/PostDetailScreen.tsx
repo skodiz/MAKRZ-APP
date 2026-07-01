@@ -45,7 +45,7 @@ const handleShare = async () => {
 };
   return (
   <div className="screen post-detail-screen">
-      <div className="topbar" style={{ borderBottom: "1px solid #E6DDD2" }}>
+      <div className="topbar" style={{ borderBottom: "1px solid var(--color-border)" }}>
         <div className="topbar-left">
           <button className="icon-btn" onClick={onBack}>
             <ArrowLeft size={22} strokeWidth={1.8} />
