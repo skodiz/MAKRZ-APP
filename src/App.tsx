@@ -24,6 +24,7 @@ import { SearchBar } from "./components/common/SearchBar";
 import { EmptyState } from "./components/common/EmptyState";
 import { TagPill } from "./components/common/TagPill";
 import { WorkshopCard } from "./components/workshops/WorkshopCard";
+import { PostCard } from "./components/posts/PostCard";
 
 // ─── SUB-COMPONENTS ───────────────────────────────────────────────────────────
 
@@ -329,54 +330,22 @@ onChange={(e) => setNewPostBody(e.target.value)}
   const replyCount = p.replies + extraReplies;
 
   return (
-    <div className={`post ${p.pinned ? "pinned" : ""}`} key={p.id} onClick={() => onPost(p)}>
-              {p.pinned && <div className="pin-label">📌 Épinglé par la référente</div>}
-              <div className="post-head">
-  <div className="av" style={{ background: p.avColor }}>{p.av}</div>
-
-  <div className="post-meta">
-    <div className="post-author">{p.author}{p.role && <span className="role">{p.role}</span>}</div>
-    <div className="post-time">{p.time}</div>
-  </div>
-
-  <div className={`post-type-badge ${p.typeKey}`}>{p.type}</div>
-</div>
-              {p.title && <div className="post-title">{p.title}</div>}
-              <div className="post-body">{p.body}</div>
-              {p.img && <img className="post-img" src={p.img} alt="" />}
-              <div className="post-actions">
-                <div className="post-action"><MessageCircle size={14} strokeWidth={1.8} />{replyCount}</div>
-<div className="post-actions-right">
-  <button
-    className="post-action"
-    onClick={(e) => {
-      e.stopPropagation();
-      setSavedPostIds((ids) =>
-        ids.includes(p.id)
-          ? ids.filter((id) => id !== p.id)
-          : [...ids, p.id]
-      );
-    }}
-  >
-    <Bookmark
-      size={15}
-      strokeWidth={1.8}
-      fill={savedPostIds.includes(p.id) ? "currentColor" : "none"}
+    <PostCard
+      key={p.id}
+      post={p}
+      replyCount={replyCount}
+      saved={savedPostIds.includes(p.id)}
+      onOpen={onPost}
+      onToggleSave={(postId) => {
+        setSavedPostIds((ids) =>
+          ids.includes(postId)
+            ? ids.filter((id) => id !== postId)
+            : [...ids, postId]
+        );
+      }}
+      onShare={handleShare}
     />
-  </button>
-
-  <button
-  className="post-action"
-  onClick={(e) => {
-    e.stopPropagation();
-    handleShare(p);
-  }}
->
-  <Share2 size={15} strokeWidth={1.8} />
-</button>
-</div>              </div>
-            </div>
-          );
+  );
 })}
         </div>
       )}
@@ -958,50 +927,20 @@ function AddResource({ atelier, onBack }: { atelier: Atelier | null; onBack: () 
       <div className="content">
         <div className="sect">Fil global</div>
         {posts.map((p) => (
-          <div className="post" key={p.id} style={{ cursor: "default" }}>
-            <div className="post-head">
-              <div className="av" style={{ background: p.avColor }}>{p.av}</div>
-              <div>
-                <div className="post-author">{p.author}{p.role && <span className="role">{p.role}</span>}</div>
-                <div className="post-time">{p.time} · Céramique raku</div>
-              </div>
-              <div className={`post-type-badge ${p.typeKey}`}>{p.type}</div>
-            </div>
-            {p.title && <div className="post-title">{p.title}</div>}
-            <div className="post-body">{p.body}</div>
-            {p.img && <img className="post-img" src={p.img} alt="" />}
-            <div className="post-actions">
-              <div className="post-action"><MessageCircle size={14} strokeWidth={1.8} />{p.replies}</div>
-<div className="post-actions-right">
- <button
-  className="post-action"
-  onClick={(e) => {
-    e.stopPropagation();
-    setSavedPostIds((ids) =>
-      ids.includes(p.id)
-        ? ids.filter((id) => id !== p.id)
-        : [...ids, p.id]
-    );
-  }}
->
-  <Bookmark
-    size={15}
-    strokeWidth={1.8}
-    fill={savedPostIds.includes(p.id) ? "currentColor" : "none"}
-  />
-</button>
-
-  <button
-  className="post-action"
-  onClick={(e) => {
-    e.stopPropagation();
-    handleShare(p);
-  }}
->
-  <Share2 size={15} strokeWidth={1.8} />
-</button>
-</div>            </div>
-          </div>
+          <PostCard
+            key={p.id}
+            post={p}
+            timeSuffix="Céramique raku"
+            saved={savedPostIds.includes(p.id)}
+            onToggleSave={(postId) => {
+              setSavedPostIds((ids) =>
+                ids.includes(postId)
+                  ? ids.filter((id) => id !== postId)
+                  : [...ids, postId]
+              );
+            }}
+            onShare={handleShare}
+          />
         ))}
       </div>
     </div>
