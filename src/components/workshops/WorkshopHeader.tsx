@@ -45,7 +45,7 @@ export function WorkshopHeader({
               <div className="members">{atelier.members} membres</div>
               <div
                 className="tags"
-                style={{ marginTop: 10, display: "flex", gap: 6, flexWrap: "wrap" }}
+                style={{ marginTop: "var(--space-8)", display: "flex", gap: "var(--space-4)", flexWrap: "wrap" }}
               >
                 {atelier.tags.map((t) => (
                   <TagPill key={t} label={t} />

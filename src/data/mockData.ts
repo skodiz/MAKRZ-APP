@@ -172,6 +172,20 @@ export const POSTS: Post[] = [
     pinned: false,
     questionStatus: "resolue",
   },
+  {
+    id: 6,
+    av: "ML",
+    avColor: "#E2D1BC",
+    author: "Moi",
+    role: null,
+    time: "il y a 6 h",
+    type: "Avancement",
+    typeKey: "avancement",
+    title: "Émaillage du service à thé terminé",
+    body: "L'étape émaillage est bouclée pour le service à thé raku — plus qu'à passer à la cuisson !",
+    replies: 1,
+    pinned: false,
+  },
 ];
 
 export const POST_TYPES: PostType[] = ["Avancement", "Question", "Découverte", "Résultat", "Sondage"];
@@ -274,9 +288,19 @@ export const PROJECTS: Project[] = [
     description:
       "Un service à thé complet (théière, 4 tasses) en grès émaillé, cuisson raku traditionnelle.",
     steps: [
-      { id: 1, label: "Tournage des pièces", done: true },
+      {
+        id: 1,
+        label: "Tournage des pièces",
+        done: true,
+        note: "Six pièces tournées en une session : une théière et cinq tasses.",
+      },
       { id: 2, label: "Séchage et tournassage", done: true },
-      { id: 3, label: "Émaillage", done: false },
+      {
+        id: 3,
+        label: "Émaillage",
+        done: false,
+        note: "Test de l'émail craquelé blanc avant application définitive.",
+      },
       { id: 4, label: "Cuisson raku", done: false },
     ],
   },
@@ -288,7 +312,12 @@ export const PROJECTS: Project[] = [
     description:
       "Série de portraits de commerçants du quartier, développée en chambre noire.",
     steps: [
-      { id: 1, label: "Repérage et prises de vue", done: true },
+      {
+        id: 1,
+        label: "Repérage et prises de vue",
+        done: true,
+        note: "Douze portraits réalisés sur trois jours de repérage.",
+      },
       { id: 2, label: "Développement des négatifs", done: false },
       { id: 3, label: "Tirages", done: false },
     ],
@@ -302,7 +331,12 @@ export const PROJECTS: Project[] = [
     steps: [
       { id: 1, label: "Préparation du papier", done: true },
       { id: 2, label: "Pliage et assemblage", done: true },
-      { id: 3, label: "Reliure", done: true },
+      {
+        id: 3,
+        label: "Reliure",
+        done: true,
+        note: "Reliure finalisée, carnet de 40 pages.",
+      },
     ],
   },
 ];

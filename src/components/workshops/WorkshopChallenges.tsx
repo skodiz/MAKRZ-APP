@@ -8,7 +8,7 @@ export function WorkshopChallenges() {
   if (activeChallenges.length === 0) return null;
 
   return (
-    <>
+    <div style={{ marginBottom: "var(--space-12)" }}>
       <div className="sect">Défis d'atelier</div>
       {activeChallenges.map((challenge) => {
         const joined = joinedIds.includes(challenge.id);
@@ -35,6 +35,6 @@ export function WorkshopChallenges() {
           </div>
         );
       })}
-    </>
+    </div>
   );
 }

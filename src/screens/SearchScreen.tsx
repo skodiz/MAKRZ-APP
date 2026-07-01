@@ -65,7 +65,11 @@ export function SearchScreen({
         )}
 
         {q && !hasResults && (
-          <EmptyState icon="🔎" title="Aucun résultat" text={`Aucun résultat pour « ${query} ».`} />
+          <EmptyState
+            icon="🔎"
+            title="Aucun résultat"
+            text={`Rien ne correspond à « ${query} ». Essayez un autre mot-clé.`}
+          />
         )}
 
         {matchedAteliers.length > 0 && (
@@ -84,7 +88,7 @@ export function SearchScreen({
 
         {matchedPosts.length > 0 && (
           <>
-            <div className="sect" style={{ marginTop: 16 }}>Publications</div>
+            <div className="sect" style={{ marginTop: "var(--space-11)" }}>Publications</div>
             {matchedPosts.map((p) => (
               <PostCard key={p.id} post={p} variant="compact" onOpen={onOpenPost} />
             ))}

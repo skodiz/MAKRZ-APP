@@ -24,6 +24,11 @@ export function FeedScreen({
   onNotifications?: () => void;
   onOpenPost: (post: Post) => void;
 }) {
+  const projectUpdates = posts.filter((p) => p.typeKey === "avancement");
+  const mainPosts = posts.filter(
+    (p) => p.typeKey !== "avancement" && !(p.typeKey === "question" && p.questionStatus)
+  );
+
   return (
     <div className="screen">
           <AppHeader
@@ -34,13 +39,32 @@ export function FeedScreen({
           />
       <div className="content">
         <UnansweredQuestions posts={posts} onOpen={onOpenPost} />
-        <div className="sect">Fil global</div>
-        {posts.map((p) => (
+
+        {projectUpdates.length > 0 && (
+          <div style={{ marginTop: "var(--space-12)" }}>
+            <div className="sect">Avancées de projet</div>
+            {projectUpdates.map((p) => (
+              <PostCard
+                key={p.id}
+                post={p}
+                timeSuffix="Céramique raku"
+                saved={savedPostIds.includes(p.id)}
+                onOpen={onOpenPost}
+                onToggleSave={(postId) => setSavedPostIds((ids) => toggleId(ids, postId))}
+                onShare={sharePost}
+              />
+            ))}
+          </div>
+        )}
+
+        <div className="sect" style={{ marginTop: "var(--space-12)" }}>Fil global</div>
+        {mainPosts.map((p) => (
           <PostCard
             key={p.id}
             post={p}
             timeSuffix="Céramique raku"
             saved={savedPostIds.includes(p.id)}
+            onOpen={onOpenPost}
             onToggleSave={(postId) => setSavedPostIds((ids) => toggleId(ids, postId))}
             onShare={sharePost}
           />

@@ -36,6 +36,7 @@ export interface ProjectStep {
   id: number;
   label: string;
   done: boolean;
+  note?: string;
 }
 
 export interface Project {

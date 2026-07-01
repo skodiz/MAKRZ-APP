@@ -33,7 +33,7 @@ export function WorkshopCard({
               {showTags && (
                 <div
                   className="tags"
-                  style={{ marginTop: 8, display: "flex", gap: 6, flexWrap: "wrap" }}
+                  style={{ marginTop: "var(--space-6)", display: "flex", gap: "var(--space-4)", flexWrap: "wrap" }}
                 >
                   {atelier.tags.map((tag) => (
                     <TagPill key={tag} label={tag} />

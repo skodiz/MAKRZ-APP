@@ -12,6 +12,9 @@ export function ProfileScreen({
   onSavedPosts: () => void;
   onProjects: () => void;
 }) {
+  const activeProject = PROJECTS.find((p) => p.status === "En cours") ?? PROJECTS[0];
+  const activeProjectDone = activeProject?.steps.filter((s) => s.done).length ?? 0;
+
   return (
     <div className="screen">
       <div className="topbar">
@@ -39,20 +42,31 @@ export function ProfileScreen({
           </button>
         </div>
 
-        <div className="section-row" style={{ marginTop: 16 }}>
+        <div className="section-row" style={{ marginTop: "var(--space-11)" }}>
           <div className="sect" style={{ marginBottom: 0 }}>Mes projets</div>
           <button className="section-link" onClick={onProjects}>
             Voir tout ({PROJECTS.length})
           </button>
         </div>
-
-        <div className="sect" style={{ marginTop: 16 }}>Activité récente</div>
-        {RECENT_ACTIVITY.map((item) => (
-          <div className="res-item" key={item.id}>
-            <div className="res-icon">{item.icon}</div>
+        {activeProject && (
+          <div className="res-item" onClick={onProjects} style={{ cursor: "pointer" }}>
+            <div className="res-icon">🗂️</div>
             <div style={{ flex: 1 }}>
-              <div className="res-title">{item.title}</div>
-              <div className="res-meta">{item.time}</div>
+              <div className="res-title">{activeProject.title}</div>
+              <div className="res-meta">
+                {activeProject.discipline} · {activeProjectDone}/{activeProject.steps.length} étapes
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="sect" style={{ marginTop: "var(--space-12)" }}>Activité récente</div>
+        {RECENT_ACTIVITY.map((item) => (
+          <div className="member-card" key={item.id}>
+            <div className="mem-av">{item.icon}</div>
+            <div style={{ flex: 1 }}>
+              <div className="mem-name">{item.title}</div>
+              <div className="mem-sub">{item.time}</div>
             </div>
           </div>
         ))}

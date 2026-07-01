@@ -27,11 +27,11 @@ export function UnansweredQuestions({ posts, onOpen }: UnansweredQuestionsProps)
                   : "var(--color-accent-dark)",
             }}
           >
-            {q.questionStatus === "resolue" ? "✓ Résolue" : "En attente d'aide"}
+            {q.questionStatus === "resolue" ? "✓ Résolue" : "Cherche un coup de main"}
           </div>
           <PostCard post={q} variant="compact" onOpen={onOpen} />
           {q.questionStatus === "resolue" && (
-            <div className="res-meta">Réponse utile trouvée</div>
+            <div className="res-meta">Une réponse a aidé</div>
           )}
         </div>
       ))}

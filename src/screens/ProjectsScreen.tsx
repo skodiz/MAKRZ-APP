@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeft, Check } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { PROJECTS } from "../data/mockData";
 
 export function ProjectsScreen({ onBack }: { onBack: () => void }) {
@@ -25,6 +25,7 @@ export function ProjectsScreen({ onBack }: { onBack: () => void }) {
                 ? "avancement"
                 : "decouverte";
           const doneSteps = project.steps.filter((s) => s.done).length;
+          const firstPendingIndex = project.steps.findIndex((s) => !s.done);
 
           return (
             <div
@@ -46,25 +47,30 @@ export function ProjectsScreen({ onBack }: { onBack: () => void }) {
                 <div className="last-text">
                   {doneSteps} / {project.steps.length} étapes
                 </div>
+                <span style={{ fontSize: 12, color: "var(--color-text-placeholder-alt)" }}>
+                  {expanded ? "Masquer ⌃" : "Voir le journal ⌄"}
+                </span>
               </div>
 
               {expanded && (
-                <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 8 }}>
-                  {project.steps.map((step) => (
-                    <div key={step.id} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                      <div
-                        className="checkbox"
-                        style={{
-                          background: step.done ? "var(--color-green-sage)" : "var(--color-bg-taupe)",
-                        }}
-                      >
-                        {step.done && <Check size={13} strokeWidth={2.5} />}
+                <div className="timeline">
+                  {project.steps.map((step, index) => {
+                    const isCurrent = !step.done && index === firstPendingIndex;
+                    const statusLabel = step.done ? "Terminée" : isCurrent ? "En cours" : "À venir";
+
+                    return (
+                      <div className="timeline-item" key={step.id}>
+                        <div
+                          className={`timeline-dot ${step.done ? "done" : isCurrent ? "current" : ""}`}
+                        />
+                        <div className={`timeline-title ${isCurrent ? "current" : ""}`}>
+                          {step.label}
+                        </div>
+                        <div className="timeline-status">{statusLabel}</div>
+                        {step.note && <div className="timeline-note">{step.note}</div>}
                       </div>
-                      <span style={{ fontSize: 13, color: "var(--color-text-secondary)" }}>
-                        {step.label}
-                      </span>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>

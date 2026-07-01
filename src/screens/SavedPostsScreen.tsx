@@ -1,6 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import type { Post } from "../types";
 import { PostCard } from "../components/posts/PostCard";
+import { EmptyState } from "../components/common/EmptyState";
 
 export function SavedPostsScreen({
   posts,
@@ -26,7 +27,11 @@ export function SavedPostsScreen({
 
       <div className="content">
         {savedPosts.length === 0 ? (
-          <div className="empty-state">Aucune publication enregistrée pour le moment.</div>
+          <EmptyState
+            icon="🔖"
+            title="Rien d'enregistré pour l'instant"
+            text="Gardez de côté les publications qui vous inspirent pour les retrouver ici."
+          />
         ) : (
           savedPosts.map((p) => (
             <PostCard key={p.id} post={p} variant="compact" onOpen={onPost} />

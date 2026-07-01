@@ -122,7 +122,7 @@ setJoinedAtelierIds: Dispatch<SetStateAction<number[]>>;
             </div>
             <div className="role-badge ref">Référente</div>
           </div>
-          <div className="sect" style={{ marginTop: 16 }}>Membres actifs</div>
+          <div className="sect" style={{ marginTop: "var(--space-11)" }}>Membres actifs</div>
           {[
             { av: "MD", name: "Marie D.", sub: "Céramiste · Lille" },
             { av: "TR", name: "Théo R.", sub: "Potier · Lyon" },
