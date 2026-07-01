@@ -1,32 +1,29 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   ArrowLeft,
-  MoreHorizontal,
   Send,
   Share2,
   MessageCircle,
   ChevronDown,
   ChevronUp,
-  FileText,
-  Link as LinkIcon,
-  ExternalLink,
   Check,
   X,
   Bookmark,
 } from "lucide-react";
 import "./styles/global.css";
-import type { Atelier, Post, PostType, ScreenKey } from "./types";
-import { ATELIERS, DISCOVER, POSTS, POST_TYPES } from "./data/mockData";
-import { typeClass } from "./utils/postTypes";
+import type { Atelier, Post, ScreenKey } from "./types";
+import { DISCOVER, POSTS } from "./data/mockData";
 import { AppHeader } from "./components/common/AppHeader";
 import { NavBar } from "./components/common/NavBar";
 import { SearchBar } from "./components/common/SearchBar";
 import { EmptyState } from "./components/common/EmptyState";
-import { TagPill } from "./components/common/TagPill";
 import { WorkshopCard } from "./components/workshops/WorkshopCard";
+import { WorkshopHeader } from "./components/workshops/WorkshopHeader";
+import { WorkshopResources } from "./components/workshops/WorkshopResources";
 import { PostCard } from "./components/posts/PostCard";
 import { PostComposer } from "./components/posts/PostComposer";
 import { CommentThread } from "./components/comments/CommentThread";
+import { GalleryGrid } from "./components/gallery/GalleryGrid";
 
 // ─── SUB-COMPONENTS ───────────────────────────────────────────────────────────
 
@@ -186,58 +183,22 @@ const handleShare = async (p: Post) => {
 };
   return (
     <div className="screen">
-           <div className="topbar">
-             <div className="topbar-left">
-          <button className="icon-btn" onClick={onBack}><ArrowLeft size={22} strokeWidth={1.8} /></button>
-        </div>
-        <button className="icon-btn"><MoreHorizontal size={22} strokeWidth={1.8} /></button>
-      </div>
-
-      <div className="ws-header">
-        <div className="ws-main">
-          <div className="ws-icon">{atelier.emoji}</div>
-          <div>
-            <div className="ws-info">
-            <div className="ws-name">{atelier.name}</div>
-            <div className="members">{atelier.members} membres</div>
-             <div className="tags" style={{ marginTop: 10, display: "flex", gap: 6, flexWrap: "wrap" }}>{atelier.tags.map((t) => <TagPill key={t} label={t} />)}</div>
-              </div>
-          </div>
-    <button
-  className={`join-btn atelier-join-btn ${
-    joinedAtelierIds.includes(atelier.id) ? "joined" : ""
-  }`}
-  onClick={() => {
-    setJoinedAtelierIds((ids) =>
-      ids.includes(atelier.id)
-        ? ids.filter((id) => id !== atelier.id)
-        : [...ids, atelier.id]
-    );
-  }}
->
-  {joinedAtelierIds.includes(atelier.id) ? "✓ Membre" : "Rejoindre"}
-</button>
-        </div>
-              </div>
-
-      {aboutOpen ? (
-        <div className="about-open">
-          <div className="about-title-row" onClick={() => setAboutOpen(false)}>
-            <span>À propos de l'atelier</span><span>⌃</span>
-          </div>
-          <p className="about-text">{atelier.about}</p>
-        </div>
-      ) : (
-        <div className="about" onClick={() => setAboutOpen(true)}>
-          <span>À propos de l'atelier</span><span>⌄</span>
-        </div>
-      )}
-
-      <div className="inner-tabs">
-        <button className={`inner-tab ${innerTab === "fil" ? "active" : ""}`} onClick={() => setInnerTab("fil")}>Fil</button>
-        <button className={`inner-tab ${innerTab === "res" ? "active" : ""}`} onClick={() => setInnerTab("res")}>Ressources</button>
-        <button className={`inner-tab ${innerTab === "mem" ? "active" : ""}`} onClick={() => setInnerTab("mem")}>Membres</button>
-      </div>
+      <WorkshopHeader
+        atelier={atelier}
+        innerTab={innerTab}
+        setInnerTab={setInnerTab}
+        aboutOpen={aboutOpen}
+        setAboutOpen={setAboutOpen}
+        isJoined={joinedAtelierIds.includes(atelier.id)}
+        onToggleJoin={() => {
+          setJoinedAtelierIds((ids) =>
+            ids.includes(atelier.id)
+              ? ids.filter((id) => id !== atelier.id)
+              : [...ids, atelier.id]
+          );
+        }}
+        onBack={onBack}
+      />
 
       {/* FIL */}
       {innerTab === "fil" && (
@@ -276,36 +237,11 @@ const handleShare = async (p: Post) => {
 
       {/* RESSOURCES */}
       {innerTab === "res" && (
-        <div className="content-white">
-          <div className="section-row">
-            <div style={{ fontSize: 15, fontWeight: 700, color: "#2C2623" }}>Galerie de l'atelier</div>
-            <button className="section-link" onClick={onGalerie}>Voir tout</button>
-          </div>
-          <div className="gallery-grid">
-            {galleryIds.map((id, i) => (
-              <img key={i} className="gal-img" onClick={onGalerie}
-                src={`https://images.unsplash.com/${id}?q=80&w=400&auto=format&fit=crop`} alt="" />
-            ))}
-          </div>
-          <div className="section-row">
-            <div style={{ fontSize: 15, fontWeight: 700, color: "#2C2623" }}>Documents et liens</div>
-            <button className="section-link" onClick={onAddRes}>+ Ajouter</button>
-          </div>
-          {[
-            { icon: <FileText size={17} strokeWidth={1.8} />, title: "Introduction au raku", meta: "Marie D. · 12 jan." },
-            { icon: <LinkIcon size={17} strokeWidth={1.8} />, title: "Fournisseur d'émaux — Solargil", meta: "Thomas R. · 8 jan." },
-            { icon: <FileText size={17} strokeWidth={1.8} />, title: "Guide des températures raku", meta: "Lucie M. · 3 jan." },
-          ].map((r, i) => (
-            <div className="res-item" key={i}>
-              <div className="res-icon">{r.icon}</div>
-              <div style={{ flex: 1 }}>
-                <div className="res-title">{r.title}</div>
-                <div className="res-meta">{r.meta}</div>
-              </div>
-              <div style={{ color: "#B6ADA4" }}><ExternalLink size={15} strokeWidth={1.8} /></div>
-            </div>
-          ))}
-        </div>
+        <WorkshopResources
+          galleryIds={galleryIds}
+          onGalerie={onGalerie}
+          onAddRes={onAddRes}
+        />
       )}
 
       {/* MEMBRES */}
@@ -526,11 +462,7 @@ function GalerieAtelier({ atelier, onBack }: { atelier: Atelier | null; onBack: 
             <button key={f} className={`filter ${filter === f ? "active" : ""}`} onClick={() => setFilter(f)}>{f}</button>
           ))}
         </div>
-        <div className="masonry">
-          {photos.map((p, i) => (
-            <img key={i} className="m-photo" style={{ height: p.h }} src={p.src} alt="" onClick={() => setOpenPhoto(true)} />
-          ))}
-        </div>
+        <GalleryGrid photos={photos} onPhotoClick={() => setOpenPhoto(true)} />
       </div>
 
       {openPhoto && (
