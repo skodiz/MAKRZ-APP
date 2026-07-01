@@ -2,6 +2,7 @@ import type { Dispatch, SetStateAction } from "react";
 import type { Post } from "../types";
 import { AppHeader } from "../components/common/AppHeader";
 import { PostCard } from "../components/posts/PostCard";
+import { sharePost, toggleId } from "../utils/postActions";
 
 export function FeedScreen({
   posts,
@@ -13,21 +14,7 @@ export function FeedScreen({
   savedPostIds: number[];
   setSavedPostIds: Dispatch<SetStateAction<number[]>>;
   onProfile: () => void;
-}) { 
-    const handleShare = async (p: Post) => {
-  const shareText = `${p.title}\n\n${p.body}`;
-
-  if (navigator.share) {
-    await navigator.share({
-      title: p.title,
-      text: shareText,
-      url: window.location.href,
-    });
-  } else {
-    await navigator.clipboard.writeText(shareText);
-    alert("Lien copié");
-  }
-};
+}) {
   return (
     <div className="screen">
           <AppHeader onProfile={onProfile} />
@@ -39,14 +26,8 @@ export function FeedScreen({
             post={p}
             timeSuffix="Céramique raku"
             saved={savedPostIds.includes(p.id)}
-            onToggleSave={(postId) => {
-              setSavedPostIds((ids) =>
-                ids.includes(postId)
-                  ? ids.filter((id) => id !== postId)
-                  : [...ids, postId]
-              );
-            }}
-            onShare={handleShare}
+            onToggleSave={(postId) => setSavedPostIds((ids) => toggleId(ids, postId))}
+            onShare={sharePost}
           />
         ))}
       </div>

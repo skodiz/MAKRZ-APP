@@ -5,6 +5,7 @@ import { WorkshopHeader } from "../components/workshops/WorkshopHeader";
 import { WorkshopResources } from "../components/workshops/WorkshopResources";
 import { PostCard } from "../components/posts/PostCard";
 import { PostComposer } from "../components/posts/PostComposer";
+import { sharePost, toggleId } from "../utils/postActions";
 
 export function WorkshopDetailScreen({
   atelier,
@@ -46,20 +47,6 @@ setJoinedAtelierIds: Dispatch<SetStateAction<number[]>>;
     "photo-1604594849809-dfedbc827105", // fil textile
     "photo-1530026405186-ed1f139313f8", // papier
   ];
-const handleShare = async (p: Post) => {
-  const shareText = `${p.title}\n\n${p.body}`;
-
-  if (navigator.share) {
-    await navigator.share({
-      title: p.title,
-      text: shareText,
-      url: window.location.href,
-    });
-  } else {
-    await navigator.clipboard.writeText(shareText);
-    alert("Lien copié");
-  }
-};
   return (
     <div className="screen">
       <WorkshopHeader
@@ -100,14 +87,8 @@ const handleShare = async (p: Post) => {
       replyCount={replyCount}
       saved={savedPostIds.includes(p.id)}
       onOpen={onPost}
-      onToggleSave={(postId) => {
-        setSavedPostIds((ids) =>
-          ids.includes(postId)
-            ? ids.filter((id) => id !== postId)
-            : [...ids, postId]
-        );
-      }}
-      onShare={handleShare}
+      onToggleSave={(postId) => setSavedPostIds((ids) => toggleId(ids, postId))}
+      onShare={sharePost}
     />
   );
 })}

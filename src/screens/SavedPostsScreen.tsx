@@ -1,5 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import type { Post } from "../types";
+import { PostCard } from "../components/posts/PostCard";
 
 export function SavedPostsScreen({
   posts,
@@ -28,10 +29,7 @@ export function SavedPostsScreen({
           <div className="empty-state">Aucune publication enregistrée pour le moment.</div>
         ) : (
           savedPosts.map((p) => (
-            <div className="post" key={p.id} onClick={() => onPost(p)}>
-              <div className="post-title">{p.title}</div>
-              <div className="post-body">{p.body}</div>
-            </div>
+            <PostCard key={p.id} post={p} variant="compact" onOpen={onPost} />
           ))
         )}
       </div>

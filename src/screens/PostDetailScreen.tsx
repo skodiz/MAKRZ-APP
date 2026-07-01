@@ -2,6 +2,7 @@ import type { Dispatch, SetStateAction } from "react";
 import { ArrowLeft, Bookmark, MessageCircle, Share2 } from "lucide-react";
 import type { Post } from "../types";
 import { CommentThread } from "../components/comments/CommentThread";
+import { sharePost, toggleId } from "../utils/postActions";
 
 export function PostDetailScreen({
   post,
@@ -29,20 +30,6 @@ const allDynamicRepliesCount = Object.values(postComments.replies || {}).reduce(
   0
 );
 const totalReplyCount = post.replies + postComments.main.length + allDynamicRepliesCount;
-const handleShare = async () => {
-  const shareText = `${post.title}\n\n${post.body}`;
-
-  if (navigator.share) {
-    await navigator.share({
-      title: post.title,
-      text: shareText,
-      url: window.location.href,
-    });
-  } else {
-    await navigator.clipboard.writeText(shareText);
-    alert("Lien copié");
-  }
-};
   return (
   <div className="screen post-detail-screen">
       <div className="topbar" style={{ borderBottom: "1px solid var(--color-border)" }}>
@@ -88,20 +75,16 @@ const handleShare = async () => {
 </div>
 
             <div className="post-actions-right">
-              <button className="post-action save-action" onClick={() => {
-  setSavedPostIds((ids) =>
-    ids.includes(post.id)
-      ? ids.filter((id) => id !== post.id)
-      : [...ids, post.id]
-  );
-}}
-                >
+              <button
+                className="post-action save-action"
+                onClick={() => setSavedPostIds((ids) => toggleId(ids, post.id))}
+              >
                 <Bookmark size={14} strokeWidth={1.8} fill={saved ? "currentColor" : "none"} />
               </button>
 
-              <button className="post-action" onClick={handleShare}>
-  <Share2 size={14} strokeWidth={1.8} />
-</button>
+              <button className="post-action" onClick={() => sharePost(post)}>
+                <Share2 size={14} strokeWidth={1.8} />
+              </button>
             </div>
           </div>
         </div>

@@ -6,6 +6,7 @@ type PostCardProps = {
   replyCount?: number;
   saved?: boolean;
   timeSuffix?: string;
+  variant?: "full" | "compact";
   onOpen?: (post: Post) => void;
   onToggleSave?: (postId: number) => void;
   onShare?: (post: Post) => void;
@@ -16,10 +17,20 @@ export function PostCard({
   replyCount,
   saved = false,
   timeSuffix,
+  variant = "full",
   onOpen,
   onToggleSave,
   onShare,
 }: PostCardProps) {
+  if (variant === "compact") {
+    return (
+      <div className="post" onClick={onOpen ? () => onOpen(post) : undefined}>
+        <div className="post-title">{post.title}</div>
+        <div className="post-body">{post.body}</div>
+      </div>
+    );
+  }
+
   const count = replyCount ?? post.replies;
 
   return (
