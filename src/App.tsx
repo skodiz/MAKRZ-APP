@@ -502,6 +502,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #E6DDD2;
+  gap: 12px;
 }
 
 .post-actions-right {
@@ -735,7 +739,48 @@ body {
   .form-actions { height: 64px; background: #FAF8F4; border-top: 1px solid #E6DDD2; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; flex-shrink: 0; }
   .cancel-lnk { border: none; background: transparent; color: #7F7770; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
   .submit-btn { border: none; border-radius: 999px; background: #3F5248; color: #FFF; font-size: 14px; font-weight: 700; padding: 10px 18px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+}
 
+.empty-state-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.empty-state-title {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #2C2623;
+  margin-bottom: 8px;
+}
+
+.empty-state-text {
+  font-size: 13px;
+  line-height: 19px;
+  color: #8C857E;
+  margin-bottom: 24px;
+  max-width: 240px;
+}
+
+.empty-state-btn {
+  border: none;
+  border-radius: 999px;
+  background: #4A6E58;
+  color: #FFF;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
 
   `;
 
@@ -816,15 +861,29 @@ const visibleDiscover = DISCOVER.filter((a) =>
     <div className="screen">
            <AppHeader onProfile={onProfile} />
       <div className="tabs">
-        <button className={`tab ${tab === "mes" ? "active" : ""}`} onClick={() => setTab("mes")}>Mes ateliers</button>
+        <button className={`tab $
+      {tab === "mes" ? "active" : ""}`} onClick={() => setTab("mes")}>Mes ateliers</button>
         <button className={`tab ${tab === "discover" ? "active" : ""}`} onClick={() => setTab("discover")}>Découvrir</button>
       </div>
       <div className="content">
         <div className="search"><Search size={14} color="#B6ADA4" /><input className="search-input" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Rechercher un atelier..." /></div>
-        {tab === "mes" ? (
-          <>
-            <div className="sect">Actifs récemment</div>
-            {visibleAteliers.map((a) => (
+       {tab === "mes" ? (
+  <>
+    {visibleAteliers.length === 0 ? (
+      <div className="empty-state">
+        <div className="empty-state-icon">🏺</div>
+        <div className="empty-state-title">Aucun atelier pour l'instant</div>
+        <div className="empty-state-text">
+          Rejoins un atelier pour commencer à échanger avec d'autres makers.
+        </div>
+        <button className="empty-state-btn" onClick={() => setTab("discover")}>
+          Découvrir des ateliers
+        </button>
+      </div>
+    ) : (
+      <>
+        <div className="sect">Actifs récemment</div>
+        {visibleAteliers.map((a) => (
               <div className="card" key={a.id} onClick={() => onOpen(a)}>
                 <div className="card-top">
                   <div className="icon">{a.emoji}</div>
@@ -1735,7 +1794,7 @@ function AddResource({ atelier, onBack }: { atelier: Atelier | null; onBack: () 
             {p.title && <div className="post-title">{p.title}</div>}
             <div className="post-body">{p.body}</div>
             {p.img && <img className="post-img" src={p.img} alt="" />}
-            <div className="post-actions">es
+            <div className="post-actions">
               <div className="post-action"><MessageCircle size={14} strokeWidth={1.8} />{p.replies}</div>
 <div className="post-actions-right">
  <button
