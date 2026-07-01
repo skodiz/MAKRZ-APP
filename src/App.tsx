@@ -297,14 +297,6 @@ body {
   -ms-overflow-style: none;
 }
 
-.content {
-  padding: 14px 12px 12px;
-}
-
-.content-white {
-  padding: 14px 16px;
-}
-
 .content::-webkit-scrollbar,
 .content-white::-webkit-scrollbar {
   display: none;
@@ -356,7 +348,7 @@ body {
 }
 
   /* SEARCH */
-.search {
+  .search {
   height: 40px;
   border-radius: 14px;
   background: rgba(255,255,255,0.45);
@@ -369,7 +361,8 @@ body {
   font-size: 13px;
   flex-shrink: 0;
   border: 1px solid rgba(0,0,0,0.06);
-}.search-input { border:none; outline:none; background:transparent; flex:1; font-family:'Inter', system-ui, sans-serif; font-size:13px; color:#2C2623; }
+}
+.search-input { border:none; outline:none; background:transparent; flex:1; font-family:'Inter', system-ui, sans-serif; font-size:13px; color:#2C2623; }
 .search-input::placeholder { color:#B6ADA4; }
 
   /* CARDS */
@@ -396,7 +389,7 @@ body {
   border-radius: 999px;
   background: #4A6E58;
   color: #FFF;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   padding: 6px 14px;
   cursor: pointer;
@@ -406,6 +399,14 @@ body {
   .members { text-align: left; margin-top: px; font-size: 14px; color: #7F7770; line-height: 18px; }
   .new-badge { display: inline-flex; align-items: center; border-radius: 999px; background: #7EA38A; color: #FFF; font-size: 9px; font-weight: 700; padding: 3px 8px; height: 18px; white-space: nowrap; margin-top: 4px; }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0px; }
+  .tag {
+  padding: 0;
+  height: auto;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  color: #8A837B;
+}
 .ws-tag {
   padding: 3px 10px;
   border-radius: 999px;
@@ -456,7 +457,7 @@ body {
   line-height: 1.05;
   max-width: 100%;
 }
-.join-btn {
+  .join-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -464,7 +465,7 @@ body {
   border-radius: 999px;
   background: #4A6E58;
   color: #FFF;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   padding: 6px 14px;
   cursor: pointer;
@@ -477,7 +478,6 @@ body {
   color: #4A6E58;
   border: 1.5px solid #4A6E58;
   font-weight: 600;
-}
 }  /* ABOUT */
   .about { padding: 0 20px; height: 42px; border-top: none; border-bottom: none; display: flex; align-items: center; justify-content: space-between; color: #7F7770; font-size: 14px; background: var(--shell); cursor: pointer; flex-shrink: 0; }
   .about-open { padding: 14px 20px 16px; border-top: 1px solid #E6DDD2; border-bottom: none; background: #FAF8F4; flex-shrink: 0; }
@@ -875,7 +875,6 @@ const [showFilters, setShowFilters] = useState(false);
 const [search, setSearch] = useState("");
 const [activeFilterTab, setActiveFilterTab] = useState<"all" | "filters">("all");
 const [activeFilters, setActiveFilters] = useState<string[]>([]);
-  const [joinedIds, setJoinedIds] = useState<number[]>([]);
 const joinedDiscover = DISCOVER.filter((a) => joinedAtelierIds.includes(a.id));
 
 const visibleAteliers = joinedDiscover
@@ -896,13 +895,12 @@ const visibleDiscover = DISCOVER.filter((a) =>
     <div className="screen">
            <AppHeader onProfile={onProfile} />
       <div className="tabs">
-        <button className={`tab $
-      {tab === "mes" ? "active" : ""}`} onClick={() => setTab("mes")}>Mes ateliers</button>
+        <button className={`tab ${tab === "mes" ? "active" : ""}`} onClick={() => setTab("mes")}>Mes ateliers</button>
         <button className={`tab ${tab === "discover" ? "active" : ""}`} onClick={() => setTab("discover")}>Découvrir</button>
       </div>
       <div className="content">
         <div className="search"><Search size={14} color="#B6ADA4" /><input className="search-input" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Rechercher un atelier..." /></div>
-{tab === "mes" && (
+       {tab === "mes" ? (
   <>
     {visibleAteliers.length === 0 ? (
       <div className="empty-state">
@@ -945,8 +943,7 @@ const visibleDiscover = DISCOVER.filter((a) =>
       </>
     )}
   </>
-)}
-{tab === "discover" && (
+) : (
           <>
             <div className="filters">
               <button className={`filter ${activeFilterTab === "all" ? "active" : ""}`} onClick={() => { setActiveFilterTab("all"); setShowFilters(false); setFilter("Tous"); }}>Tous</button>
@@ -961,21 +958,24 @@ const visibleDiscover = DISCOVER.filter((a) =>
   <div>
     <div className="atelier-name">{a.name}</div>
     <div className="members">{a.members} membres</div>
+    <div className="tags" style={{ marginTop: 8, display: "flex", gap: 6, flexWrap: "wrap" }}>
+      {a.tags.map((t) => (
+        <span className="ws-tag" key={t}>{t}</span>
+      ))}
+    </div>
   </div>
 
   <button
-  className={`join-btn ${joinedIds.includes(a.id) ? 'joined' : ''}`}
-  onClick={(e) => {
-    e.stopPropagation();
-    setJoinedIds((prev) =>
-      prev.includes(a.id)
-        ? prev.filter((id) => id !== a.id)
-        : [...prev, a.id]
-    );
-  }}
->
-  {joinedIds.includes(a.id) ? '✓ Membre' : 'Rejoindre'}
-</button>
+    className={`join-btn ${joinedAtelierIds.includes(a.id) ? "joined" : ""}`}
+    onClick={(e) => {
+      e.stopPropagation();
+      setJoinedAtelierIds((ids) =>
+        ids.includes(a.id) ? ids.filter((id) => id !== a.id) : [...ids, a.id]
+      );
+    }}
+  >
+    {joinedAtelierIds.includes(a.id) ? "✓ Membre" : "Rejoindre"}
+  </button>
 </div>
                   </div>
                 </div>
@@ -984,8 +984,6 @@ const visibleDiscover = DISCOVER.filter((a) =>
             ))}
           </>
         )}
-        </>
-)}
       </div>
     </div>
   );
@@ -1028,15 +1026,15 @@ setJoinedAtelierIds: React.Dispatch<React.SetStateAction<number[]>>;
   const [postType, setPostType] = useState<PostType>("Question");
   const [newPostTitle, setNewPostTitle] = useState("");
 const [newPostBody, setNewPostBody] = useState("");
-const [joinedIds, setJoinedIds] = useState<number[]>([]);
- const galleryIds = [
-  "photo-1565193566173-7a0ee3dbe261", // céramique
-  "photo-1558618666-fcd25c85cd64",    // broderie
-  "photo-1452860606245-08befc0ff44b", // atelier bois
-  "photo-1473621038790-b778b4750efe", // poterie mains
-  "photo-1604594849809-dfedbc827105", // fil textile
-  "photo-1530026405186-ed1f139313f8", // papier
-];
+
+  const galleryIds = [
+    "photo-1565193566173-7a0ee3dbe261", // céramique
+    "photo-1558618666-fcd25c85cd64",    // broderie
+    "photo-1452860606245-08befc0ff44b", // atelier bois
+    "photo-1473621038790-b778b4750efe", // poterie mains
+    "photo-1604594849809-dfedbc827105", // fil textile
+    "photo-1530026405186-ed1f139313f8", // papier
+  ];
 const handleShare = async (p: Post) => {
   const shareText = `${p.title}\n\n${p.body}`;
 
@@ -1067,24 +1065,22 @@ const handleShare = async (p: Post) => {
             <div className="ws-info">
             <div className="ws-name">{atelier.name}</div>
             <div className="members">{atelier.members} membres</div>
-             <div className="tags" style={{ marginTop: 10, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-  {atelier.tags.map((t, i) => (
-    <span className="ws-tag" key={t}>
-      {t}
-    </span>
-  ))}
-</div>
+             <div className="tags" style={{ marginTop: 10, display: "flex", gap: 6, flexWrap: "wrap" }}>{atelier.tags.map((t) => <span className="ws-tag" key={t}>{t}</span>)}</div>
+              </div>
           </div>
     <button
-  className={`join-btn ${joinedIds.includes(a.id) ? 'joined' : ''}`}
-  onClick={(e) => {
-    e.stopPropagation();
-    setJoinedIds((prev) =>
-      prev.includes(a.id) ? prev.filter((id) => id !== a.id) : [...prev, a.id]
+  className={`join-btn atelier-join-btn ${
+    joinedAtelierIds.includes(atelier.id) ? "joined" : ""
+  }`}
+  onClick={() => {
+    setJoinedAtelierIds((ids) =>
+      ids.includes(atelier.id)
+        ? ids.filter((id) => id !== atelier.id)
+        : [...ids, atelier.id]
     );
   }}
 >
-  {joinedIds.includes(a.id) ? '✓ Membre' : 'Rejoindre'}
+  {joinedAtelierIds.includes(atelier.id) ? "✓ Membre" : "Rejoindre"}
 </button>
         </div>
               </div>
@@ -1317,6 +1313,7 @@ onChange={(e) => setNewPostBody(e.target.value)}
     </div>
   );
 }
+
 // ─── SCREEN: POST DETAIL ──────────────────────────────────────────────────────
 
 function PostDetail({
@@ -1668,13 +1665,13 @@ function GalerieAtelier({ atelier, onBack }: { atelier: Atelier | null; onBack: 
   const [openReplies, setOpenReplies] = useState(false);
 
   const photos = [
-  { src: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=700&auto=format&fit=crop", h: 230 }, // céramique
-  { src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=700&auto=format&fit=crop", h: 170 }, // broderie
-  { src: "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?q=80&w=700&auto=format&fit=crop", h: 170 }, // atelier bois
-  { src: "https://images.unsplash.com/photo-1473621038790-b778b4750efe?q=80&w=700&auto=format&fit=crop", h: 230 }, // poterie mains
-  { src: "https://images.unsplash.com/photo-1604594849809-dfedbc827105?q=80&w=700&auto=format&fit=crop", h: 130 }, // fil textile
-  { src: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?q=80&w=700&auto=format&fit=crop", h: 130 }, // papier reliure
-];
+    { src: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=700&auto=format&fit=crop", h: 230 }, // céramique
+    { src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=700&auto=format&fit=crop", h: 170 }, // broderie
+    { src: "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?q=80&w=700&auto=format&fit=crop", h: 170 }, // atelier bois
+    { src: "https://images.unsplash.com/photo-1473621038790-b778b4750efe?q=80&w=700&auto=format&fit=crop", h: 230 }, // poterie mains
+    { src: "https://images.unsplash.com/photo-1604594849809-dfedbc827105?q=80&w=700&auto=format&fit=crop", h: 130 }, // fil textile
+    { src: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?q=80&w=700&auto=format&fit=crop", h: 130 }, // papier reliure
+  ];
 
   return (
     <div className="screen" style={{ position: "relative" }}>
