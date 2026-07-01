@@ -10,6 +10,10 @@ import { SavedPostsScreen } from "./screens/SavedPostsScreen";
 import { GalleryScreen } from "./screens/GalleryScreen";
 import { AddResourceScreen } from "./screens/AddResourceScreen";
 import { FeedScreen } from "./screens/FeedScreen";
+import { ProfileScreen } from "./screens/ProfileScreen";
+import { SearchScreen } from "./screens/SearchScreen";
+import { MessagesScreen } from "./screens/MessagesScreen";
+import { NotificationsScreen } from "./screens/NotificationsScreen";
 
 // ─── ROOT APP ─────────────────────────────────────────────────────────────────
 
@@ -99,13 +103,47 @@ setSavedPostIds={setSavedPostIds}
     if (screen === "addres") {
       return <AddResourceScreen atelier={selectedAtelier} onBack={() => setScreen("atelier")} />;
     }
+    if (screen === "profile") {
+      return (
+        <ProfileScreen
+          savedCount={savedPostIds.length}
+          onBack={() => setScreen(null)}
+          onSavedPosts={() => setScreen("saved")}
+        />
+      );
+    }
+    if (screen === "search") {
+      return (
+        <SearchScreen
+          posts={atelierPosts}
+          onBack={() => setScreen(null)}
+          onOpenAtelier={(a) => {
+            setSelectedAtelier(a);
+            setScreen("atelier");
+          }}
+          onOpenPost={(p) => {
+            setSelectedPost(p);
+            setScreen("post");
+          }}
+        />
+      );
+    }
+    if (screen === "messages") {
+      return <MessagesScreen onBack={() => setScreen(null)} />;
+    }
+    if (screen === "notifications") {
+      return <NotificationsScreen onBack={() => setScreen(null)} />;
+    }
 if (navTab === "feed")
   return (
    <FeedScreen
   posts={atelierPosts}
   savedPostIds={savedPostIds}
   setSavedPostIds={setSavedPostIds}
-  onProfile={() => setScreen("saved")}
+  onProfile={() => setScreen("profile")}
+  onSearch={() => setScreen("search")}
+  onMessages={() => setScreen("messages")}
+  onNotifications={() => setScreen("notifications")}
 />
   );    if (navTab === "galerie") return <GalleryScreen atelier={null} onBack={() => handleNavTab("ateliers")} />;
     return (
@@ -114,7 +152,10 @@ if (navTab === "feed")
     setSelectedAtelier(a);
     setScreen("atelier");
   }}
-  onProfile={() => setScreen("saved")}
+  onProfile={() => setScreen("profile")}
+  onSearch={() => setScreen("search")}
+  onMessages={() => setScreen("messages")}
+  onNotifications={() => setScreen("notifications")}
   joinedAtelierIds={joinedAtelierIds}
   setJoinedAtelierIds={setJoinedAtelierIds}
 />

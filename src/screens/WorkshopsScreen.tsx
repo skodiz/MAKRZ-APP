@@ -7,16 +7,22 @@ import { SearchBar } from "../components/common/SearchBar";
 import { EmptyState } from "../components/common/EmptyState";
 import { WorkshopCard } from "../components/workshops/WorkshopCard";
 
-export function WorkshopsScreen({ 
-  onOpen, 
-  onProfile, 
+export function WorkshopsScreen({
+  onOpen,
+  onProfile,
   joinedAtelierIds,
 setJoinedAtelierIds,
-}:{ 
+  onSearch,
+  onMessages,
+  onNotifications,
+}:{
   onOpen: (a: Atelier) => void;
   onProfile: () => void;
   joinedAtelierIds: number[];
 setJoinedAtelierIds: Dispatch<SetStateAction<number[]>>;
+  onSearch?: () => void;
+  onMessages?: () => void;
+  onNotifications?: () => void;
 }) {
   const [tab, setTab] = useState<"mes" | "discover">("mes");
 const [, setFilter] = useState("Tous");
@@ -42,7 +48,12 @@ const visibleDiscover = DISCOVER.filter((a) =>
 );  
   return (
     <div className="screen">
-           <AppHeader onProfile={onProfile} />
+           <AppHeader
+             onProfile={onProfile}
+             onSearch={onSearch}
+             onMessages={onMessages}
+             onNotifications={onNotifications}
+           />
       <div className="tabs">
         <button className={`tab ${tab === "mes" ? "active" : ""}`} onClick={() => setTab("mes")}>Mes ateliers</button>
         <button className={`tab ${tab === "discover" ? "active" : ""}`} onClick={() => setTab("discover")}>Découvrir</button>

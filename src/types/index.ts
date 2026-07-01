@@ -29,4 +29,46 @@ export interface Post {
   pinned: boolean;
 }
 
-export type ScreenKey = "atelier" | "post" | "galerie" | "addres" | "saved" | null;
+export type ScreenKey =
+  | "atelier"
+  | "post"
+  | "galerie"
+  | "addres"
+  | "saved"
+  | "profile"
+  | "search"
+  | "messages"
+  | "notifications"
+  | null;
+
+export interface CurrentUser {
+  name: string;
+  av: string;
+  avColor: string;
+  bio: string;
+}
+
+export interface Conversation {
+  id: number;
+  name: string;
+  av: string;
+  avColor: string;
+  lastMessage: string;
+  time: string;
+  unread: number;
+}
+
+export interface AppNotification {
+  id: number;
+  icon: string;
+  title: string;
+  time: string;
+  read: boolean;
+}
+
+export interface ActivityItem {
+  id: number;
+  icon: string;
+  title: string;
+  time: string;
+}

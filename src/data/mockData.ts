@@ -1,4 +1,12 @@
-import type { Atelier, Post, PostType } from "../types";
+import type {
+  ActivityItem,
+  AppNotification,
+  Atelier,
+  Conversation,
+  CurrentUser,
+  Post,
+  PostType,
+} from "../types";
 
 export const ATELIERS: Atelier[] = [
   {
@@ -133,4 +141,93 @@ export const POSTS: Post[] = [
 ];
 
 export const POST_TYPES: PostType[] = ["Avancement", "Question", "Découverte", "Résultat", "Sondage"];
+
+export const CURRENT_USER: CurrentUser = {
+  name: "Moi",
+  av: "ML",
+  avColor: "#E2D1BC",
+  bio: "Céramiste amateur · Paris",
+};
+
+export const CONVERSATIONS: Conversation[] = [
+  {
+    id: 1,
+    name: "Lucie M.",
+    av: "LM",
+    avColor: "#78917F",
+    lastMessage: "Merci pour le partage du guide des températures !",
+    time: "5 min",
+    unread: 2,
+  },
+  {
+    id: 2,
+    name: "Thomas R.",
+    av: "TR",
+    avColor: "#5C7A6F",
+    lastMessage: "Tu utilises quel four pour la cuisson raku ?",
+    time: "1 h",
+    unread: 0,
+  },
+  {
+    id: 3,
+    name: "Marie D.",
+    av: "MD",
+    avColor: "#C6784F",
+    lastMessage: "Photo envoyée",
+    time: "hier",
+    unread: 0,
+  },
+];
+
+export const NOTIFICATIONS: AppNotification[] = [
+  {
+    id: 1,
+    icon: "💬",
+    title: "Lucie M. a commenté votre publication",
+    time: "il y a 10 min",
+    read: false,
+  },
+  {
+    id: 2,
+    icon: "❤️",
+    title: "Thomas R. a aimé votre photo",
+    time: "il y a 2 h",
+    read: false,
+  },
+  {
+    id: 3,
+    icon: "🏺",
+    title: "Nouvelle publication dans Céramique raku",
+    time: "il y a 5 h",
+    read: true,
+  },
+  {
+    id: 4,
+    icon: "👋",
+    title: "Marie D. a rejoint l'atelier Broderie contemporaine",
+    time: "hier",
+    read: true,
+  },
+];
+
+export const RECENT_ACTIVITY: ActivityItem[] = [
+  {
+    id: 1,
+    icon: "📸",
+    title: "Vous avez publié « Sortie de four ce matin »",
+    time: "il y a 2 h",
+  },
+  {
+    id: 2,
+    icon: "🧵",
+    title: "Vous avez rejoint l'atelier Broderie contemporaine",
+    time: "il y a 1 sem",
+  },
+  {
+    id: 3,
+    icon: "💬",
+    title: "Vous avez commenté une publication de Thomas R.",
+    time: "il y a 3 j",
+  },
+];
 
